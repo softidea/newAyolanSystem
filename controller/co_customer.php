@@ -89,7 +89,7 @@ $cus_daily_loan_bank_branch = "";
 $cus_daily_loan_facilities = "";
 $cus_daily_loan_account_no = "";
 
-
+$cus_reg_date = "";
 if (isset($_POST['customer_continue'])) {
 
     $cus_name = $_SESSION['cus_name'] = filter_input(INPUT_POST, 'cus_name');
@@ -172,12 +172,14 @@ if (isset($_POST['customer_continue'])) {
     $cus_daily_loan_bank_branch = $_SESSION['cus_daily_loan_bank_branch'] = filter_input(INPUT_POST, 'cus_daily_loan_bank_branch');
     $cus_daily_loan_facilities = $_SESSION['cus_daily_loan_facilities'] = filter_input(INPUT_POST, 'cus_daily_loan_facilities');
     $cus_daily_loan_account_no = $_SESSION['cus_daily_loan_account_no'] = filter_input(INPUT_POST, 'cus_daily_loan_account_no');
-    
-    $cus_regdate=$_SESSION['cus_reg_date']=  filter_input(INPUT_POST, 'cus_reg_date');
+
+    $cus_reg_date = $_SESSION['cus_reg_date'] = filter_input(INPUT_POST, 'cus_reg_date');
 
     header("location:../customer/customer_addlease.php");
 }
 if (isset($_POST['lease_reg'])) {
+
+    $cus_reg_date = $_SESSION['cus_reg_date'];
 
     $cus_name = $_SESSION['cus_name'];
     $cus_address = $_SESSION['cus_address'];
@@ -272,8 +274,8 @@ if (isset($_POST['lease_reg'])) {
     $pre_code = $_SESSION['v_code'] = filter_input(INPUT_POST, 'v_code');
     $alter_code = $_SESSION['v_no_code'] = filter_input(INPUT_POST, 'v_no_code');
     $v_no_num = $_SESSION['v_no_num'] = filter_input(INPUT_POST, 'v_no_num');
-    $vehicle_num="";
-    $vehicle_code="";
+    $vehicle_num = "";
+    $vehicle_code = "";
     if (strlen($pre_code) == 1) {
         $vehicle_num = $pre_code . "" . $alter_code . "-" . $v_no_num;
         $vehicle_code = $pre_code . "" . $alter_code;
@@ -281,17 +283,16 @@ if (isset($_POST['lease_reg'])) {
         $vehicle_num = $alter_code . "-" . $v_no_num;
         $vehicle_code = $alter_code;
     }
-    
+
     $model_year = $_SESSION['model_year'] = filter_input(INPUT_POST, 'model_year');
     $lease_rate = $_SESSION['lease_rate'] = filter_input(INPUT_POST, 'lease_rate');
     $fixed_rate = $_SESSION['fixed_rate'] = filter_input(INPUT_POST, 'fixed_rate');
     $cbo_loan_duration = $_SESSION['cbo_loan_duration'] = filter_input(INPUT_POST, 'cbo_loan_duration');
     $ser_installment = $_SESSION['ser_installment'] = filter_input(INPUT_POST, 'ser_installment');
     $loan_description = $_SESSION['loan_description'] = filter_input(INPUT_POST, 'loan_description');
-    $province_code=$_SESSION['province_code']=  filter_input(INPUT_POST, 'province_code');
+    $province_code = $_SESSION['province_code'] = filter_input(INPUT_POST, 'province_code');
 
-    $cus_regdate=$_SESSION['cus_reg_date']=  filter_input(INPUT_POST, 'cus_reg_date');
-    
+//    $cus_regdate=$_SESSION['cus_reg_date']=  filter_input(INPUT_POST, 'cus_reg_date');
     //saving customer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     global $conn;
     $query_customer = "INSERT INTO customer
@@ -339,7 +340,7 @@ VALUES (
         '$cus_emp_name',
         '$cus_emp_address',
         '$cus_addr_map_link',
-        '$cus_regdate',
+        '$cus_reg_date',
         '1',
         '$cus_spouse_name',
         '$cus_spouse_dob',
@@ -576,12 +577,15 @@ VALUES (
             $save_g2 = mysqli_query($conn, $query_guarantor2);
         }
 // saving gurantors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-        if ($save_savings && $save_mobile && $save_daily_loan && $save_property1 && $save_property2 && $save_lease && $save_g1 && $save_g2) {
-            echo "<script>alert('Customer Lease has been sussfully added');</script>";
-            echo "<script>window.location.href='../user/user_home.php';</script>";
-            $_SESSION['cus_nic'] = "";
-            $_SESSION['cus_name'] = "";
+        if ($save_lease) {
+            if ($save_savings && $save_mobile && $save_daily_loan && $save_property1 && $save_property2 && $save_lease && $save_g1 && $save_g2) {
+                echo "<script>alert('Customer Lease has been sussfully added');</script>";
+                echo "<script>window.location.href='../user/user_home.php';</script>";
+                $_SESSION['cus_nic'] = "";
+                $_SESSION['cus_name'] = "";
+            } else {
+                echo "Error while Saving";
+            }
         } else {
             echo "Error while Saving";
         }
