@@ -47,6 +47,8 @@ if (isset($_SESSION['cus_nic'])) {
         <script src="../assets/js/jquery-3.0.0.js"></script>
         <link rel="icon" href="favicon.ico">
 
+
+
         <?php require '../controller/co_load_vehicle_brands.php'; ?>
         <script type="text/javascript">
             function imagepreview(input) {
@@ -340,8 +342,10 @@ if (isset($_SESSION['cus_nic'])) {
                 }
             };
         </script>
+        <link rel="stylesheet" href="../assets/css/images-uploader.css">
     </head>
     <body>
+
         <?php include '../assets/include/navigation_bar.php'; ?>
         <!--Lease Registration Panel-->
         <div class="container" style="margin-top: 80px;display: block;" id="one">
@@ -359,7 +363,7 @@ if (isset($_SESSION['cus_nic'])) {
                                         <div class="form-group required">
                                             <label class="control-label">Customer NIC:</label>
                                             <div class="form-inline required">
-                                                <input type="text" name="cus_nic" id="customer_nic" value="<?php echo $cus_nic; ?>" placeholder="Customer NIC" class="form-control" required style="width: 85%;" maxlength="10"/>
+                                                <input type="text" name="cus_nic" id="cus_nic" value="<?php echo $cus_nic; ?>" placeholder="Customer NIC" class="form-control" required style="width: 85%;text-transform: uppercase;" maxlength="10" readonly/>
                                                 <button type="button" id="cviewbuttons" class="btn btn" onclick="searchCustomerforLease();">Search</button>
                                             </div>
                                         </div>
@@ -370,16 +374,37 @@ if (isset($_SESSION['cus_nic'])) {
                                         <div class="form-inline" style="margin-bottom: 8px;">
                                             <a href="customer_registration.php"><button type="button" id="cviewbuttons" class="btn btn">New Customer</button></a>
                                         </div>
-                                        <!--                                        <div class="form-group">
-                                                                                    <label class="control-label">Upload Customer:</label>
-                                                                                    <input type="file" name="product_image[]" id="idupload" onchange="imagepreview(this);"/>
-                                                                                    <img id="imgpreview" title="Image Preview" style="width: 200px;height: 200px;">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Upload Property:</label>
-                                                                                    <input type="file" name="product_image"/>
-                                                                                </div>-->
-                                    </fieldset>
+                                        </fieldset>
+                                        <!--Image Uploader-->
+                                        <fieldset id="account">
+                                        <legend>Upload Vehicle Images Here</legend>
+                                            <form id="upload" method="post" enctype="multipart/form-data">
+                                                <div id="upload-drop-zone">
+                                                    <ul>
+                                                        <li>Drop photos here</li>
+                                                        <li>or</li>
+                                                        <li>
+                                                            <input type="file" multiple name="upload-input[]" id="upload-input" accept="image/*">
+                                                            <label for="upload-input">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                                                                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+                                                                </svg>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!--<label for="galleries-names">Enter galleries names as CSV</label>-->
+                                                <input type="hidden" name="galleries-names" id="galleries-names">
+                                                <input type="submit" value="Upload" name="upload-submit" id="upload-submit" class="btn btn" style="background: #009688; color: white;">
+                                                <input type="button" value="Clear" id="clear_img_preview" class="btn btn" onclick="clearImgPreview();" style="background: #009688; color: white;">
+                                            </form>
+                                            <ul id="image-preview">
+                                                
+                                            </ul>
+                                        </fieldset>
+                                        <!--Image Uploader-->
+
+                                    
                                 </div>
                                 <div class="col-sm-6">
                                     <fieldset id="account">
@@ -479,8 +504,8 @@ if (isset($_SESSION['cus_nic'])) {
                                             <label class="control-label">Description of the Loan:</label>
                                             <input type="text" id="lease_des" class="form-control" name="loan_description" placeholder="Description of the Loan">
                                         </div>
-
                                         <input type="submit" class="btn btn" id="custcontinue" name="lease_reg" value="Register Lease"/>
+
                                     </fieldset>
                                 </div>
                             </div>
@@ -523,5 +548,10 @@ if (isset($_SESSION['cus_nic'])) {
 
 
     </script>
-
+    <script type="text/javascript">
+            function clearImgPreview(){
+                document.getElementById('image-preview').innerHTML="";
+            }
+    </script>
+    <script src="../assets/js/images-uploader-min.js"></script>
 </html>

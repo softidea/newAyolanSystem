@@ -99,7 +99,7 @@ if (!isset($_SESSION['user_email'])) {
                                         <li class="dropdown-header" style="color: #004D40;">Customer</li>
                                         <li><a href="../customer/customer_registration.php" style="text-decoration: none;">Registration</a></li>
                                         <li><a href="../customer/customer_view.php" style="text-decoration: none;">View Customers</a></li>
-                                        <li><a href="../customer/customer_installment.php" style="text-decoration: none;">Add new Installment</a></li>
+                                        <li><a href="../customer/customer_installment.php" style="text-decoration: none;">Add Lease Installment</a></li>
                                         <li><a href="../customer/customer_registration.php" style="text-decoration: none;">Add a Lease</a></li>
                                         <li class="divider"></li>
                                         <li class="dropdown-header" style="color: #004D40;">Motor Bikes</li>
@@ -124,7 +124,7 @@ if (!isset($_SESSION['user_email'])) {
                                         <li class="dropdown-header" style="color: #004D40;">Services</li>
                                         <li><a href="../customer/customer_addlease.php" style="text-decoration: none;">Add new Lease</a></li>
                                         <li><a href="#" style="text-decoration: none;">Add new Pawn</a></li>
-                                        <li><a href="../customer/customer_installment.php" style="text-decoration: none;">Pay Installment</a></li>							
+                                        <li><a href="../customer/customer_installment.php" style="text-decoration: none;">Pay Lease Installment</a></li>							
                                         <li class="divider"></li>
                                         <li class="dropdown-header" style="color: #004D40;">Search Customers</li>
                                         
@@ -161,7 +161,7 @@ if (!isset($_SESSION['user_email'])) {
                             <a href="../customer/customer_view.php" style="text-decoration: none;"><button type="button" class="list-group-item">Search Customers</button></a>
                             <a href="../customer/customer_addlease.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Vehicle Lease</button></a>
                             <a href="../customer/customer_addpawn.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Land Pawn</button></a>
-                            <a href="../customer/customer_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Installment</button></a>
+                            <a href="../customer/customer_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Lease Installment</button></a>
                         </div>
                         <div class="panel-footer"><div style="height: 15px;"></div></div>
                     </div>

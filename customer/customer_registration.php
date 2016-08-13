@@ -344,13 +344,22 @@ if (!isset($_SESSION['user_email'])) {
                 }
             };
         </script>
+        <script type="text/javascript">
+            function checkForm(){
+                if(document.getElementById('cus_nic').value!="" ||document.getElementById('cus_nic').value!=null){
+                    form.customer_continue.disabled=true;
+                    form.customer_continue.value = "Please wait...";
+                    return true;
+                }else{return false;alert('Please Enter Nic');}
+            }
+        </script>
     </head>
     <body>
 
         <?php include '../assets/include/navigation_bar.php'; ?>
 
         <!--Customer Panel Section-->
-        <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data">
+        <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data" onsubmit="return checkForm(this);">
             <div class="container" style="margin-top: 80px;display: block;" id="one">
 
                 <div class="row">
@@ -693,7 +702,7 @@ if (!isset($_SESSION['user_email'])) {
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="submit" class="btn btn" name="customer_continue" id="custcontinue" onclick="checkCustomerValues();" value="Continue">
+                                    <input type="submit" class="btn btn" name="customer_continue" id="custcontinue" value="Continue">
                                 </div>
                             </div>
 
@@ -704,8 +713,6 @@ if (!isset($_SESSION['user_email'])) {
             <!-- Over.Customer Panel Section-->
         </form>
         <!--Over.Property Panel Section-->
-
-
 
 
         <!--Footer Section-->
@@ -849,7 +856,8 @@ if (!isset($_SESSION['user_email'])) {
 
         </script>
         <script type="text/javascript">
-            function checkCustomerValues() {
+            function 
+            checkCustomerValues() {
 
                 var cus_fullname = document.getElementById('cus_fullname').value
                 var cus_initial = document.getElementById('cus_initial').value
