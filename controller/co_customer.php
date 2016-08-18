@@ -7,6 +7,9 @@ if (mysqli_connect_errno()) {
 session_start();
 $reference_person = $_SESSION['user_email'];
 
+
+
+
 $cus_name = "";
 $cus_address = "";
 $cus_tp = "";
@@ -292,7 +295,9 @@ if (isset($_POST['lease_reg'])) {
     $loan_description = $_SESSION['loan_description'] = filter_input(INPUT_POST, 'loan_description');
     $province_code = $_SESSION['province_code'] = filter_input(INPUT_POST, 'province_code');
 
-//    $cus_regdate=$_SESSION['cus_reg_date']=  filter_input(INPUT_POST, 'cus_reg_date');
+    $cus_regdate=$_SESSION['cus_reg_date']=  filter_input(INPUT_POST, 'cus_reg_date');
+    date_default_timezone_set('Asia/Colombo');
+    $lease_reg_date=date("Y-m-d");
     //saving customer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     global $conn;
     $query_customer = "INSERT INTO customer
@@ -340,7 +345,7 @@ VALUES (
         '$cus_emp_name',
         '$cus_emp_address',
         '$cus_addr_map_link',
-        '$cus_reg_date',
+        '$lease_reg_date',
         '1',
         '$cus_spouse_name',
         '$cus_spouse_dob',
