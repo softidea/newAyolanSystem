@@ -9,9 +9,11 @@ if (!isset($_SESSION['user_email'])) {
 if (isset($_SESSION['cus_nic'])) {
     $cus_nic = $_SESSION['cus_nic'];
     $cus_name = $_SESSION['cus_name'];
+    $lease_date=$_SESSION['cus_reg_date'];
 } else {
     $cus_nic = "";
     $cus_name = "";
+    $lease_date="";
 }
 ?>
 <!DOCTYPE html>
@@ -372,6 +374,7 @@ if (isset($_SESSION['cus_nic'])) {
                                                 <button type="button" id="cviewbuttons" class="btn btn" onclick="searchCustomerforLease();">Search</button>
                                             </div>
                                         </div>
+                                        <input type="hiiden" name="lease_reg_date_hide" value="<?php echo $lease_date;?>">
                                         <div class="form-group">
                                             <label class="control-label">Customer Name:</label>
                                             <input type="text" name="cus_name" readonly id="customer_name" value="<?php echo $cus_name; ?>" placeholder="Customer Name" class="form-control"/>

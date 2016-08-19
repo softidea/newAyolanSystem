@@ -183,7 +183,7 @@ if (isset($_POST['customer_continue'])) {
 }
 if (isset($_POST['lease_reg'])) {
 
-    $lease_reg_date=$_POST['lease_reg_date'];
+    $lease_reg_date_hide=$_SESSION['lease_reg_date_hide']=filter_input(INPUT_POST, 'lease_reg_date_hide');
 
     $cus_name = $_SESSION['cus_name'];
     $cus_address = $_SESSION['cus_address'];
@@ -507,7 +507,7 @@ VALUES (
         '$ser_installment',
         '$loan_description',
         '$province_code',
-        '$lease_reg_date',
+        '$lease_reg_date_hide',
         '$reference_person',
         '1',
         '$cus_nic')";
