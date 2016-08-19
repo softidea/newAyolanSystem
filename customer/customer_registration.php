@@ -78,7 +78,6 @@ if (!isset($_SESSION['user_email'])) {
     $cus_daily_loan_account_no = "";
 
     $payable_loan_amount = "";
-
     $reg_date = date("Y-m-d");
 ///////////////////////////////////////////////////////
 

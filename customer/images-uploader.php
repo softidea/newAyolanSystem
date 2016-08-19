@@ -1,12 +1,14 @@
 <?php
 //require('helper.php');
+session_start();
+
+$cus_nic = $_SESSION['cus_nic'];
 
 require 'helper.php';
 require '../db/newDB.php';
 
 
-//
-$cus_nic=$_POST['cus_nic'];
+
 $service_code=$_POST['service_code'];
 $service_no=$_POST['service_nos'];
 $ser_number=$service_code+"-"+$service_no;

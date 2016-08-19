@@ -177,12 +177,13 @@ if (isset($_POST['customer_continue'])) {
     $cus_daily_loan_account_no = $_SESSION['cus_daily_loan_account_no'] = filter_input(INPUT_POST, 'cus_daily_loan_account_no');
 
     $cus_reg_date = $_SESSION['cus_reg_date'] = filter_input(INPUT_POST, 'cus_reg_date');
-
+    
+    
     header("location:../customer/customer_addlease.php");
 }
 if (isset($_POST['lease_reg'])) {
 
-    $cus_reg_date = $_SESSION['cus_reg_date'];
+    $lease_reg_date=$_POST['lease_reg_date'];
 
     $cus_name = $_SESSION['cus_name'];
     $cus_address = $_SESSION['cus_address'];
@@ -296,8 +297,7 @@ if (isset($_POST['lease_reg'])) {
     $province_code = $_SESSION['province_code'] = filter_input(INPUT_POST, 'province_code');
 
     $cus_regdate=$_SESSION['cus_reg_date']=  filter_input(INPUT_POST, 'cus_reg_date');
-    date_default_timezone_set('Asia/Colombo');
-    $lease_reg_date=date("Y-m-d");
+   
     //saving customer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     global $conn;
     $query_customer = "INSERT INTO customer
@@ -507,7 +507,7 @@ VALUES (
         '$ser_installment',
         '$loan_description',
         '$province_code',
-        '$cus_regdate',
+        '$lease_reg_date',
         '$reference_person',
         '1',
         '$cus_nic')";
