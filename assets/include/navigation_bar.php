@@ -50,7 +50,7 @@
                         <ul class="dropdown-menu">
                            <li><a href="<?php echo ('../admin/customer/addsis.php'); ?>">Add New Re-process</a></li>
                             <li><a href="<?php echo ('../admin/customer/viewsis.php'); ?>">View Re-Process</a></li>
-                            <li><a href="<?php echo ('../admin/customer/viewsis.php'); ?>">Release Sis</a></li>
+                            <li><a href="<?php echo ('../admin/customer/checksis.php'); ?>">Release Sis</a></li>
                             <li><a href="<?php echo ('../admin/customer/checksis.php'); ?>">Check Re-Process</a></li>
                         </ul>
                     </li>
