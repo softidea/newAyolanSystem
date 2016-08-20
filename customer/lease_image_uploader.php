@@ -6,34 +6,24 @@ if (!isset($_SESSION['user_email'])) {
 }
 ?>
 <?php
-if (isset($_SESSION['cus_nic'])) {
-    $cus_nic = $_SESSION['cus_nic'];
-    $cus_name = $_SESSION['cus_name'];
-    $lease_date=$_SESSION['cus_reg_date'];
+if (isset($_SESSION['ser_number'])) {
+    $img_cus_nic = $_SESSION['img_cus_nic'];
+    if ($img_cus_nic != null) {
+        $img_cus_nic = $_SESSION['img_cus_nic'];
+        $img_ser_number = $_SESSION['ser_number'];
+    }
+    $img_ser_number = $_SESSION['ser_number'];
 } else {
-    $cus_nic = "";
-    $cus_name = "";
-    $lease_date="";
+    $img_cus_nic = "";
+    $img_ser_number = "";
 }
 ?>
+
 <!DOCTYPE html>
 <html>
-    <!--Variable Declaration-->
-    <?php
-    $vehicle_no = "";
-    $model_year = "";
-    $lease_rate = "";
-    $fixed_rate = "";
-    $cbo_loan_duration = "";
-    
-    date_default_timezone_set('Asia/Colombo');
-    $lease_reg_date=date("Y-m-d");
-    
-    ?>
-    <!--Variable Declaration-->
     <head>
         <meta charset="UTF-8">
-        <title>Lease | Registration </title>
+        <title>Service | Image Upload</title>
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -355,195 +345,58 @@ if (isset($_SESSION['cus_nic'])) {
         <?php include '../assets/include/navigation_bar.php'; ?>
         <!--Lease Registration Panel-->
         <div ng-app="" class="container" style="margin-top: 80px;display: block;" id="one">
-            <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data" ng-app="" ng-init="ser = 'HOR-'">
+            <form id="upload" method="POST" enctype="multipart/form-data" action="../customer/images-uploader.php">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading" id="panelheading">
-                                <h3 class="panel-title">Lease Registration</h3>
+                                <h3 class="panel-title">Lease Image Upload</h3>
                             </div>
                             <div class="panel-body" style="background-color: #FAFAFA;">
                                 <div class="col-sm-6">
-                                    <fieldset id="account">
-                                        <legend>Customer Details</legend>
-                                        <div class="form-group required">
-                                            <label class="control-label">Customer NIC:</label>
-                                            <div class="form-inline required">
-                                                <input type="text" name="cus_nic" id="cus_nic" value="<?php echo $cus_nic; ?>" placeholder="Customer NIC" class="form-control" required style="width: 85%;text-transform: uppercase;" maxlength="10" readonly/>
-                                                <button type="button" id="cviewbuttons" class="btn btn" onclick="searchCustomerforLease();">Search</button>
-                                            </div>
-                                        </div>
-                                        <input type="hiiden" name="lease_reg_date_hide" value="<?php echo $lease_date;?>">
-                                        <div class="form-group">
-                                            <label class="control-label">Customer Name:</label>
-                                            <input type="text" name="cus_name" readonly id="customer_name" value="<?php echo $cus_name; ?>" placeholder="Customer Name" class="form-control"/>
-                                        </div>
-                                        <div class="form-inline" style="margin-bottom: 8px;">
-                                            <a href="customer_registration.php"><button type="button" id="cviewbuttons" class="btn btn">New Customer</button></a>
-                                        </div>
-                                    </fieldset>
-
-
                                     <!--Image Uploader-->
                                     <fieldset id="account">
                                         <legend>Upload Vehicle Images Here</legend>
-                                        <form id="upload" method="post" enctype="multipart/form-data">
-                                            <div id="upload-drop-zone">
-                                                <ul>
-                                                    <li>Drop photos here</li>
-                                                    <li>or</li>
-                                                    <li>
-                                                        <input type="file" multiple name="upload-input[]" id="upload-input" accept="image/*">
-                                                        <label for="upload-input">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-                                                            <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
-                                                            </svg>
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                                <div ng-switch="myVar">
-                                                    <div ng-switch-when="HOR">
-                                                        {{ser = 'HOR-'}}{{number}}
-                                                        <input type="text" name="hide_hor" ng-switch-when="HOR" id="hide_hor" value="{{ser = 'HOR-'}}{{number}}" />
-                                                    </div>
-                                                    <div ng-switch-when="BLS">
-                                                        {{ser = 'BLS-'}}{{number}}
-                                                        <input type="text" name="hide_hor" ng-bind="{{number}}" id="hide_hor">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--<label for="galleries-names">Enter galleries names as CSV</label>-->
-                                            <input type="hidden" name="hide_nic" id="hide_nic" value="<?php echo $cus_nic; ?>">
-                                            
-                                            <input type="hidden" name="galleries-names" id="galleries-names">
-                                            <input type="submit" value="Upload" name="upload-submit" id="upload-submit" class="btn btn" style="background: #009688; color: white;">
-                                            <input type="button" value="Clear" id="clear_img_preview" class="btn btn" onclick="clearImgPreview();" style="background: #009688; color: white;">
-                                        </form>
+
+                                        <input type="text" name="img_cus_nic" id="img_cus_nic" value="<?php echo $img_cus_nic; ?>">
+                                        <input type="text" name="img_ser_number" id="img_ser_number" value="<?php echo $img_ser_number; ?>">
+                                        <div id="upload-drop-zone">
+                                            <ul>
+                                                <li>Drop photos here</li>
+                                                <li>or</li>
+                                                <li>
+                                                    <input type="file" multiple name="upload-input[]" id="upload-input" accept="image/*">
+                                                    <label for="upload-input">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                                                        <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+                                                        </svg>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!--<label for="galleries-names">Enter galleries names as CSV</label>-->
+
+
+                                        <input type="hidden" name="galleries-names" id="galleries-names">
+                                        <input type="submit" value="Upload" name="upload-submit" id="upload-submit" class="btn btn" style="background: #009688; color: white;">
+                                        <input type="button" value="Clear" id="clear_img_preview" class="btn btn" onclick="clearImgPreview();" style="background: #009688; color: white;">
+
                                         <ul id="image-preview">
 
                                         </ul>
                                     </fieldset>
                                     <!--Image Uploader-->
 
-
                                 </div>
                                 <div class="col-sm-6">
-                                    <fieldset id="account">
-                                        <legend>Leasing Details</legend>
-                                        <div class="form-group">
-                                            <label class="control-label">Service No:</label>
-                                            <div class="form-inline">
 
-
-                                                <select name="service_code" id="scode" ng-model="myVar" class="form-control" onchange="" style="width: 40%;" >
-                                                    <option value="HOR">HOR</option>
-                                                    <option value="BLS">BLS</option>
-                                                </select>
-
-
-
-                                                <input ng-app="" type="text" name="service_no" id="sno" ng-model="number" placeholder="Service No" class="form-control" onKeyPress="return numbersonly(this, event)" max="4" maxlength="4" style="width: 59%;" required/>
-
-
-
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Select Category:</label>
-                                            <select name="vehicle_category" id="v_cat" class="form-control" onchange="set_vehicle_div(this.value);">
-                                                <option value="0">~~Select Category~~</option>
-                                                <option value="1">Bike</option>
-                                                <option value="2">Three-Wheel</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Select Vehicle Brand:</label>
-                                            <select name="vehicle_brand" id="v_brand" class="form-control" onchange="showTypes(this.value);">
-                                                <?php load_vehicle_brands(); ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Select Vehicle Type:</label>
-                                            <select name="vehicle_type" id="v_type" class="form-control" required onchange="showVehicleMods(this.value);">
-                                                <option value="0">~~Select Vehicle Type~~</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Vehicle Pre Code:</label>
-                                            <select name="v_code" id="v_code" class="form-control" required onchange="showDetails();">
-                                                <option value="0">~~Select Vehicle Code~~</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-inline">
-                                            <input type="text" name="v_no_code" style="text-transform: uppercase;" id="v_no_code" placeholder="Ex:ME" class="form-control" required/>
-                                            <label class="control-label"> - </label>
-                                            <input type="text" name="v_no_num" onKeyPress="return numbersonly(this, event)" max="4" maxlength="4" id="v_no_num" placeholder="Ex:2558" class="form-control" required/>
-                                            <br>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Model Year:</label>
-                                            <input type="text" readonly name="model_year" value="<?php echo $model_year; ?>" id="m_year" placeholder="Model Year" class="form-control" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Lease Rental:</label>
-                                            <input type="text" readonly name="lease_rate" id="l_rate" value="<?php echo $lease_rate; ?>" placeholder="Lease Rate" class="form-control" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Fixed Rental:</label>
-                                            <input type="text" name="fixed_rate" id="f_rate" value="<?php echo $fixed_rate; ?>" placeholder="Fix Rate" class="form-control" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Select Period:</label>
-                                            <select name="cbo_loan_duration" id="v_lease_period" class="form-control" required onchange="setServiceInstallment();">
-                                                <option value="0">~~Select Period~~</option>
-                                                <option value="3">3 Months</option>
-                                                <option value="6">6 Months</option>
-                                                <option value="9">9 Months</option>
-                                                <option value="12">1 Year</option>
-                                                <option value="18">1 Year & 6 Months</option>
-                                                <option value="24">2 Years</option>
-                                                <option value="30">2 Year & 6 Months</option>
-                                                <option value="36">3 Years</option>
-                                                <option value="42">3 Year & 6 Months</option>
-                                                <option value="48">4 Years</option>
-                                                <option value="54">4 Year & 6 Months</option>
-                                                <option value="60">5 Years</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Service Installment:</label>
-                                            <input type="text" name="ser_installment" id="ser_installment" value="<?php echo $fixed_rate; ?>" placeholder="Fix Rate" class="form-control" required readonly/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Vehicle Province Code:</label>
-                                            <select name="province_code" id="province_code" class="form-control" required>
-                                                <option value="0">~~Select Period~~</option>
-                                                <option value="CP">CP-Central Province</option>
-                                                <option value="EP">EP-Eastern Province</option>
-                                                <option value="NC">NC-North Central Province</option>
-                                                <option value="NP">NP-Nouthern Province</option>
-                                                <option value="NW">NW-North West</option>
-                                                <option value="SB">SB-Sabaragamuwa Province</option>
-                                                <option value="SP">SP-Southern Province</option>
-                                                <option value="UP">UP-Uva Province</option>
-                                                <option value="WP">WP-Western Province</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Description of the Loan:</label>
-                                            <input type="text" id="lease_des" class="form-control" name="loan_description" placeholder="Description of the Loan">
-                                        </div>
-                                        <input type="hidden" name="lease_reg_date" value="<?php echo $lease_reg_date;?>">
-                                        <input type="submit" class="btn btn" id="custcontinue" name="lease_reg" value="Register Lease"/>
-
-                                    </fieldset>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+
         </div>
         <!--Lease Registration Panel-->
         <?php include '../assets/include/footer.php'; ?>
@@ -552,37 +405,11 @@ if (isset($_SESSION['cus_nic'])) {
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="http://bootsnipp.com/dist/scripts.min.js"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <script type="text/javascript">
-
-                                                function numbersonly(myfield, e, dec)
-                                                {
-                                                    var key;
-                                                    var keychar;
-                                                    if (window.event)
-                                                        key = window.event.keyCode;
-                                                    else if (e)
-                                                        key = e.which;
-                                                    else
-                                                        return true;
-                                                    keychar = String.fromCharCode(key);
-                                                    if ((key == null) || (key == 0) || (key == 8) ||
-                                                            (key == 9) || (key == 13) || (key == 27))
-                                                        return true;
-                                                    else if ((("0123456789").indexOf(keychar) > -1))
-                                                        return true;
-                                                    else if (dec && (keychar == ".")) {
-                                                        myfield.form.elements[dec].focus();
-                                                        return false;
-                                                    } else
-                                                        return false;
-                                                }
-
-
-    </script>
-    <script type="text/javascript">
-        function clearImgPreview() {
-            document.getElementById('image-preview').innerHTML = "";
-        }
+                                            function clearImgPreview() {
+                                                document.getElementById('image-preview').innerHTML = "";
+                                            }
     </script>
     <script src="../assets/js/images-uploader-min.js"></script>
 </html>

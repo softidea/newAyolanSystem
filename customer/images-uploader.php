@@ -2,17 +2,13 @@
 //require('helper.php');
 session_start();
 
-$cus_nic = $_SESSION['cus_nic'];
-
 require 'helper.php';
 require '../db/newDB.php';
 
-
-
-$service_code=$_POST['service_code'];
-$service_no=$_POST['service_nos'];
-$ser_number=$service_code+"-"+$service_no;
-
+$img_cus_nic= $_POST['img_cus_nic'];
+$img_ser_number= $_POST['img_ser_number'];
+echo $img_cus_nic;
+echo $img_ser_number;
 
 
 
@@ -91,12 +87,15 @@ foreach ($files_errors as $key => $error) {
              image_path,
              status)
 VALUES (
-        '$ser_number',
-        '$cus_nic',
+        '$img_ser_number',
+        '$img_cus_nic',
         '$uuid_file_name',
         '1');";
 $run_query=  mysqli_query($conn, $save_images);
-
+if($run_query){
+    echo "<script>alert('Vehicle Images successfully uploaded');</script>";
+    echo "<script>window.location.href='../user/user_home.php';</script>";
+}
 
   //image file name save to the db
   

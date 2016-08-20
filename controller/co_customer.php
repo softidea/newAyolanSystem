@@ -189,6 +189,11 @@ if (isset($_POST['lease_reg'])) {
     $cus_address = $_SESSION['cus_address'];
     $cus_tp = $_SESSION['cus_tp'];
     $cus_nic = $_SESSION['cus_nic'];
+    
+    //set upload nic 
+    $_SESSION['img_cus_nic']=$cus_nic;
+    //set upload nic
+    
     $cus_dob = $_SESSION['cus_dob'];
     $cus_position = $_SESSION['cus_position'];
     $cus_salary = $_SESSION['cus_salary'];
@@ -270,6 +275,7 @@ if (isset($_POST['lease_reg'])) {
     $service_code = $_SESSION['service_code'] = filter_input(INPUT_POST, 'service_code');
     $service_no = $_SESSION['service_no'] = filter_input(INPUT_POST, 'service_no');
     $service_number = $service_code . "-" . $service_no;
+    $_SESSION['ser_number']=$service_number;
     $vehicle_category = $_SESSION['vehicle_category'] = filter_input(INPUT_POST, 'vehicle_category');
     $vehicle_brand = $_SESSION['vehicle_brand'] = filter_input(INPUT_POST, 'vehicle_brand');
     $vehicle_type = $_SESSION['vehicle_type'] = filter_input(INPUT_POST, 'vehicle_type');
@@ -345,7 +351,7 @@ VALUES (
         '$cus_emp_name',
         '$cus_emp_address',
         '$cus_addr_map_link',
-        '$lease_reg_date',
+        '$cus_reg_date',
         '1',
         '$cus_spouse_name',
         '$cus_spouse_dob',
@@ -512,7 +518,7 @@ VALUES (
         '1',
         '$cus_nic')";
 
-            $save_lease = mysqli_query($conn, $query_lease);
+        $save_lease = mysqli_query($conn, $query_lease);
 
 //saving leasing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // saving gurantors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -585,7 +591,8 @@ VALUES (
         if ($save_lease) {
             if ($save_savings && $save_mobile && $save_daily_loan && $save_property1 && $save_property2 && $save_lease && $save_g1 && $save_g2) {
                 echo "<script>alert('Customer Lease has been sussfully added');</script>";
-                echo "<script>window.location.href='../user/user_home.php';</script>";
+//                echo "<script>window.location.href='../user/user_home.php';</script>";
+                echo "<script>window.location.href='../customer/lease_image_uploader.php';</script>";
                 $_SESSION['cus_nic'] = "";
                 $_SESSION['cus_name'] = "";
             } else {
