@@ -9,11 +9,11 @@ if (!isset($_SESSION['user_email'])) {
 if (isset($_SESSION['cus_nic'])) {
     $cus_nic = $_SESSION['cus_nic'];
     $cus_name = $_SESSION['cus_name'];
-    $lease_date=$_SESSION['cus_reg_date'];
+    $lease_date = $_SESSION['cus_reg_date'];
 } else {
     $cus_nic = "";
     $cus_name = "";
-    $lease_date="";
+    $lease_date = "";
 }
 ?>
 <!DOCTYPE html>
@@ -25,10 +25,9 @@ if (isset($_SESSION['cus_nic'])) {
     $lease_rate = "";
     $fixed_rate = "";
     $cbo_loan_duration = "";
-    
+
     date_default_timezone_set('Asia/Colombo');
-    $lease_reg_date=date("Y-m-d");
-    
+    $lease_reg_date = date("Y-m-d");
     ?>
     <!--Variable Declaration-->
     <head>
@@ -55,7 +54,7 @@ if (isset($_SESSION['cus_nic'])) {
 
 
 
-        <?php require '../controller/co_load_vehicle_brands.php'; ?>
+<?php require '../controller/co_load_vehicle_brands.php'; ?>
         <script type="text/javascript">
             function imagepreview(input) {
                 if (input.files && input.files[0]) {
@@ -352,7 +351,7 @@ if (isset($_SESSION['cus_nic'])) {
     </head>
     <body>
 
-        <?php include '../assets/include/navigation_bar.php'; ?>
+<?php include '../assets/include/navigation_bar.php'; ?>
         <!--Lease Registration Panel-->
         <div ng-app="" class="container" style="margin-top: 80px;display: block;" id="one">
             <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data" ng-app="" ng-init="ser = 'HOR-'">
@@ -373,7 +372,7 @@ if (isset($_SESSION['cus_nic'])) {
                                                 <button type="button" id="cviewbuttons" class="btn btn" onclick="searchCustomerforLease();">Search</button>
                                             </div>
                                         </div>
-                                        <input type="hiiden" name="lease_reg_date_hide" value="<?php echo $lease_date;?>">
+                                        <input type="hiiden" name="lease_reg_date_hide" value="<?php echo $lease_date; ?>">
                                         <div class="form-group">
                                             <label class="control-label">Customer Name:</label>
                                             <input type="text" name="cus_name" readonly id="customer_name" value="<?php echo $cus_name; ?>" placeholder="Customer Name" class="form-control"/>
@@ -414,7 +413,7 @@ if (isset($_SESSION['cus_nic'])) {
                                             </div>
                                             <!--<label for="galleries-names">Enter galleries names as CSV</label>-->
                                             <input type="hidden" name="hide_nic" id="hide_nic" value="<?php echo $cus_nic; ?>">
-                                            
+
                                             <input type="hidden" name="galleries-names" id="galleries-names">
                                             <input type="submit" value="Upload" name="upload-submit" id="upload-submit" class="btn btn" style="background: #009688; color: white;">
                                             <input type="button" value="Clear" id="clear_img_preview" class="btn btn" onclick="clearImgPreview();" style="background: #009688; color: white;">
@@ -460,7 +459,7 @@ if (isset($_SESSION['cus_nic'])) {
                                         <div class="form-group">
                                             <label class="control-label">Select Vehicle Brand:</label>
                                             <select name="vehicle_brand" id="v_brand" class="form-control" onchange="showTypes(this.value);">
-                                                <?php load_vehicle_brands(); ?>
+<?php load_vehicle_brands(); ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -534,7 +533,7 @@ if (isset($_SESSION['cus_nic'])) {
                                             <label class="control-label">Description of the Loan:</label>
                                             <input type="text" id="lease_des" class="form-control" name="loan_description" placeholder="Description of the Loan">
                                         </div>
-                                        <input type="hidden" name="lease_reg_date" value="<?php echo $lease_reg_date;?>">
+                                        <input type="hidden" name="lease_reg_date" value="<?php echo $lease_reg_date; ?>">
                                         <input type="submit" class="btn btn" id="custcontinue" name="lease_reg" value="Register Lease"/>
 
                                     </fieldset>
@@ -546,7 +545,7 @@ if (isset($_SESSION['cus_nic'])) {
             </form>
         </div>
         <!--Lease Registration Panel-->
-        <?php include '../assets/include/footer.php'; ?>
+<?php include '../assets/include/footer.php'; ?>
     </body>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

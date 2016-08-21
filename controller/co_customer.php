@@ -177,23 +177,23 @@ if (isset($_POST['customer_continue'])) {
     $cus_daily_loan_account_no = $_SESSION['cus_daily_loan_account_no'] = filter_input(INPUT_POST, 'cus_daily_loan_account_no');
 
     $cus_reg_date = $_SESSION['cus_reg_date'] = filter_input(INPUT_POST, 'cus_reg_date');
-    
-    
+
+
     header("location:../customer/customer_addlease.php");
 }
 if (isset($_POST['lease_reg'])) {
 
-    $lease_reg_date_hide=$_SESSION['lease_reg_date_hide']=filter_input(INPUT_POST, 'lease_reg_date_hide');
+    $lease_reg_date_hide = $_SESSION['lease_reg_date_hide'] = filter_input(INPUT_POST, 'lease_reg_date_hide');
 
     $cus_name = $_SESSION['cus_name'];
     $cus_address = $_SESSION['cus_address'];
     $cus_tp = $_SESSION['cus_tp'];
     $cus_nic = $_SESSION['cus_nic'];
-    
+
     //set upload nic 
-    $_SESSION['img_cus_nic']=$cus_nic;
+    $_SESSION['img_cus_nic'] = $cus_nic;
     //set upload nic
-    
+
     $cus_dob = $_SESSION['cus_dob'];
     $cus_position = $_SESSION['cus_position'];
     $cus_salary = $_SESSION['cus_salary'];
@@ -275,7 +275,7 @@ if (isset($_POST['lease_reg'])) {
     $service_code = $_SESSION['service_code'] = filter_input(INPUT_POST, 'service_code');
     $service_no = $_SESSION['service_no'] = filter_input(INPUT_POST, 'service_no');
     $service_number = $service_code . "-" . $service_no;
-    $_SESSION['ser_number']=$service_number;
+    $_SESSION['ser_number'] = $service_number;
     $vehicle_category = $_SESSION['vehicle_category'] = filter_input(INPUT_POST, 'vehicle_category');
     $vehicle_brand = $_SESSION['vehicle_brand'] = filter_input(INPUT_POST, 'vehicle_brand');
     $vehicle_type = $_SESSION['vehicle_type'] = filter_input(INPUT_POST, 'vehicle_type');
@@ -302,8 +302,8 @@ if (isset($_POST['lease_reg'])) {
     $loan_description = $_SESSION['loan_description'] = filter_input(INPUT_POST, 'loan_description');
     $province_code = $_SESSION['province_code'] = filter_input(INPUT_POST, 'province_code');
 
-    $cus_regdate=$_SESSION['cus_reg_date']=  filter_input(INPUT_POST, 'cus_reg_date');
-   
+    $cus_regdate = $_SESSION['cus_reg_date'] = filter_input(INPUT_POST, 'cus_reg_date');
+
     //saving customer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     global $conn;
     $query_customer = "INSERT INTO customer
@@ -518,7 +518,7 @@ VALUES (
         '1',
         '$cus_nic')";
 
-        $save_lease = mysqli_query($conn, $query_lease);
+            $save_lease = mysqli_query($conn, $query_lease);
 
 //saving leasing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // saving gurantors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -586,21 +586,23 @@ VALUES (
         '$service_number');";
 
             $save_g2 = mysqli_query($conn, $query_guarantor2);
-        }
-// saving gurantors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        if ($save_lease) {
-            if ($save_savings && $save_mobile && $save_daily_loan && $save_property1 && $save_property2 && $save_lease && $save_g1 && $save_g2) {
-                echo "<script>alert('Customer Lease has been sussfully added');</script>";
+
+
+            if ($save_lease) {
+                if ($save_savings && $save_mobile && $save_daily_loan && $save_property1 && $save_property2 && $save_lease && $save_g1 && $save_g2) {
+                    echo "<script>alert('Customer Lease has been sussfully added');</script>";
 //                echo "<script>window.location.href='../user/user_home.php';</script>";
-                echo "<script>window.location.href='../customer/lease_image_uploader.php';</script>";
-                $_SESSION['cus_nic'] = "";
-                $_SESSION['cus_name'] = "";
+                    echo "<script>window.location.href='../customer/lease_image_uploader.php';</script>";
+                    $_SESSION['cus_nic'] = "";
+                    $_SESSION['cus_name'] = "";
+                } else {
+                    echo "Error while Saving";
+                }
             } else {
                 echo "Error while Saving";
             }
-        } else {
-            echo "Error while Saving";
         }
+// saving gurantors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     } else {
         echo "Error";
     }
