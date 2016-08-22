@@ -97,7 +97,7 @@ VALUES (
 if (isset($_GET['gallery'])) {
     $files_names = dir_to_array(UPLOADED_IMAGES_DIR);
     $gallery_name = $_GET['gallery'];
-
+    
     foreach ($json_in_decoded['images'] as $uuid => $image_item) {
         if (in_array($gallery_name, $image_item['galleries']) && in_array($image_item['uuid'], $files_names)) {
             echo '<li><img src="images/' . $image_item['uuid'] . '" id="' . $uuid . '"></li>';

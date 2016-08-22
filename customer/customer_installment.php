@@ -370,7 +370,7 @@ $current_date = date("Y-m-d");
                                         <div class="form-group required">
                                             <label class="control-label">Service No:</label>
                                             <div class="form-inline required">
-                                                <input type="text"  name="ser_number" id="ser_number" placeholder="Service No" class="form-control" style="width:85%;" maxlength="10" required/>
+                                                <input type="text"  name="ser_number" id="ser_number" placeholder="Service No" class="form-control" style="width:85%;text-transform: uppercase;" maxlength="10" required/>
                                                 <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="loadInstallmentService();">
                                                 <input type="hidden" id="hidden_ser_number" value="NONE">
                                             </div>
