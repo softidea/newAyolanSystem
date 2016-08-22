@@ -41,7 +41,6 @@
                             <li><a href="<?php echo ('customer_installment.php'); ?>" style="text-decoration: none;">Pay Lease Installment</a></li>
                             <li><a href="<?php echo ('land_pawn_payment.php'); ?>" style="text-decoration: none;">Pay Pawn Installment</a></li>
                             <li><a href="<?php echo ('customer_installment.php'); ?>" style="text-decoration: none;">View Installment</a></li>
-                            <li><a href="<?php echo ('customer_installment.php'); ?>" style="text-decoration: none;">Update Installment</a></li>
                             <li><a href="<?php echo ('customer_installment.php'); ?>" style="text-decoration: none;">Settle Service</a></li>
                         </ul>
                     </li>

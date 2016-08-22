@@ -98,46 +98,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Paid Installments:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Due Installments" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Due Installments:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Due Installments" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Customer Due:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Customer Due" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Company Due:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Company Due" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Payable:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Payable" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Next Installment:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Next Installment" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
                                             <div class="form-inline col-sm-12">
                                                 <div class="form" style="float: right;">
 
@@ -148,7 +108,6 @@
 
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
