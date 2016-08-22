@@ -286,7 +286,7 @@
                                                 <div class="form-group required">
                                                     <div class="form-group required">
                                                         <label class="control-label">Payable Installment:</label>
-                                                        <input type="text" disabled value="" placeholder="Payable Installment" class="form-control" required/>
+                                                        <input type="text" disabled placeholder="Payable Installment" class="form-control" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -294,13 +294,13 @@
                                                 <div class="form-group required">
                                                     <div class="form-group required">
                                                         <label class="control-label">Sis Cost:</label>
-                                                        <input type="text" disabled value="" placeholder="Sis Cost" class="form-control" required/>
+                                                        <input type="text" disabled placeholder="Sis Cost" class="form-control" required/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group required">
                                                     <div class="form-group required">
                                                         <label class="control-label">Total Payable Cost:</label>
-                                                        <input type="text" value="" placeholder="Total Payable Cost" class="form-control" required/>
+                                                        <input type="text" placeholder="Total Payable Cost" class="form-control" required/>
                                                     </div>
                                                 </div>
                                             </div>
