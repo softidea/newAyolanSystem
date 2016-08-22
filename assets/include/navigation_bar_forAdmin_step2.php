@@ -52,7 +52,7 @@
                             <li><a href="<?php echo ('../customer/addsis.php'); ?>">Add New Re-process</a></li>
                             <li><a href="<?php echo ('../customer/viewsis.php'); ?>">View Re-Process</a></li>
                             <li><a href="<?php echo ('../customer/viewsis.php'); ?>">Release Sis</a></li>
-                            <li><a href="<?php echo ('../customer/checksis.php'); ?>">Check Re-Process</a></li>
+                            <!--<li><a href="<?php echo ('../customer/checksis.php'); ?>">Check Re-Process</a></li>-->
                         </ul>
                     </li>
                     <li class="dropdown">

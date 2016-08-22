@@ -215,10 +215,11 @@ if (!isset($_SESSION['user_email'])) {
                                             <div class="list-group">
                                                 <a href="../admin/customer/addsis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Re-Process Registration</button></a>
                                                 <a href="../admin/customer/viewsis.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Re-Processes</button></a>
-                                                <a href="../admin/customer/checksis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Release Sis</button></a>
-                                                <a href="../admin/customer/checksis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Check Re-Process</button></a>
-                                                <a href="../customer/customer_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Settlement</button></a>
+                                                <a href="../admin/customer/checksis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Release Re-Process</button></a>
                                                 <a href="../admin/customer/viewsis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Re-Process Report</button></a>
+                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item"><br></button></a>
+                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item"><br></button></a>
+                                                
                                             </div>
                                             <div class="panel-footer"><div style="height: 15px;"></div></div>
                                         </div>
