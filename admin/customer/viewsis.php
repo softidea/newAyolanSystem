@@ -98,9 +98,8 @@
                                         <label class="control-label" for="input-email">Select Service:</label>
                                         <select name="cbopayment" id="cboservice" class="form-control" required>
                                             <option value=""> --- All Services --- </option>
-                                            <option value="bike">Search by Name</option>
-                                            <option value="twheel">Search by NIC</option>
-                                            <option value="land">Search by Phone Number</option>
+                                            <option value="bike">Land</option>
+                                            <option value="twheel">Vehicle</option>
                                         </select>
                                     </div>
                                     <div class="form-group required">
@@ -108,7 +107,6 @@
                                             <label class="control-label" for="input-email">Service No:</label>
                                             <input type="text"  name="customersearch" id="fname" value="" placeholder="Enter Service No Here" id="input-email" class="form-control" required/>
                                             <button type="submit"  class="btn btn" id="cservicebtn">Search</button>
-                                            <button type="submit"  class="btn btn" id="cservicebtn">New Service</button>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -118,7 +116,7 @@
                                     <fieldset id="account">
                                         <legend>Search Option-02</legend>
                                         <div class="form-group required">
-                                            <label class="control-label" for="input-email">Select Customer:</label>
+                                            <label class="control-label">Select Customer:</label>
                                             <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
                                                 <option value=""> --- Please Select --- </option>
                                                 <option value="bike">Customer Name</option>
@@ -128,10 +126,9 @@
                                         </div>
                                         <div class="form-group required">
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Search Customer:</label>
+                                                <label class="control-label">Search Customer:</label>
                                                 <input type="text" name="fname" id="fname" value="" placeholder="Enter Customer Search" id="input-email" class="form-control" required/>
                                                 <button type="submit"  class="btn btn" id="cservicebtn">Search</button>
-                                                <button type="submit"  class="btn btn" id="cservicebtn">New Customer</button>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -142,22 +139,13 @@
                                     <fieldset id="account">
                                         <legend>Search Option-03</legend>
                                         <div class="form-group required">
-                                            <label class="control-label" for="input-email">From Date:</label>
-                                            <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="bike">Motor Bike Leasing</option>
-                                                <option value="twheel">Three-Wheel Leasing</option>
-                                                <option value="land">Land Pawning</option>
-                                            </select>
+                                            <label class="control-label">From Date:</label>
+                                            <input type="date" name="start_date" id="start_date" class="form-control"/>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label" for="input-email">To Date:</label>
-                                            <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="bike">Motor Bike Leasing</option>
-                                                <option value="twheel">Three-Wheel Leasing</option>
-                                                <option value="land">Land Pawning</option>
-                                            </select>
+                                            <label class="control-label">To Date:</label>
+                                            <input type="date" name="end_date" id="end_date" class="form-control"/>
+                                            <button type="submit"  class="btn btn" id="cservicebtn">Search</button>
                                         </div>
                                     </fieldset>
                                 </div>
@@ -272,13 +260,13 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group required">
                                                     <div class="form-group required">
-                                                        <label class="control-label" for="input-email">Due Installments:</label>
+                                                        <label class="control-label">Due Installments:</label>
                                                         <input type="text" disabled placeholder="Due Installments" class="form-control" required/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group required">
                                                     <div class="form-group required">
-                                                        <label class="control-label" for="input-email">Due Installments Cost:</label>
+                                                        <label class="control-label">Due Installments Cost:</label>
                                                         <input type="text" disabled placeholder="Due Installments Cost" class="form-control" required/>
                                                     </div>
                                                 </div>
@@ -286,7 +274,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group required">
                                                     <div class="form-group required">
-                                                        <label class="control-label" for="input-email">Payable Installment:</label>
+                                                        <label class="control-label">Payable Installment:</label>
                                                         <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
                                                             <option value=""> --- Please Select --- </option>
                                                             <option value="1">1</option>
@@ -297,7 +285,7 @@
                                                 </div>
                                                 <div class="form-group required">
                                                     <div class="form-group required">
-                                                        <label class="control-label" for="input-email">Payable Installment:</label>
+                                                        <label class="control-label">Payable Installment:</label>
                                                         <input type="text" disabled value="" placeholder="Payable Installment" class="form-control" required/>
                                                     </div>
                                                 </div>
@@ -305,13 +293,13 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group required">
                                                     <div class="form-group required">
-                                                        <label class="control-label" for="input-email">Sis Cost:</label>
+                                                        <label class="control-label">Sis Cost:</label>
                                                         <input type="text" disabled value="" placeholder="Sis Cost" class="form-control" required/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group required">
                                                     <div class="form-group required">
-                                                        <label class="control-label" for="input-email">Total Payable Cost:</label>
+                                                        <label class="control-label">Total Payable Cost:</label>
                                                         <input type="text" value="" placeholder="Total Payable Cost" class="form-control" required/>
                                                     </div>
                                                 </div>
@@ -319,15 +307,7 @@
                                         </fieldset>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!--single sis view components panel-->  
-
-                            <div class="col-md-12">
                                 <button type="submit"  class="btn btn" id="cservicebtn">Release Service</button>
-                                <button type="submit"  class="btn btn" id="cservicebtn">New Service</button>
-                                <button type="submit"  class="btn btn" id="cservicebtn">New Customer</button>
-                                <button type="submit"  class="btn btn" id="cservicebtn">View Installment</button>
                             </div>
                         </div>
                     </div>
