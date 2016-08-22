@@ -89,7 +89,6 @@
                                 <div id="searchOptionPanel">
                                     <fieldset id="account">
                                         <legend>Search Option-02</legend>
-
                                         <div class="form-group required">
                                             <label class="control-label">Search by Service Type:</label>
                                             <div class="form-inline required">
@@ -104,7 +103,6 @@
                                             </div>
                                             <?php
                                             if (isset($_POST['SearchVehicle'])) {
-
                                                 $com_ser = $_POST['SearchVehicle'];
                                             }
                                             ?>
@@ -120,8 +118,6 @@
                                                 </div>
                                             </div>
                                         </form>
-
-
                                     </fieldset>
                                 </div>
                             </div>
@@ -131,9 +127,6 @@
                             <div class="col-sm-12">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
-
-
-
                                         <!--pagination for view service-->
                                         <?php
                                         global $conn;
@@ -230,46 +223,8 @@ $status = "";
                                                 <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Paid Installments:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Due Installments" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Due Installments:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Due Installments" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Customer Due:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Customer Due" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Company Due:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Company Due" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Total Payable:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Total Payable" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label" for="input-email">Next Installment:</label>
-                                                    <input type="text" disabled name="fname" id="fname" value="" placeholder="Next Installment" id="input-email" class="form-control" required/>
-                                                </div>
-                                            </div>
+                                       
+                                       
                                             <div class="form-inline col-sm-12">
                                                 <div class="form" style="float: right;">
 
@@ -280,7 +235,6 @@ $status = "";
 
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
