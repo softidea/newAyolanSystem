@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+    <?php
+    date_default_timezone_set('Asia/Colombo');
+    $current_date = date("Y-m-d");
+    ?>
     <head>
         <meta charset="UTF-8">
         <title>Services View</title>
@@ -61,19 +65,13 @@
                                             <div class="form-group required">
                                                 <label class="control-label">Search Here:</label>
                                                 <div class="form-inline required">
-                                                    <input type="text" name="customer_search_bar" id="customer_searchbar" value="" placeholder="Search Here" class="form-control" style="width: 86%;" required/>
+                                                    <input type="text" name="customer_search_bar" id="customer_searchbar" placeholder="Search Here" class="form-control" style="width: 86%;" required/>
                                                     <button type="submit" name="search" id="cservicebtn" class="btn btn">Search</button>
                                                 </div>
                                             </div>
                                         </form>
-                                        <form method="post">
-
-
-
+                                        <form method="POST">
                                             <button type="submit" name="search_view_all" id="cservicebtn" class="btn btn">View All</button>
-
-
-
                                         </form>
                                         <?php
                                         if (isset($_POST['cbo_customer_search'])) {
@@ -112,7 +110,7 @@
                                                 <div class="form-group required">
                                                     <label class="control-label">Registration Date:</label>
                                                     <div class="form-inline required">
-                                                        <input type="date" name="install_date" id="service_searchbar"  class="form-control" style="width: 86%;" required/>
+                                                        <input type="date" name="install_date" id="service_searchbar" value="<?php echo $current_date;?>" class="form-control" style="width: 86%;" required/>
                                                         <button type="submit" name="searchByDate" id="cservicebtn" class="btn btn">Search</button>
                                                     </div>
                                                 </div>
@@ -190,10 +188,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="bike_tbody">
-<?php
-$index = 0;
-$status = "";
-?>
+                                                    <?php
+                                                    $index = 0;
+                                                    $status = "";
+                                                    ?>
                                                     <?php while ($row = mysqli_fetch_assoc($result)): ?>
 
                                                         <?php
@@ -204,7 +202,7 @@ $status = "";
                                                         }
                                                         ?>
 
-                                                    <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> onclick="readValues(this);">
+                                                        <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> onclick="readValues(this);">
 
                                                             <td><input type="radio" name="check"/></td>
                                                             <td><?php echo $row['ser_number'] ?></td>
@@ -216,23 +214,20 @@ $status = "";
                                                             <td><?php echo $status ?></td>
 
                                                         </tr>
-                                                        <?php endwhile ?>
+                                                    <?php endwhile ?>
                                                 </tbody>
                                             </table>
                                             <div class="text-center">
                                                 <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                             </div>
                                         </div>
-                                            <div class="form-inline col-sm-12">
-                                                <div class="form" style="float: right;">
+                                        <div class="form-inline col-sm-12">
+                                            <div class="form" style="float: right;">
 
-                                                    <button type="submit" class="btn btn" id="cservicebtn">Print</button>
-                                                    <button type="submit" class="btn btn" id="cservicebtn"><a href="customer_installment.php" style="text-decoration: none;color: white;">Add Installment</a></button>
-                                                    <button type="submit" class="btn btn" id="cservicebtn"><a href="customer_installment.php" style="text-decoration: none;color: white;">View Installments</a></button>
-                                                    <button type="submit" class="btn btn" id="cservicebtn"><a href="customer_addlease.php" style="text-decoration: none;color: white;">Add New Lease</a></button>
-
-                                                </div>
+                                                <button type="submit" class="btn btn" id="cservicebtn">Print</button>
+                                                <button type="submit" class="btn btn" id="cservicebtn"><a href="customer_installment.php" style="text-decoration: none;color: white;">Add Installment</a></button>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -243,25 +238,26 @@ $status = "";
         </div>
         <!--Customer Service Loader-->
 
-<?php include '../assets/include/footer.php'; ?>
+        <?php include '../assets/include/footer.php'; ?>
     </body>
     <script type="text/javascript">
 
-                                                var cel;
-                                                function readValues(x) {
+        var cel;
+        function readValues(x) {
 
-                                                    cel = x.cells[1].innerHTML;
-                                                    var cus_nic = cel;
-                                                   // alert(cus_nic);
-                                                   <?php 
-                                                   $ser_no='documrnt.w';
- echo cel;
-                                                   ?>
-                                                }
-                                            </script>
-                                            <?php $ser_no="<script>document.write(cel)</script>";
- echo '<script>alert('."This Is var ".$ser_no.');</script>';
-                                            ?>
+            cel = x.cells[1].innerHTML;
+            var cus_nic = cel;
+            // alert(cus_nic);
+<?php
+$ser_no = 'documrnt.w';
+echo cel;
+?>
+        }
+    </script>
+    <?php
+    $ser_no = "<script>document.write(cel)</script>";
+    echo '<script>alert(' . "This Is var " . $ser_no . ');</script>';
+    ?>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="http://bootsnipp.com/dist/scripts.min.js"></script>
