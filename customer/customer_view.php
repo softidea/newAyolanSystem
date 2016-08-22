@@ -243,8 +243,6 @@ $date_setter = date("Y-m-d");
                                                     }
                                                 }
 
-
-
 </script>
 
 </html>
