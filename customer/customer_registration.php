@@ -695,7 +695,7 @@ if (!isset($_SESSION['user_email'])) {
                                     <div class="form-group">
                                         <label class="control-label">Registration Date</label>
                                         <div class="fomr-inline" id="msg_caption">
-                                            <input type="date" id="cus_reg_date" name="cus_reg_date" value="<?php echo $reg_date; ?>" placeholder="Date" class="form-control" />
+                                            <input type="text" id="cus_reg_date" name="cus_reg_date" value="<?php echo $reg_date; ?>" placeholder="Date" class="form-control" />
                                             <br><p><b>Warning</b> :~~  ~~ are mandatory fields, should not be empty</p>
                                         </div>
                                     </div>

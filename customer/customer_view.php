@@ -64,15 +64,15 @@ $date_setter = date("Y-m-d");
                                                 <input type="text" name="fname" id="fname" value="" placeholder="Search Here" id="input-email" class="form-control" maxlength="10" required/>
                                                 <br>
                                                 <button type="submit" name="search_buton"  id="cservicebtn" method="post" class="btn btn">Search</button>
-                                                
+
                                             </div>
                                         </form>
                                         <form method="post">
-                                            
-                                             <div class="form-group required">
+
+                                            <div class="form-group required">
                                                 <button type="submit" name="search_buton_view_All"  id="cservicebtn" method="post" class="btn btn">View All</button>
                                             </div>
-                                            
+
                                         </form>
                                         <?php
                                         if (isset($_POST['cbopayment'])) {
@@ -114,17 +114,16 @@ $date_setter = date("Y-m-d");
 
                                     $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,c.`ser_number`,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp FROM customer a INNER JOIN `service` c ON a.`cus_nic`=c.`cus_nic` WHERE c.`ser_number`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                 } elseif ($com_vehi == "tp") {
-                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE `a.cus_tp`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_tp`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                 } elseif ($com_vehi == "nic") {
-                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE `a.cus_nic`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_nic`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                 }
                             } elseif (isset($_POST['search_date'])) {
 
-                                $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE `a.cus_reg_date` BETWEEN '" . $_POST['date1'] . "' AND '" . $_POST['date2'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_reg_date` BETWEEN '" . $_POST['date1'] . "' AND '" . $_POST['date2'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                             } elseif (isset($_POST['search_buton_view_All'])) {
-                                
+
                                 $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                                
                             } else {
                                 $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                             }
@@ -161,13 +160,13 @@ $date_setter = date("Y-m-d");
                                         $i = 1;
                                         ?>
                                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                                        <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> >
+                                            <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> onclick="readValues(this)">
 
 
                                                 <td><?php echo $row['cus_id'] ?></td>
                                                 <td><?php echo $row['cus_fullname'] ?></td>
                                                 <td><?php echo $row['cus_nic'] ?></td>
-                                                <td><?php echo $row['ser_number'] ?></td>
+                                                <td> <a href="#"><?php echo $row['ser_number'] ?></a></td>
                                                 <td><?php echo $row['cus_address'] ?></td>
                                                 <td><?php echo $row['cus_reg_date'] ?></td>
                                                 <td><?php echo $row['cus_tp'] ?></td>
@@ -190,11 +189,10 @@ $date_setter = date("Y-m-d");
 
                                                 var cel;
                                                 function readValues(x) {
-
-                                                    cel = x.cells[2].innerHTML;
-                                                    var cus_nic = cel;
-                                                    alert(cus_nic);
-                                                    window.location.href = "customer_updateinfo.php?nic=" + cus_nic;
+                                                    cel = x.cells[3].innerHTML;
+                                                    var cus_id = cel.substring(cel.lastIndexOf("#") + 3, cel.lastIndexOf("<"));   
+                                                    alert(cus_id);
+                                                    window.location.href = "customer_installment_set.php?ser_number=" + cus_id;
                                                 }
                                             </script>                                           
 

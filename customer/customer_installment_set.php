@@ -2,7 +2,9 @@
 <?php
 date_default_timezone_set('Asia/Colombo');
 $current_date = date("Y-m-d");
-
+$cus_seid=filter_input(INPUT_GET, 'ser_number');
+session_start();
+echo 'alert($cus_seid)';
 ?>
 <html>
     <head>
@@ -24,6 +26,7 @@ $current_date = date("Y-m-d");
         <link rel="icon" href="favicon.ico">
         <link rel="stylesheet" type="text/css" href="../assets/css/installments.css"/>
         <script type="text/javascript">
+           
             function loadInstallmentCustomer() {
                 var nic = document.getElementById('cus_nic').value;
                 //alert(nic);
@@ -309,8 +312,11 @@ $current_date = date("Y-m-d");
                 xmlhttp.send();
             }
         </script>
+        
     </head>
     <body>
+        
+        
         <?php include '../assets/include/navigation_bar.php'; ?>
 
         <!--Service View Main Panel-->
@@ -325,6 +331,65 @@ $current_date = date("Y-m-d");
                             <div class="col-sm-6">
                                 <fieldset id="account">
                                     <legend>Customer Details</legend>
+                                    <input type="hidden" name="sevis_id" id="sevis_id" value="<?php echo $cus_seid; ?>" />
+                                    <script type="text/javascript">
+     
+          
+            
+             var ser_number = document.getElementById('sevis_id').value;
+            
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                    {
+                        //alert(xmlhttp.responseText);
+                        var value = xmlhttp.responseText;
+                        var result_arr = value.split("#");
+                        //alert(result_arr.length);
+                        if (result_arr.length > 1) {
+
+                            document.getElementById('ser_number_id').value=ser_number;
+
+                            document.getElementById('hidden_ser_number').value = ser_number;
+
+                            document.getElementById('cus_nic').value = "";
+                            document.getElementById('cus_name').value = "";
+                            document.getElementById('cus_tp').value = "";
+                            document.getElementById('cus_address').value = "";
+                            document.getElementById('cus_reg_date').value = "";
+
+                            document.getElementById('cus_nic').value = result_arr[0];
+                            document.getElementById('cus_name').value = result_arr[1];
+                            document.getElementById('cus_tp').value = result_arr[2];
+                            document.getElementById('cus_address').value = result_arr[3];
+                            document.getElementById('cus_reg_date').value = result_arr[4];
+                            document.getElementById('payble_installment').value = "";
+                            document.getElementById('ser_no').value = "";
+                            document.getElementById('ser_payment').value = "";
+                            document.getElementById('ser_installment').value = "";
+
+                            document.getElementById('ser_no').value = result_arr[5];
+                            document.getElementById('ser_payment').value = result_arr[6];
+                            document.getElementById('ser_installment').value = result_arr[7] + ".00";
+
+                            loadServiceInstallments(ser_number);
+                        } else {
+                            document.getElementById('hidden_ser_number').value = "NONE";
+
+                            alert("No Service found Under This Number!");
+                        }
+                    }
+                }
+                xmlhttp.open("GET", "../controller/co_load_installment_customer.php?ser_number=" + ser_number, true);
+                xmlhttp.send();
+        
+       
+        </script>
                                     <div class="form-group required">
                                         <label class="control-label">Customer NIC:</label>
                                         <div class="form-inline required">
@@ -371,7 +436,7 @@ $current_date = date("Y-m-d");
                                         <div class="form-group required">
                                             <label class="control-label">Service No:</label>
                                             <div class="form-inline required">
-                                                <input type="text"  name="ser_number" id="ser_number" placeholder="Service No" class="form-control" style="width:85%;text-transform: uppercase;" maxlength="10" required/>
+                                                <input type="text"  name="ser_number" id="ser_number_id" placeholder="Service No" class="form-control"  style="width:85%;" maxlength="10" required/>
                                                 <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="loadInstallmentService();">
                                                 <input type="hidden" id="hidden_ser_number" value="NONE">
                                             </div>
