@@ -216,15 +216,13 @@ $status = "";
                                                             <td><?php echo $status ?></td>
 
                                                         </tr>
-<?php endwhile ?>
+                                                        <?php endwhile ?>
                                                 </tbody>
                                             </table>
                                             <div class="text-center">
                                                 <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                             </div>
                                         </div>
-                                       
-                                       
                                             <div class="form-inline col-sm-12">
                                                 <div class="form" style="float: right;">
 
