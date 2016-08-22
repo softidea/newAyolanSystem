@@ -122,20 +122,20 @@ if (!isset($_SESSION['user_email'])) {
                                 <li class="col-sm-3">
                                     <ul>
                                         <li class="dropdown-header" style="color: #004D40;">Services</li>
-                                        <li><a href="../customer/customer_addlease.php" style="text-decoration: none;">Add new Lease</a></li>
+                                        <li><a href="../customer/customer_registration.php" style="text-decoration: none;">Add new Lease</a></li>
                                         <li><a href="#" style="text-decoration: none;">Add new Pawn</a></li>
                                         <li><a href="../customer/customer_installment.php" style="text-decoration: none;">Pay Lease Installment</a></li>							
                                         <li class="divider"></li>
                                         <li class="dropdown-header" style="color: #004D40;">Search Customers</li>
-                                        
-                                            <div class="form-group">
-                                                <label class="sr-only" for="email">Name | ID</label>
-                                                <input type="email" class="form-control" id="email" placeholder="Name | ID | Service No">
-                                            </div>
-                                            <a href="../customer/customer_view.php" style="text-decoration: none;color: white;">
-                                                <button type="button" class="btn btn btn-block" style="background-color: #009688;color: white;">Search
-                                                </button>
-                                            </a>
+
+                                        <div class="form-group">
+                                            <label class="sr-only" for="email">Name | ID</label>
+                                            <input type="email" class="form-control" id="email" placeholder="Name | ID | Service No">
+                                        </div>
+                                        <a href="../customer/customer_view.php" style="text-decoration: none;color: white;">
+                                            <button type="button" class="btn btn btn-block" style="background-color: #009688;color: white;">Search
+                                            </button>
+                                        </a>
                                     </ul>
                                 </li>
                             </ul>
@@ -159,7 +159,7 @@ if (!isset($_SESSION['user_email'])) {
                             <a href="../customer/customer_registration.php" style="text-decoration: none;"><button type="button" class="list-group-item">New Registration</button></a>
                             <a href="../customer/customer_updateinfo.php" style="text-decoration: none;"><button type="button" class="list-group-item">Update Customers</button></a>
                             <a href="../customer/customer_view.php" style="text-decoration: none;"><button type="button" class="list-group-item">Search Customers</button></a>
-                            <a href="../customer/customer_addlease.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Vehicle Lease</button></a>
+                            <a href="../customer/customer_registration.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Vehicle Lease</button></a>
                             <a href="../customer/customer_addpawn.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Land Pawn</button></a>
                             <a href="../customer/customer_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Lease Installment</button></a>
                         </div>
@@ -175,8 +175,8 @@ if (!isset($_SESSION['user_email'])) {
                             <img class="panelimage" src="../assets/images/home/servicee.png"/>
                         </div>
                         <div class="list-group">
-                            <a href="../customer/customer_addlease.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Vehicle Lease</button></a>
-                            <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Add Land Pawn</button></a>
+                            <a href="../customer/customer_registration.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Vehicle Lease</button></a>
+                            <a href="../customer/customer_addpawn.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Land Pawn</button></a>
                             <a href="../customer/customer_serviceview.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Vehicle Leases</button></a>
                             <a href="../customer/customer_serviceview.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Land Pawns</button></a>
                             <a href="../customer/view_vehicles.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Vehicle Rates</button><a>
@@ -198,7 +198,7 @@ if (!isset($_SESSION['user_email'])) {
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Pawn Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Vehicle Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Land Reports</button></a>
-                                                <a href="#"style="text-decoration: none;"><button type="button" class="list-group-item">Customer Reports</button></a>
+                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Customer Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Account Reports</button></a>
                                             </div>
                                             <div class="panel-footer"><div style="height: 15px;"></div></div>

@@ -6,12 +6,10 @@ session_start();
 require 'helper.php';
 require '../db/newDB.php';
 
-
 $files_names = $_FILES['upload-input']['name'];
 $files_types = $_FILES['upload-input']['type'];
 $files_errors = $_FILES['upload-input']['error'];
 $galleries_names_csv = $_POST['galleries-names'];
-
 
 
 $content_to_update = array();

@@ -354,7 +354,7 @@ if (isset($_SESSION['cus_nic'])) {
 <?php include '../assets/include/navigation_bar.php'; ?>
         <!--Lease Registration Panel-->
         <div ng-app="" class="container" style="margin-top: 80px;display: block;" id="one">
-            <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data" ng-app="" ng-init="ser = 'HOR-'">
+            <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
@@ -372,7 +372,7 @@ if (isset($_SESSION['cus_nic'])) {
                                                 <button type="button" id="cviewbuttons" class="btn btn" onclick="searchCustomerforLease();">Search</button>
                                             </div>
                                         </div>
-                                        <input type="hiiden" name="lease_reg_date_hide" value="<?php echo $lease_date; ?>">
+                                        <input type="hidden" name="lease_reg_date_hide" value="<?php echo $lease_date; ?>">
                                         <div class="form-group">
                                             <label class="control-label">Customer Name:</label>
                                             <input type="text" name="cus_name" readonly id="customer_name" value="<?php echo $cus_name; ?>" placeholder="Customer Name" class="form-control"/>
@@ -381,49 +381,6 @@ if (isset($_SESSION['cus_nic'])) {
                                             <a href="customer_registration.php"><button type="button" id="cviewbuttons" class="btn btn">New Customer</button></a>
                                         </div>
                                     </fieldset>
-
-
-                                    <!--Image Uploader-->
-                                    <fieldset id="account">
-                                        <legend>Upload Vehicle Images Here</legend>
-                                        <form id="upload" method="post" enctype="multipart/form-data">
-                                            <div id="upload-drop-zone">
-                                                <ul>
-                                                    <li>Drop photos here</li>
-                                                    <li>or</li>
-                                                    <li>
-                                                        <input type="file" multiple name="upload-input[]" id="upload-input" accept="image/*">
-                                                        <label for="upload-input">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-                                                            <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
-                                                            </svg>
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                                <div ng-switch="myVar">
-                                                    <div ng-switch-when="HOR">
-                                                        {{ser = 'HOR-'}}{{number}}
-                                                        <input type="text" name="hide_hor" ng-switch-when="HOR" id="hide_hor" value="{{ser = 'HOR-'}}{{number}}" />
-                                                    </div>
-                                                    <div ng-switch-when="BLS">
-                                                        {{ser = 'BLS-'}}{{number}}
-                                                        <input type="text" name="hide_hor" ng-bind="{{number}}" id="hide_hor">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--<label for="galleries-names">Enter galleries names as CSV</label>-->
-                                            <input type="hidden" name="hide_nic" id="hide_nic" value="<?php echo $cus_nic; ?>">
-
-                                            <input type="hidden" name="galleries-names" id="galleries-names">
-                                            <input type="submit" value="Upload" name="upload-submit" id="upload-submit" class="btn btn" style="background: #009688; color: white;">
-                                            <input type="button" value="Clear" id="clear_img_preview" class="btn btn" onclick="clearImgPreview();" style="background: #009688; color: white;">
-                                        </form>
-                                        <ul id="image-preview">
-
-                                        </ul>
-                                    </fieldset>
-                                    <!--Image Uploader-->
-
 
                                 </div>
                                 <div class="col-sm-6">
@@ -434,7 +391,7 @@ if (isset($_SESSION['cus_nic'])) {
                                             <div class="form-inline">
 
 
-                                                <select name="service_code" id="scode" ng-model="myVar" class="form-control" onchange="" style="width: 40%;" >
+                                                <select name="service_code" id="scode" class="form-control" onchange="" style="width: 40%;" >
                                                     <option value="HOR">HOR</option>
                                                     <option value="BLS">BLS</option>
                                                 </select>
