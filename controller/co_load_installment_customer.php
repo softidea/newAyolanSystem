@@ -1103,19 +1103,23 @@ function ServiceInstallment($sno_begin_ins){
 //             foreach ($payment_arr_calc as $value) {
 //                $customer_due+=$value;
 //            }     
-             
+            
+            $customer_total_overpaid=0;
             if($datediff>0){
                    
             if($datediff>14){
                 if($need_to_calc){
+                $customer_total_overpaid=($nextpayment*(10/100));
                 $nextpayment*=(110/100);
+                
                 }
               
                 $dis_round_date=$rounded_off_date;
             }elseif($datediff>7){
                 if($need_to_calc){
+                $customer_total_overpaid=($nextpayment*(5/100));   
                 $nextpayment*=(105/100);
-                   
+               
                 }
                 if($customer_due>=0){
                     $dis_round_date=date('Y-m-d', strtotime('+1 week', strtotime($dis_round_date)));
@@ -1132,6 +1136,7 @@ function ServiceInstallment($sno_begin_ins){
 //            }
             
             }
+           
             
             
             ///////////////////////////////////////////
@@ -1146,7 +1151,7 @@ function ServiceInstallment($sno_begin_ins){
          
             
             //Calculating Customer Overpaid
-            $customer_total_overpaid=0;
+            
             
             for($i=0;$i<sizeof($payment_arr);$i++){
                 if($payment_halfpaid[$i]>0){
@@ -1204,7 +1209,7 @@ function ServiceInstallment($sno_begin_ins){
 
            
          //   
-            $no_of_installments=($period-$paid_installments)."  (".$paid_installments." Paid)";
+            $no_of_installments=($period-$paid_installments);
 
             $customer_due = ceil($customer_due);
             $nextpayment = ceil($nextpayment);
@@ -1219,7 +1224,7 @@ function ServiceInstallment($sno_begin_ins){
                 $temp_settlement = ceil($temp_settlement);
                 $settlement_amount = $settlement_amount . " (With 6% Discount ($temp_settlement.00))";
             }
-
+            $no_of_installments=($period-$paid_installments)."  (".$paid_installments." Paid)";
 //            if ($balance_lease <= 0) {
 //                $update_service_status = "UPDATE service SET ser_status='0' WHERE ser_number='$sno_begin_ins'";
 //                $run_update = mysqli_query($conn, $update_service_status);
