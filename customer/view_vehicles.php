@@ -406,51 +406,51 @@
                                         <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                     </div>
                                 </div>
-
+                                <!--bike rate registration-->
                                 <div class="new_vehicle" style="display: block;">
                                     <div class="col-sm-6">
                                         <fieldset id="account">
                                             <legend>New Bike Rate Registration</legend>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Model Year:</label>
+                                                <label class="control-label">Model Year:</label>
                                                 <input type="text" name="modelyear"  placeholder="Model Year" class="form-control" />
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Brand:</label>
+                                                <label class="control-label">Brand:</label>
                                                 <select name="vbrand" id="v_brand" class="form-control" onchange="showTypes(this.value);">
                                                     <?php loadBikeBrands(); ?>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">New Brand:</label>
+                                                <label class="control-label">New Brand:</label>
                                                 <input type="text" readonly id="newbrand" placeholder="New Brand" class="form-control"/>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Select Type:</label>
+                                                <label class="control-label">Select Type:</label>
                                                 <select name="vtype" id="v_type" class="form-control" onchange="showVehicleMods(this.value);">
                                                     <option>~~Select Type~~</option> 
                                                 </select>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">New Type:</label>
+                                                <label class="control-label">New Type:</label>
                                                 <input type="text" readonly id="newtype" value="" placeholder="New Type" class="form-control" style="text-transform: uppercase;"/>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Select Model:</label>
+                                                <label class="control-label">Select Model:</label>
                                                 <select name="vcode" id="v_code" class="form-control" onchange="changeModel();">
                                                     <option>~~Select Model~~</option>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">New Model:</label>
+                                                <label class="control-label">New Model:</label>
                                                 <input type="text" readonly id="newmodel" placeholder="New Model" class="form-control" style="text-transform: uppercase;"/>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Min Value:</label>
+                                                <label class="control-label">Min Value:</label>
                                                 <input type="text" name="minval" placeholder="Min Value" class="form-control" />
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Max Value:</label>
+                                                <label class="control-label">Max Value:</label>
                                                 <input type="text" name="maxval" placeholder="Max Value" class="form-control" />
                                             </div>
                                             <div class="form-group">
@@ -459,12 +459,13 @@
                                         </fieldset>
                                     </div>
                                 </div>
+                                <!--bike rate registration-->
                                 <div class="new_vehicle" style="display: block;">
                                     <div class="col-sm-6">
                                         <fieldset id="account">
                                             <legend>New Three-Wheel Rate Registration</legend>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Select Type:</label>
+                                                <label class="control-label">Select Type:</label>
                                                 <select name="vtype" id="tw_type" class="form-control" onchange="loadTWTypes(this.value);">
                                                     <option value="0">~~Select Type~~</option>
                                                     <option value="2">2 Stroke</option>
@@ -472,21 +473,21 @@
                                                 </select>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Select Model:</label>
+                                                <label class="control-label">Select Model:</label>
                                                 <select name="vcode" id="tw_code" class="form-control" onchange="enablenewtwmodel();">
                                                     <option>~~Select Model~~</option>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">New Model:</label>
+                                                <label class="control-label">New Model:</label>
                                                 <input type="text" readonly id="new_tw_model" placeholder="New Model" class="form-control" style="text-transform: uppercase;"/>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Min Value:</label>
+                                                <label class="control-label">Min Value:</label>
                                                 <input type="text" name="minval" placeholder="Min Value" class="form-control" />
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-email">Max Value:</label>
+                                                <label class="control-label">Max Value:</label>
                                                 <input type="text" name="maxval" placeholder="Max Value" class="form-control" />
                                             </div>
                                             <div class="form-group">
@@ -496,8 +497,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
