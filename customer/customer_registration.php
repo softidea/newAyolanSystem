@@ -356,7 +356,6 @@ if (!isset($_SESSION['user_email'])) {
     <body>
 
         <?php include '../assets/include/navigation_bar.php'; ?>
-
         <!--Customer Panel Section-->
         <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data">
             <div class="container" style="margin-top: 80px;display: block;" id="one">
