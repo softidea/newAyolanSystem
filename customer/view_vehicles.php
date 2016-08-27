@@ -511,7 +511,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="http://bootsnipp.com/dist/scripts.min.js"></script>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<style>
+<style type="text/css">
     #hidecaption{
         color: #FAFAFA;
     }
@@ -530,7 +530,6 @@
                                                     }
 </script>
 <script type="text/javascript">
-
     function checker() {
 
         var value = document.getElementById('v_cat').value;
@@ -586,7 +585,6 @@ $url = "../print_report/PrintArea.php";
     function PrintPreview() {
 
         echo '<script type="text/javascript">window.location.href="../print_report/PrintArea.php"';
-
     }
 </script>
 </html>
