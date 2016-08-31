@@ -217,9 +217,9 @@ if (!isset($_SESSION['user_email'])) {
                                                 <a href="../admin/customer/viewsis.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Re-Processes</button></a>
                                                 <a href="../admin/customer/checksis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Release Re-Process</button></a>
                                                 <a href="../admin/customer/viewsis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Re-Process Report</button></a>
+                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Check Installment</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item"><br></button></a>
-                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item"><br></button></a>
-                                                
+
                                             </div>
                                             <div class="panel-footer"><div style="height: 15px;"></div></div>
                                         </div>
@@ -228,6 +228,8 @@ if (!isset($_SESSION['user_email'])) {
                                     <!--Process Div Panel Set-->
 
                                     </div>
+
+
                                     <?php include '../assets/include/footer.php'; ?>
                                     </body>
                                     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

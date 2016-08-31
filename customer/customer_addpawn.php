@@ -260,13 +260,13 @@ session_start();
                                         </div>
                                         <div class="form-group required">
                                             <div class="form-inline required">
-                                            <label class="control-label">Land Position:</label>
-                                            <input type="text" class="form-control" name="loan_description" id="loan_description" placeholder="Description of the Loan" style="width: 85%;">
-                                            <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="setPositiontoMap();">
-                                        </div>
+                                                <label class="control-label">Land Position:</label>
+                                                <input type="text" class="form-control" name="loan_description" id="loan_description" placeholder="Description of the Loan" style="width: 85%;">
+                                                <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="setPositiontoMap();">
                                             </div>
+                                        </div>
                                         <div id="map_location" style="width: 100%" height="400">
-                                           
+
                                         </div>
 
 
@@ -286,16 +286,13 @@ session_start();
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="http://bootsnipp.com/dist/scripts.min.js"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-                                                function setPositiontoMap() {
-                                                    var maplocation = document.getElementById('loan_description').value;
-                                                                                                     
-                                                    
-                                                    
-                                                    var val='<iframe style="width: 100%" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAZug4gv6zHg69WJ_5sInSlEYeTdGDrf_E &q='+maplocation+',sri lanka" allowfullscreen></iframe>';
-                                                    
-                                                    document.getElementById('map_location').innerHTML="";
-                                                    document.getElementById('map_location').innerHTML=val;
-                                                }
+    <script type="text/javascript">
+                                                    function setPositiontoMap() {
+                                                        var maplocation = document.getElementById('loan_description').value;
+                                                        var val = '<iframe style="width: 100%" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAZug4gv6zHg69WJ_5sInSlEYeTdGDrf_E &q=' + maplocation + ',sri lanka" allowfullscreen></iframe>';
+
+                                                        document.getElementById('map_location').innerHTML = "";
+                                                        document.getElementById('map_location').innerHTML = val;
+                                                    }
     </script>
 </html>

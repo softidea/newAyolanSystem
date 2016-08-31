@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_email'])) {
     $cus_emp_name = "";
     $cus_emp_address = "";
     $cus_addr_map_link = "No add this one";
-    
+
 
 
     $cus_hhalf_name = "";
@@ -344,12 +344,15 @@ if (!isset($_SESSION['user_email'])) {
             };
         </script>
         <script type="text/javascript">
-            function checkForm(){
-                if(document.getElementById('cus_nic').value!="" ||document.getElementById('cus_nic').value!=null){
-                    form.customer_continue.disabled=true;
+            function checkForm() {
+                if (document.getElementById('cus_nic').value != "" || document.getElementById('cus_nic').value != null) {
+                    form.customer_continue.disabled = true;
                     form.customer_continue.value = "Please wait...";
                     return true;
-                }else{return false;alert('Please Enter Nic');}
+                } else {
+                    return false;
+                    alert('Please Enter Nic');
+                }
             }
         </script>
     </head>
@@ -375,9 +378,15 @@ if (!isset($_SESSION['user_email'])) {
                                             <label class="control-label">Full Name:</label>
                                             <input type="text" id="cus_name" maxlength="100" name="cus_name" placeholder="Full Name" class="form-control" maxlength="100" autofocus />
                                         </div>
-                                        <div class="form-group  ">
-                                            <label class="control-label" >Permanent Address :</label>
-                                            <input type="text" id="cus_paddress" maxlength="255"  name="cus_address" placeholder="Permanent Address"   class="form-control" maxlength="150"/>
+                                        <div class="form-group required">
+                                            <div class="form-inline required">
+                                                <label class="control-label" >Permanent Address :</label>
+                                                <input type="text" id="cus_paddress" maxlength="255"  name="cus_address" placeholder="Permanent Address"   class="form-control" maxlength="150"style="width: 85%;"/>
+                                                <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="setPositiontoMap();">
+                                            </div>
+                                        </div>
+                                        <div id="map_location" style="width: 100%" height="400">
+
                                         </div>
                                         <div class="form-group  ">
                                             <label class="control-label" >Telephone:</label>
@@ -694,7 +703,7 @@ if (!isset($_SESSION['user_email'])) {
                                     <div class="form-group">
                                         <label class="control-label">Registration Date</label>
                                         <div class="fomr-inline" id="msg_caption">
-                                            <input type="text" id="cus_reg_date" name="cus_reg_date" value="<?php echo $reg_date; ?>" placeholder="Date" class="form-control" />
+                                            <input type="date" id="cus_reg_date" name="cus_reg_date" value="<?php echo $reg_date; ?>" placeholder="Date" class="form-control" />
                                             <br><p><b>Warning</b> :~~  ~~ are mandatory fields, should not be empty</p>
                                         </div>
                                     </div>
@@ -750,82 +759,82 @@ if (!isset($_SESSION['user_email'])) {
             }
         </style>
         <script type="text/javascript">
-                                        function gotosecond()
-                                        {
-                                            document.getElementById('one').style.display = "none";
-                                            document.getElementById('second').style.display = "block";
-                                        }
-                                        function gotoone()
-                                        {
-                                            document.getElementById('one').style.display = "block";
-                                            document.getElementById('second').style.display = "none";
-                                        }
-                                        function setCusDependancy() {
-                                            if (document.getElementById('c_m_status').value == "Single") {
-                                                //alert("Single");
-                                                document.getElementById('cus_dependdency').value = "0";
-                                                document.getElementById('cus_dependdency').readOnly = true;
-                                                document.getElementById('cus_spouse_name').value = "None";
-                                                document.getElementById('cus_spouse_name').readOnly = true;
-                                                document.getElementById('cus_spouse_dob').readOnly = true;
-                                                document.getElementById('cus_spouse_position').value = "None";
-                                                document.getElementById('cus_spouse_position').readOnly = true;
-                                                document.getElementById('cus_spouse_salary').value = "0";
-                                                document.getElementById('cus_spouse_salary').readOnly = true;
-                                                document.getElementById('cus_spouse_emp_name').value = "None";
-                                                document.getElementById('cus_spouse_emp_name').readOnly = true;
-                                            }
-                                            else if (document.getElementById('c_m_status').value == "Married") {
-                                                // alert("Married");
-                                                document.getElementById('cus_dependdency').value = "0";
-                                                document.getElementById('cus_dependdency').readOnly = false;
-                                                document.getElementById('cus_spouse_name').value = "";
-                                                document.getElementById('cus_spouse_name').readOnly = false;
-                                                document.getElementById('cus_spouse_dob').readOnly = false;
-                                                document.getElementById('cus_spouse_position').value = "";
-                                                document.getElementById('cus_spouse_position').readOnly = false;
-                                                document.getElementById('cus_spouse_salary').value = "0";
-                                                document.getElementById('cus_spouse_salary').readOnly = false;
-                                                document.getElementById('cus_spouse_emp_name').value = "";
-                                                document.getElementById('cus_spouse_emp_name').readOnly = false;
-                                            }
-                                        }
-                                        function setGua1Dependancy() {
-                                            if (document.getElementById('g1_ms').value == "Single") {
-                                                document.getElementById('g1_spouse').value = "None";
-                                                document.getElementById('g1_spouse').readOnly = true;
+                                                function gotosecond()
+                                                {
+                                                    document.getElementById('one').style.display = "none";
+                                                    document.getElementById('second').style.display = "block";
+                                                }
+                                                function gotoone()
+                                                {
+                                                    document.getElementById('one').style.display = "block";
+                                                    document.getElementById('second').style.display = "none";
+                                                }
+                                                function setCusDependancy() {
+                                                    if (document.getElementById('c_m_status').value == "Single") {
+                                                        //alert("Single");
+                                                        document.getElementById('cus_dependdency').value = "0";
+                                                        document.getElementById('cus_dependdency').readOnly = true;
+                                                        document.getElementById('cus_spouse_name').value = "None";
+                                                        document.getElementById('cus_spouse_name').readOnly = true;
+                                                        document.getElementById('cus_spouse_dob').readOnly = true;
+                                                        document.getElementById('cus_spouse_position').value = "None";
+                                                        document.getElementById('cus_spouse_position').readOnly = true;
+                                                        document.getElementById('cus_spouse_salary').value = "0";
+                                                        document.getElementById('cus_spouse_salary').readOnly = true;
+                                                        document.getElementById('cus_spouse_emp_name').value = "None";
+                                                        document.getElementById('cus_spouse_emp_name').readOnly = true;
+                                                    }
+                                                    else if (document.getElementById('c_m_status').value == "Married") {
+                                                        // alert("Married");
+                                                        document.getElementById('cus_dependdency').value = "0";
+                                                        document.getElementById('cus_dependdency').readOnly = false;
+                                                        document.getElementById('cus_spouse_name').value = "";
+                                                        document.getElementById('cus_spouse_name').readOnly = false;
+                                                        document.getElementById('cus_spouse_dob').readOnly = false;
+                                                        document.getElementById('cus_spouse_position').value = "";
+                                                        document.getElementById('cus_spouse_position').readOnly = false;
+                                                        document.getElementById('cus_spouse_salary').value = "0";
+                                                        document.getElementById('cus_spouse_salary').readOnly = false;
+                                                        document.getElementById('cus_spouse_emp_name').value = "";
+                                                        document.getElementById('cus_spouse_emp_name').readOnly = false;
+                                                    }
+                                                }
+                                                function setGua1Dependancy() {
+                                                    if (document.getElementById('g1_ms').value == "Single") {
+                                                        document.getElementById('g1_spouse').value = "None";
+                                                        document.getElementById('g1_spouse').readOnly = true;
 
-                                            }
-                                            else if (document.getElementById('g1_ms').value == "Married") {
-                                                document.getElementById('g1_spouse').value = "";
-                                                document.getElementById('g1_spouse').readOnly = false;
-                                            }
-                                        }
-                                        function setPropDependancy() {
-                                            if (document.getElementById('prop_ms').value == "Single") {
-                                                //alert(document.getElementById('prop_ms').value);
-                                                document.getElementById('prop_spouse_name').value = "None";
-                                                document.getElementById('prop_spouse_name').readOnly = true;
+                                                    }
+                                                    else if (document.getElementById('g1_ms').value == "Married") {
+                                                        document.getElementById('g1_spouse').value = "";
+                                                        document.getElementById('g1_spouse').readOnly = false;
+                                                    }
+                                                }
+                                                function setPropDependancy() {
+                                                    if (document.getElementById('prop_ms').value == "Single") {
+                                                        //alert(document.getElementById('prop_ms').value);
+                                                        document.getElementById('prop_spouse_name').value = "None";
+                                                        document.getElementById('prop_spouse_name').readOnly = true;
 
-                                            }
-                                            else if (document.getElementById('prop_ms').value == "Married") {
-                                               //alert(document.getElementById('prop_ms').value);
-                                                document.getElementById('prop_spouse_name').value = "";
-                                                document.getElementById('prop_spouse_name').readOnly = false;
-                                            }
-                                        }
+                                                    }
+                                                    else if (document.getElementById('prop_ms').value == "Married") {
+                                                        //alert(document.getElementById('prop_ms').value);
+                                                        document.getElementById('prop_spouse_name').value = "";
+                                                        document.getElementById('prop_spouse_name').readOnly = false;
+                                                    }
+                                                }
 
-                                        function setGua2Dependancy() {
-                                            if (document.getElementById('g2_ms').value == "Single") {
-                                                document.getElementById('g2_spouse').value = "None";
-                                                document.getElementById('g2_spouse').readOnly = true;
+                                                function setGua2Dependancy() {
+                                                    if (document.getElementById('g2_ms').value == "Single") {
+                                                        document.getElementById('g2_spouse').value = "None";
+                                                        document.getElementById('g2_spouse').readOnly = true;
 
-                                            }
-                                            else if (document.getElementById('g2_ms').value == "Married") {
-                                                document.getElementById('g2_spouse').value = "";
-                                                document.getElementById('g2_spouse').readOnly = false;
-                                            }
-                                        }
+                                                    }
+                                                    else if (document.getElementById('g2_ms').value == "Married") {
+                                                        document.getElementById('g2_spouse').value = "";
+                                                        document.getElementById('g2_spouse').readOnly = false;
+                                                    }
+                                                }
 
 
 
@@ -851,11 +860,9 @@ if (!isset($_SESSION['user_email'])) {
                     document.getElementById('landpanel').style.display = 'block';
                 }
             }
-
         </script>
         <script type="text/javascript">
-            function 
-            checkCustomerValues() {
+            function checkCustomerValues() {
 
                 var cus_fullname = document.getElementById('cus_fullname').value
                 var cus_initial = document.getElementById('cus_initial').value
@@ -916,10 +923,16 @@ if (!isset($_SESSION['user_email'])) {
                     document.getElementById('msg_caption').style.color = "red";
                     alert("Empty Data Fields Found,Please Insert Valid Data");
                 }
-
-
             }
+        </script>
+        <script type="text/javascript">
+            function setPositiontoMap() {
+                var maplocation = document.getElementById('cus_paddress').value;
+                var val = '<iframe style="width: 100%" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAZug4gv6zHg69WJ_5sInSlEYeTdGDrf_E &q=' + maplocation + ',sri lanka" allowfullscreen></iframe>';
 
+                document.getElementById('map_location').innerHTML = "";
+                document.getElementById('map_location').innerHTML = val;
+            }
         </script>
     </body>
 </html>

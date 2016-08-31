@@ -184,7 +184,8 @@ if (isset($_POST['customer_continue'])) {
 if (isset($_POST['lease_reg'])) {
 
     $lease_reg_date_hide = $_SESSION['lease_reg_date_hide'] = filter_input(INPUT_POST, 'lease_reg_date_hide');
-
+     $cus_reg_date = $_SESSION['lease_reg_date_hide'] = filter_input(INPUT_POST, 'lease_reg_date_hide');
+    
     $cus_name = $_SESSION['cus_name'];
     $cus_address = $_SESSION['cus_address'];
     $cus_tp = $_SESSION['cus_tp'];
@@ -302,7 +303,7 @@ if (isset($_POST['lease_reg'])) {
     $loan_description = $_SESSION['loan_description'] = filter_input(INPUT_POST, 'loan_description');
     $province_code = $_SESSION['province_code'] = filter_input(INPUT_POST, 'province_code');
 
-    $cus_regdate = $_SESSION['cus_reg_date'] = filter_input(INPUT_POST, 'cus_reg_date');
+   
 
     //saving customer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     global $conn;
@@ -477,6 +478,8 @@ VALUES (
         $run_check = mysqli_query($conn, $check_service);
         if (mysqli_num_rows($run_check) > 0) {
             echo "<script>alert('Service already added');</script>";
+            echo "<script>window.location.href='../customer/customer_addlease.php';</script>";
+            
         } else {
 
 
