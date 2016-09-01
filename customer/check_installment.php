@@ -70,13 +70,13 @@ if (isset($_SESSION['cus_nic'])) {
                 var amount = document.getElementById('lease_amount').value;
                 var period = document.getElementById('v_lease_period').value;
                 
-                alert(amount);
-                alert(period);
+//                alert(amount);
+//                alert(period);
                 
                 var installment = ((amount/period)+((3.96/100)*(amount)));
-                alert(installment);
+//                alert(installment);
                 
-                alert(Math.round(installment)+1);
+//                alert(Math.round(installment)+1);
                 
                 
                 document.getElementById('installment_val').value=Math.round(installment)+1+".00";
