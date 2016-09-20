@@ -198,7 +198,7 @@ if (!isset($_SESSION['user_email'])) {
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Pawn Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Vehicle Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Land Reports</button></a>
-                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Customer Reports</button></a>
+                                                <a href="../customer/customer_view_report.php" style="text-decoration: none;"><button type="button" class="list-group-item">Customer Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Account Reports</button></a>
                                             </div>
                                             <div class="panel-footer"><div style="height: 15px;"></div></div>

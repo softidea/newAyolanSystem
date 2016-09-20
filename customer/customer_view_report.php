@@ -47,58 +47,9 @@ $date_setter = date("Y-m-d");
                             <h3 class="panel-title">Customer Information</h3>
                         </div>
                         <div class="panel-body" style="background-color: #FAFAFA;">
-                            <div class="col-sm-6">
-                                <fieldset id="account">
-                                    <legend>Search Option 01</legend>
-                                    <div class="form-group required">
-                                        <label class="control-label">Search by:</label>
-                                        <form method="post"> 
-                                            <select name="cbopayment" id="input-search-option" class="form-control" required onchange="setServiceOptionPanel();">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="nic">Customer NIC</option>
-                                                <option value="tp">Phone Number</option>
-                                                <option value="sno">Service Number</option>
-                                            </select>
-                                            <div class="form-group required">
-                                                <label class="control-label" for="input-email">Search Here:</label>
-                                                <input type="text" name="fname" id="fname" value="" placeholder="Search Here" id="input-email" class="form-control" maxlength="10" required/>
-                                                <br>
-                                                <button type="submit" name="search_buton"  id="cservicebtn" method="post" class="btn btn">Search</button>
+                           
 
-                                            </div>
-                                        </form>
-                                        <form method="post">
-
-                                            <div class="form-group required">
-                                                <button type="submit" name="search_buton_view_All"  id="cservicebtn" method="post" class="btn btn">View All</button>
-                                            </div>
-
-                                        </form>
-                                        <?php
-                                        if (isset($_POST['cbopayment'])) {
-                                            $com_vehi = $_POST['cbopayment'];
-                                        }
-                                        ?>
-                                    </div>
-
-                                </fieldset>
-                            </div>
-
-                            <fieldset id="account">
-                                <legend>Search Option 02</legend>
-                                <form method="post">
-                                    <div class="form-group required">
-                                        <label class="control-label">Start Date:</label>
-                                        <input type="date" name="date1" id="date1" min="1900-12-31" max="<?php echo $date_setter; ?>" value="<?php echo $date_setter; ?>" placeholder="Registration Date" class="form-control"/>
-                                    </div>
-                                    <div class="form-group required">
-                                        <label class="control-label">End Here:</label>
-                                        <input type="date" name="date2" id="date2" min="1900-12-31" max="<?php echo $date_setter; ?>" value="<?php echo $date_setter; ?>" placeholder="Search Here" class="form-control" required/>
-                                        <br>
-                                        <button type="submit" on name="search_date" id="cservicebtn" class="btn btn">Search</button>
-                                    </div>
-                                </form>
-                            </fieldset>
+                      
 
 
                             <!--pagination for Customer View-->
@@ -125,7 +76,7 @@ $date_setter = date("Y-m-d");
 
                                 $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                             } else {
-                                $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id ";
                             }
                             $result = mysqli_query($conn, $sql_query);
                             $service_co = mysqli_num_rows($result);
@@ -151,7 +102,7 @@ $date_setter = date("Y-m-d");
                                             <th>Permanent Address</th>
                                             <th>Registration Date</th>
                                             <th>Phone Number</th>
-                                            <th>View More</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -170,23 +121,19 @@ $date_setter = date("Y-m-d");
                                                 <td><?php echo $row['cus_address'] ?></td>
                                                 <td><?php echo $row['cus_reg_date'] ?></td>
                                                 <td><?php echo $row['cus_tp'] ?></td>
-                                                <td><?php echo '<form action="customer_updateinfo.php"><button type="submit" name="view" id="cservicebtn" method="post" class="btn btn">View</button></form>' ?></td>
+                                              
                                             </tr>
                                             <?php $i++; ?>
                                         <?php endwhile ?>
                                     </tbody>
                                 </table>
-                                <div class="text-center">
-                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
-                                </div>
+                               
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div class="form-inline">
                                             
-                                            <button type="submit"  class="btn btn" id="cservicebtn">Save as PDF</button>
-                                            
-                                            <button type="submit"  class="btn btn" id="cservicebtn"><a href="customer_view_report.php" target="_parent" style="color: white; text-decoration: none">Print</a></button>
+                                            <button type="submit"  class="btn btn" id="cservicebtn" onclick="window.print()">Print</button>
                                             <script>
 
                                                 var cel;

@@ -50,75 +50,8 @@
                             <h3 class="panel-title">Customer Service Information</h3>
                         </div>
                         <div class="panel-body" style="background-color: #FAFAFA;">
-                            <div class="col-sm-6">
-                                <fieldset id="account">
-                                    <legend>Search Option-01</legend>
-                                    <div class="form-group required">
-                                        <label class="control-label">Select Customer Option:</label>
-                                        <form method="post" > <select name="cbo_customer_search" id="cboservice" class="form-control" required onchange="check();">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="sno">Search by Service No</option>
-                                                <option value="nic">Search by NIC</option>
-                                                <option value="phone">Search by Phone Number</option>
-                                            </select>
-
-                                            <div class="form-group required">
-                                                <label class="control-label">Search Here:</label>
-                                                <div class="form-inline required">
-                                                    <input type="text" name="customer_search_bar" id="customer_searchbar" placeholder="Search Here" class="form-control" style="width: 86%;" required/>
-                                                    <button type="submit" name="search" id="cservicebtn" class="btn btn">Search</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <form method="POST">
-                                            <button type="submit" name="search_view_all" id="cservicebtn" class="btn btn">View All</button>
-                                        </form>
-                                        <?php
-                                        if (isset($_POST['cbo_customer_search'])) {
-
-                                            $com_cus = $_POST['cbo_customer_search'];
-                                        }
-                                        ?>
-                                    </div>
-
-                                </fieldset>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="searchOptionPanel">
-                                    <fieldset id="account">
-                                        <legend>Search Option-02</legend>
-                                        <div class="form-group required">
-                                            <label class="control-label">Search by Service Type:</label>
-                                            <div class="form-inline required">
-                                                <form method="post"> <select name="SearchVehicle" id="cboservice" class="form-control" required onchange="check();" style="width: 86%;">
-                                                        <option value=""> --- Please Select --- </option>
-                                                        <option value="bike">Motor Bike Leasing</option>
-                                                        <option value="twheel">Three-Wheel Leasing</option>
-
-                                                    </select>
-                                                    <button type="submit" name="searchByVehicle" id="cservicebtn" class="btn btn">Search</button>
-                                                </form>
-                                            </div>
-                                            <?php
-                                            if (isset($_POST['SearchVehicle'])) {
-                                                $com_ser = $_POST['SearchVehicle'];
-                                            }
-                                            ?>
-                                        </div>
-                                        <form method="post">
-                                            <div class="form-group required">
-                                                <div class="form-group required">
-                                                    <label class="control-label">Registration Date:</label>
-                                                    <div class="form-inline required">
-                                                        <input type="date" name="install_date" id="service_searchbar" value="<?php echo $current_date;?>" class="form-control" style="width: 86%;" required/>
-                                                        <button type="submit" name="searchByDate" id="cservicebtn" class="btn btn">Search</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </fieldset>
-                                </div>
-                            </div>
+                           
+                            
                             <!--Service View Main Panel-->
 
                             <!--Customer Service Loader-->
@@ -160,7 +93,7 @@
 
                                             $sql_query = "SELECT SQL_CALC_FOUND_ROWS `ser_number`,`ser_date`,`description`,`fix_rate`,`period`,`installment`,`ser_status` FROM `service` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         } else {
-                                            $sql_query = "SELECT SQL_CALC_FOUND_ROWS `ser_number`,`ser_date`,`description`,`fix_rate`,`period`,`installment`,`ser_status` FROM `service` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                            $sql_query = "SELECT SQL_CALC_FOUND_ROWS `ser_number`,`ser_date`,`description`,`fix_rate`,`period`,`installment`,`ser_status` FROM `service` ";
                                         }
 
                                         $result = mysqli_query($conn, $sql_query);
@@ -217,15 +150,13 @@
                                                     <?php endwhile ?>
                                                 </tbody>
                                             </table>
-                                            <div class="text-center">
-                                                <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
-                                            </div>
+                                           
                                         </div>
                                         <div class="form-inline col-sm-12">
                                             <div class="form" style="float: right;">
 
-                                                <button type="submit" class="btn btn" id="cservicebtn"><a href="customer_serviceview_report.php" style="text-decoration: none;color: white;">Print</a></button>
-                                                <button type="submit" class="btn btn" id="cservicebtn"><a href="customer_installment.php" style="text-decoration: none;color: white;">Add Installment</a></button>
+                                                <button type="submit" class="btn btn" id="cservicebtn" onclick="window.print()">Print</button>
+                                              
                                             </div>
                                         </div>
                                     </div>
