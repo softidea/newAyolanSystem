@@ -25,20 +25,58 @@
         <link rel="icon" href="favicon.ico">
         <?php include '../controller/co_load_bike_rates.php'; ?>
 
-
-
-
-
-
-
-
-
-
-
         <script type="text/javascript">
-            function loadTWTypes(str) {
-                if (str != "" && str != "0") {
-                    alert(str);
+            function load_vehicle_categories() {
+                var cat_load = "loadcat";
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else
+                { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById('cat_load').innerHTML = xmlhttp.responseText;
+                        document.getElementById('cat_load_brand').innerHTML = xmlhttp.responseText;
+                        document.getElementById('cat_load_rate').innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load=" + cat_load, true);
+                xmlhttp.send();
+
+            }
+        </script>
+        <script type="text/javascript">
+            function load_vehicle_brands() {
+                var category = document.getElementById('cat_load_brand').value;
+                alert(category);
+                if (category != null && category != "") {
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    { // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById('brand_load').innerHTML = "";
+                            document.getElementById('brand_load').innerHTML = xmlhttp.responseText;
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load_brand=" + category, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function save_vehicle_brand() {
+                var category = document.getElementById('cat_load').value;
+                var brand = document.getElementById('new_brand').value;
+                if (category != null && category != "" && brand != null && brand != "") {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
                         xmlhttp = new XMLHttpRequest();
@@ -50,26 +88,22 @@
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             alert(xmlhttp.responseText);
-                            document.getElementById("tw_code").innerHTML = xmlhttp.responseText;
+                            var brand = document.getElementById('new_brand').value = "";
                         }
                     }
-                    xmlhttp.open("GET", "../controller/co_load_bike_advance_seacrh_rate.php?tw_mode=" + str, true);
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?brand_category_id=" + category + "&save_brand=" + brand, true);
                     xmlhttp.send();
-                }
-            }
-            function enablenewtwmodel() {
-                if (document.getElementById('tw_code').value == "new_tw_model") {
-                    document.getElementById('new_tw_model').readOnly = false;
                 } else {
-                    document.getElementById('new_tw_model').value = "";
-                    document.getElementById('new_tw_model').readOnly = true;
+                    alert("Missing Data,Please enter valid Data");
                 }
             }
         </script>
-        
         <script>
-                 function load_vehicle_categories() {
-                     var cat_load= "loadcat";
+            function save_vehicle_model() {
+                var category = document.getElementById('cat_load_brand').value;
+                var brand = document.getElementById('brand_load').value;
+                var model = document.getElementById('new_model').value;
+                if (category != null && category != "" && brand != null && brand != "" && model != "" && model != null) {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
                         xmlhttp = new XMLHttpRequest();
@@ -81,22 +115,96 @@
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             alert(xmlhttp.responseText);
-                            document.getElementById('cat_load').innerHTML=xmlhttp.responseText;
+                            var model = document.getElementById('new_model').value = "";
                         }
                     }
-                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load=" + cat_load, true);
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?model_category_id=" + category + "&model_brand=" + brand + "&save_model=" + model, true);
                     xmlhttp.send();
-                
+                } else {
+                    alert("Missing Data,Please enter valid Data");
+                }
             }
         </script>
-        
-        
+        <script type="text/javascript">
+            function load_vehicle_rate_brands() {
+                var category = document.getElementById('cat_load_rate').value;
+                alert(category);
+                if (category != null && category != "") {
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    { // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById('brand_load_rate').innerHTML = "";
+                            document.getElementById('brand_load_rate').innerHTML = xmlhttp.responseText;
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load_brand=" + category, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+        <script>
+            function load_vehicle_rate_models() {
+                var brand = document.getElementById('brand_load_rate').value;
+                alert(brand);
+                if (brand != null && brand != "") {
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    { // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById('model_load_rate').innerHTML = xmlhttp.responseText;
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load_model=" + brand, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+        <script>
+            function save_vehicle_rate() {
+                var category= document.getElementById('cat_load_rate').value;
+                var brand = document.getElementById('brand_load_rate').value;
+                var model = document.getElementById('model_load_rate').value;
+                var model_year = document.getElementById('model_year').value;
+                var min_value=document.getElementById('min_value').value;
+                var max_value=document.getElementById('min_value').value;
+                if (category != null && category != "" && brand!=null && brand!="" && model!=null && model!="" && model_year!=null && model_year!="" && min_value1=null && min_value!="" && max_value!=null && max_value!="") {
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    { // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            alert(xmlhttp.responseText);
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?rate_category=" + category+"&rate_brand"+brand+"&rate_model"+model+"&min_value="+min_value+"&max_value="+max_value+"&model_year="+model_year, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
 </html>
 </head>
 <body onload="load_vehicle_categories()">
     <?php
     include '../assets/include/navigation_bar.php';
-    $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+    $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
     if (mysqli_connect_errno()) {
         echo "Falied to Connect the Database" . mysqli_connect_error();
     }
@@ -114,7 +222,7 @@
                             <fieldset id="account">
                                 <legend>Search Option 01</legend>
                                 <div class="form-group required">
-                                    <label class="control-label" for="input-email">Search by Category:</label>
+                                    <label class="control-label">Search by Category:</label>
                                     <select name="v_cat" id="v_cat" class="form-control" onchange="checker();">
                                         <option value="bike">Bikes</option>
                                         <option value="tw">Three-Wheels</option>
@@ -123,7 +231,7 @@
                                 </div>
                                 <div id="advance_bike_panel" style="display: none;">
                                     <div class="form-group required">
-                                        <label class="control-label" for="input-email">Brand:</label>
+                                        <label class="control-label">Brand:</label>
                                         <select name="vbrand_advance" id="v_brand_advanced" class="form-control" onchange="loadCustomBikeBrands(this.value);">
                                             <option value="0">~~Select Brand~~</option>
                                             <option value="1">Bajaj</option>
@@ -132,13 +240,13 @@
                                         </select>
                                     </div>
                                     <div class="form-group required">
-                                        <label class="control-label" for="input-email">Select Type:</label>
+                                        <label class="control-label">Select Type:</label>
                                         <select name="vtype" id="v_type_advance" class="form-control" onchange="loadCustomBikeTypes(this.value);">
                                             <option>~~Select Type~~</option> 
                                         </select>
                                     </div>
                                     <div class="form-group required">
-                                        <label class="control-label" for="input-email">Select Model:</label>
+                                        <label class="control-label">Select Model:</label>
                                         <select name="vcode" id="v_code_advance" class="form-control" onchange=";">
                                             <option>~~Select Model~~</option>
                                         </select>
@@ -150,7 +258,7 @@
                             <fieldset id="account">
                                 <legend style="color: #FAFAFA;">Search Option 02</legend>
                                 <div class="form-group">
-                                    <label class="control-label" for="input-email" id="hidecaption">Admin Options:</label>
+                                    <label class="control-label" id="hidecaption">Admin Options:</label>
                                     <div class="form-inline required">
                                         <button type="submit"  class="btn btn" id="cservicebtn">Add Vehicle Rate</button>
                                         <button type="submit"  class="btn btn" id="cservicebtn">Add Land Rate</button>
@@ -328,23 +436,23 @@
                                         <legend>Vehicle Brand Registration</legend>
                                         <div class="form-group required">
                                             <label class="control-label">Select Category:</label>
-                                            <select name="cat_load" id="cat_load" class="form-control" onchange="">
+                                            <select name="cat_load" id="cat_load" class="form-control">
                                                 <option value="0">~~Select Type~~</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">New Brand:</label>
-                                            <input type="text" name="new_brand" id="new_category" placeholder="New Brand" class="form-control" />
+                                            <input type="text" name="new_brand" id="new_brand" placeholder="New Brand" class="form-control" />
                                         </div>
                                         <div class="form-group">
-                                            <button type="button" class="btn btn" id="cservicebtn">Save Brand</button>
+                                            <button type="button" class="btn btn" id="cservicebtn" onclick="save_vehicle_brand();">Save Brand</button>
                                         </div>
                                     </fieldset>
                                     <fieldset id="account">
                                         <legend>Vehicle Type Registration</legend>
                                         <div class="form-group required">
                                             <label class="control-label">Select Category:</label>
-                                            <select name="cat_load" id="cat_load" class="form-control" onchange="">
+                                            <select name="cat_load_brand" id="cat_load_brand" class="form-control" onchange="load_vehicle_brands();">
                                                 <option value="0">~~Select Category~~</option>
                                             </select>
                                         </div>
@@ -356,10 +464,10 @@
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">New Model:</label>
-                                            <input type="text" name="new_model" id="new_category" placeholder="New Model" class="form-control" />
+                                            <input type="text" name="new_model" id="new_model" placeholder="New Model" class="form-control" />
                                         </div>
                                         <div class="form-group">
-                                            <button type="button" class="btn btn" id="cservicebtn">Save Type</button>
+                                            <button type="button" class="btn btn" id="cservicebtn" onclick="save_vehicle_model();">Save Type</button>
                                         </div>
                                     </fieldset>
                                 </div>
@@ -371,36 +479,36 @@
                                         <legend>Vehicle Rate Registration</legend>
                                         <div class="form-group required">
                                             <label class="control-label">Select Category:</label>
-                                            <select name="cat_load_rate" id="tw_type" class="form-control" onchange="">
+                                            <select name="cat_load_rate" id="cat_load_rate" class="form-control" onchange="load_vehicle_rate_brands();">
                                                 <option value="0">~~Select Type~~</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Select Brand:</label>
-                                            <select name="brand_load_rate" id="tw_code" class="form-control" onchange="">
+                                            <select name="brand_load_rate" id="brand_load_rate" class="form-control" onchange="load_vehicle_rate_models();">
                                                 <option>~~Select Brand~~</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Select Model:</label>
-                                            <select name="model_load_rate" id="tw_code" class="form-control" onchange="">
+                                            <select name="model_load_rate" id="model_load_rate" class="form-control">
                                                 <option>~~Select Model~~</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Model Year:</label>
-                                            <input type="text" name="model_year" placeholder="Model Year" class="form-control" />
+                                            <input type="text" name="model_year" id="model_year" placeholder="Model Year" class="form-control" />
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Min Value:</label>
-                                            <input type="text" name="min_val" placeholder="Min Value" class="form-control" />
+                                            <input type="text" name="min_val" id="min_val" placeholder="Min Value" class="form-control" />
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Max Value:</label>
-                                            <input type="text" name="max_val" placeholder="Max Value" class="form-control" />
+                                            <input type="text" name="max_val" id="max_val" placeholder="Max Value" class="form-control" />
                                         </div>
                                         <div class="form-group">
-                                            <button type="button"  class="btn btn" id="cservicebtn">Save Rate</button>
+                                            <button type="button"  class="btn btn" id="cservicebtn" onclick="save_vehicle_rate();">Save Rate</button>
                                         </div>
                                     </fieldset>
                                 </div>
