@@ -218,8 +218,7 @@ if (!isset($_SESSION['user_email'])) {
                                                 <a href="../admin/customer/checksis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Release Re-Process</button></a>
                                                 <a href="../admin/customer/viewsis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Re-Process Report</button></a>
                                                 <a href="../customer/check_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Check Installment</button></a>
-                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item"><br></button></a>
-
+                                                <a href="../customer/customer_visit.php" style="text-decoration: none;"><button type="button" class="list-group-item">Visit Registration</button></a>
                                             </div>
                                             <div class="panel-footer"><div style="height: 15px;"></div></div>
                                         </div>

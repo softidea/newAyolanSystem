@@ -42,6 +42,7 @@ if (isset($_SESSION['cus_nic'])) {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
         <!-- Optional theme -->
 
+        
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,700,600italic,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -132,81 +133,6 @@ if (isset($_SESSION['cus_nic'])) {
                     xmlhttp.send();
                 }
             }
-        </script>
-        <script type="text/javascript">
-            function showDetails()
-            {
-                if (document.getElementById('v_cat').selectedIndex == 1) {
-                    var v_type = document.getElementById('v_type').value;
-                    var v_code = document.getElementById('v_code').value;
-                    //alert(v_type + " " + v_code);
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            //alert(xmlhttp.responseText);
-                            var value = xmlhttp.responseText;
-                            var result_arr = value.split("#");
-                            document.getElementById('m_year').value = result_arr[0];
-                            document.getElementById('l_rate').value = result_arr[1];
-                            if (v_code.length === 1) {
-                                document.getElementById('v_no_code').maxLength = v_code.length;
-                                document.getElementById('v_no_code').readOnly = false;
-                                document.getElementById('v_no_code').value = "";
-                                document.getElementById('v_no_num').value = "";
-                            } else {
-                                document.getElementById('v_no_code').value = "";
-                                document.getElementById('v_no_num').value = "";
-                                document.getElementById('v_no_code').readOnly = true;
-                                document.getElementById('v_no_code').maxLength = v_code.length;
-                                document.getElementById('v_no_code').value = document.getElementById('v_code').value;
-                            }
-
-                        }
-                    }
-                    xmlhttp.open("GET", "../controller/co_load_vehicle_details.php?v_type=" + v_type + "&v_code=" + v_code, true);
-                    xmlhttp.send();
-                } else if (document.getElementById('v_cat').selectedIndex == 2) {
-                    //alert('inner');
-                    var v_tw_type = document.getElementById('v_type').value;
-                    var v_tw_code = document.getElementById('v_code').value;
-                    //alert(v_tw_type + "tw " + v_tw_code);
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                            //alert(xmlhttp.responseText);
-                            document.getElementById('l_rate').value = xmlhttp.responseText;
-                            document.getElementById('m_year').value = "None";
-                            if (v_tw_code.length === 1) {
-                                //alert("length 1");
-                                document.getElementById('v_no_code').maxLength = v_tw_code.length;
-                                document.getElementById('v_no_code').readOnly = false;
-                                document.getElementById('v_no_code').value = "";
-                                document.getElementById('v_no_num').value = "";
-                            } else {
-                                //alert("length else");
-                                document.getElementById('v_no_code').value = "";
-                                document.getElementById('v_no_num').value = "";
-                                document.getElementById('v_no_code').readOnly = true;
-                                document.getElementById('v_no_code').maxLength = v_tw_code.length;
-                                document.getElementById('v_no_code').value = document.getElementById('v_code').value;
-                            }
-                        }
-                    }
-                    xmlhttp.open("GET", "del.php?v_tw_type=" + v_tw_type + "&v_tw_code=" + v_tw_code, true);
-                    xmlhttp.send();
-                }
-            }
-
         </script>
         <script type="text/javascript">
             function set_vehicle_div(val) {
@@ -315,9 +241,9 @@ if (isset($_SESSION['cus_nic'])) {
                 }
             }
             function setServiceInstallment() {
-
                 var payment = document.getElementById('f_rate').value;
                 var period = document.getElementById('v_lease_period').value;
+                var vehicle_category=document.getElementById('vehicle_category').value;
 
                 if (payment != "" && period != "" && payment != null && period != null) {
 
@@ -334,7 +260,7 @@ if (isset($_SESSION['cus_nic'])) {
                             document.getElementById('ser_installment').value = xmlhttp.responseText;
                         }
                     }
-                    xmlhttp.open("GET", "../controller/co_load_lease_customer.php?payment=" + payment + "&period=" + period, true);
+                    xmlhttp.open("GET", "../controller/co_load_lease_customer.php?payment=" + payment + "&period=" + period+"&vehicle_category="+, true);
                     xmlhttp.send();
                 }
             }
@@ -395,19 +321,12 @@ if (isset($_SESSION['cus_nic'])) {
                                                     <option value="HOR">HOR</option>
                                                     <option value="BLS">BLS</option>
                                                 </select>
-
-
-
                                                 <input ng-app="" type="text" name="service_no" id="sno" ng-model="number" placeholder="Service No" class="form-control" onKeyPress="return numbersonly(this, event)" max="4" maxlength="4" style="width: 59%;" required/>
-
-
-
-
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Select Category:</label>
-                                            <select name="vehicle_category" id="v_cat" class="form-control" onchange="set_vehicle_div(this.value);">
+                                            <select name="vehicle_category" id="vehicle_category" class="form-control" onchange="set_vehicle_div(this.value);">
                                                 <option value="0">~~Select Category~~</option>
                                                 <option value="1">Bike</option>
                                                 <option value="2">Three-Wheel</option>
@@ -415,8 +334,7 @@ if (isset($_SESSION['cus_nic'])) {
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Select Vehicle Brand:</label>
-                                            <select name="vehicle_brand" id="v_brand" class="form-control" onchange="showTypes(this.value);">
-<?php load_vehicle_brands(); ?>
+                                            <select name="vehicle_brand" id="v_brand" class="form-control" onchange="showTypes(this.value);"><?php load_vehicle_brands(); ?>
                                             </select>
                                         </div>
                                         <div class="form-group">

@@ -261,8 +261,6 @@
                             ?>
                             <div class="col-sm-12">
                                 <div id="bike_div" style="display: block;background: white;">
-                                    <div id="printarea">
-
                                         <table class="table table-bordered table-striped table-hover">
                                             <thead>
                                                 <tr>
@@ -293,9 +291,6 @@
                                         <div class="text-center">
                                             <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                         </div>
-
-
-                                    </div>
                                 </div>
                                 <!--pagination for 3whele values-->
                                 <?php
@@ -410,51 +405,51 @@
                                 <div class="new_vehicle" style="display: block;">
                                     <div class="col-sm-6">
                                         <fieldset id="account">
-                                            <legend>New Bike Rate Registration</legend>
+                                            <legend>Vehicle Category Registration</legend>
                                             <div class="form-group required">
-                                                <label class="control-label">Model Year:</label>
-                                                <input type="text" name="modelyear"  placeholder="Model Year" class="form-control" />
+                                                <label class="control-label">New Category:</label>
+                                                <input type="text" name="new_category" id="new_category" placeholder="New Category" class="form-control" />
                                             </div>
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn" id="cservicebtn">Save Category</button>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset id="account">
+                                            <legend>Vehicle Brand Registration</legend>
                                             <div class="form-group required">
-                                                <label class="control-label">Brand:</label>
-                                                <select name="vbrand" id="v_brand" class="form-control" onchange="showTypes(this.value);">
-                                                    <?php loadBikeBrands(); ?>
+                                                <label class="control-label">Select Category:</label>
+                                                <select name="cat_load" id="cat_load" class="form-control" onchange="">
+                                                    <option value="0">~~Select Type~~</option>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
                                                 <label class="control-label">New Brand:</label>
-                                                <input type="text" readonly id="newbrand" placeholder="New Brand" class="form-control"/>
+                                                <input type="text" name="new_brand" id="new_category" placeholder="New Brand" class="form-control" />
                                             </div>
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn" id="cservicebtn">Save Brand</button>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset id="account">
+                                            <legend>Vehicle Type Registration</legend>
                                             <div class="form-group required">
-                                                <label class="control-label">Select Type:</label>
-                                                <select name="vtype" id="v_type" class="form-control" onchange="showVehicleMods(this.value);">
-                                                    <option>~~Select Type~~</option> 
+                                                <label class="control-label">Select Category:</label>
+                                                <select name="cat_load" id="cat_load" class="form-control" onchange="">
+                                                    <option value="0">~~Select Category~~</option>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label">New Type:</label>
-                                                <input type="text" readonly id="newtype" value="" placeholder="New Type" class="form-control" style="text-transform: uppercase;"/>
-                                            </div>
-                                            <div class="form-group required">
-                                                <label class="control-label">Select Model:</label>
-                                                <select name="vcode" id="v_code" class="form-control" onchange="changeModel();">
-                                                    <option>~~Select Model~~</option>
+                                                <label class="control-label">Select Brand:</label>
+                                                <select name="brand_load" id="brand_load" class="form-control" onchange="">
+                                                    <option value="0">~~Select Brand~~</option>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
                                                 <label class="control-label">New Model:</label>
-                                                <input type="text" readonly id="newmodel" placeholder="New Model" class="form-control" style="text-transform: uppercase;"/>
-                                            </div>
-                                            <div class="form-group required">
-                                                <label class="control-label">Min Value:</label>
-                                                <input type="text" name="minval" placeholder="Min Value" class="form-control" />
-                                            </div>
-                                            <div class="form-group required">
-                                                <label class="control-label">Max Value:</label>
-                                                <input type="text" name="maxval" placeholder="Max Value" class="form-control" />
+                                                <input type="text" name="new_model" id="new_category" placeholder="New Model" class="form-control" />
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit"  class="btn btn" id="cservicebtn">Save Rate</button>
+                                                <button type="button" class="btn btn" id="cservicebtn">Save Type</button>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -463,35 +458,39 @@
                                 <div class="new_vehicle" style="display: block;">
                                     <div class="col-sm-6">
                                         <fieldset id="account">
-                                            <legend>New Three-Wheel Rate Registration</legend>
+                                            <legend>Vehicle Rate Registration</legend>
                                             <div class="form-group required">
-                                                <label class="control-label">Select Type:</label>
-                                                <select name="vtype" id="tw_type" class="form-control" onchange="loadTWTypes(this.value);">
+                                                <label class="control-label">Select Category:</label>
+                                                <select name="cat_load_rate" id="tw_type" class="form-control" onchange="">
                                                     <option value="0">~~Select Type~~</option>
-                                                    <option value="2">2 Stroke</option>
-                                                    <option value="4">4 Stroke</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group required">
+                                                <label class="control-label">Select Brand:</label>
+                                                <select name="brand_load_rate" id="tw_code" class="form-control" onchange="">
+                                                    <option>~~Select Brand~~</option>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
                                                 <label class="control-label">Select Model:</label>
-                                                <select name="vcode" id="tw_code" class="form-control" onchange="enablenewtwmodel();">
+                                                <select name="model_load_rate" id="tw_code" class="form-control" onchange="">
                                                     <option>~~Select Model~~</option>
                                                 </select>
                                             </div>
                                             <div class="form-group required">
-                                                <label class="control-label">New Model:</label>
-                                                <input type="text" readonly id="new_tw_model" placeholder="New Model" class="form-control" style="text-transform: uppercase;"/>
+                                                <label class="control-label">Model Year:</label>
+                                                <input type="text" name="model_year" placeholder="Model Year" class="form-control" />
                                             </div>
                                             <div class="form-group required">
                                                 <label class="control-label">Min Value:</label>
-                                                <input type="text" name="minval" placeholder="Min Value" class="form-control" />
+                                                <input type="text" name="min_val" placeholder="Min Value" class="form-control" />
                                             </div>
                                             <div class="form-group required">
                                                 <label class="control-label">Max Value:</label>
-                                                <input type="text" name="maxval" placeholder="Max Value" class="form-control" />
+                                                <input type="text" name="max_val" placeholder="Max Value" class="form-control" />
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit"  class="btn btn" id="cservicebtn">Save Rate</button>
+                                                <button type="button"  class="btn btn" id="cservicebtn">Save Rate</button>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -502,7 +501,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <!--Customer Panel Section-->
 
     <?php include '../assets/include/footer.php'; ?>
@@ -522,69 +520,5 @@
         user-select: none;
     }
 </style>
-<script type="text/javascript">
-                                                    function Enable_Form_Fields() {
-                                                        if (document.getElementById('v_brand').value = "newbrand") {
-                                                            document.getElementById('v_type').selectedIndex = 0;
-                                                        }
-                                                    }
-</script>
-<script type="text/javascript">
-    function checker() {
 
-        var value = document.getElementById('v_cat').value;
-
-        if (value == 'bike') {
-            document.getElementById('land_div').style.display = "none";
-            document.getElementById('tw_div').style.display = "none";
-            document.getElementById('bike_div').style.display = "block"
-            document.getElementById('advance_bike_panel').style.display = "none";
-
-        }
-        else if (value == 'tw') {
-            document.getElementById('advance_bike_panel').style.display = "none";
-            document.getElementById('bike_div').style.display = "none";
-            document.getElementById('land_div').style.display = "none";
-            document.getElementById('tw_div').style.display = "block";
-
-        }
-        else if (value == 'land') {
-            document.getElementById('bike_div').style.display = "none";
-            document.getElementById('tw_div').style.display = "none";
-            document.getElementById('advance_bike_panel').style.display = "none";
-            document.getElementById('land_div').style.display = "block";
-
-        }
-    }
-    function setServiceOptionPanel()
-    {
-        var sp_value = document.getElementById('input-search-option').value;
-        if (sp_value == 'serviceno')
-        {
-            document.getElementById('cboservice').disabled = false;
-
-            alert(sp_value);
-        }
-        else if (sp_value == 'cname' || sp_value == 'tp')
-        {
-            document.getElementById('cboservice').selectedIndex = "0";
-            document.getElementById('cboservice').disabled = true;
-            alert(sp_value);
-        }
-    }
-
-
-</script>
-
-<?php
-$url = "../print_report/PrintArea.php";
-?>
-<script type="text/javascript">
-
-    /*--This JavaScript method for Print Preview command--*/
-    function PrintPreview() {
-
-        echo '<script type="text/javascript">window.location.href="../print_report/PrintArea.php"';
-    }
-</script>
 </html>
