@@ -8,7 +8,7 @@ define('db_host', '77.104.142.97');
 define('db_port', '3306');
 define('db_user', 'ayolanin_dev');
 define('db_password', 'WelComeDB1129');
-define('db_database', 'ayolanin_test');
+define('db_database', 'ayolanin_datahost');
 
 //define('db_host', 'localhost');
 //define('db_port', '3306');

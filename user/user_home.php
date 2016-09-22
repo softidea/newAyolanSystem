@@ -98,7 +98,7 @@ if (!isset($_SESSION['user_email'])) {
                                     <ul>
                                         <li class="dropdown-header" style="color: #004D40;">Customer</li>
                                         <li><a href="../customer/customer_registration.php" style="text-decoration: none;">Registration</a></li>
-                                        <li><a href="../customer/customer_view.php" style="text-decoration: none;">View Customers</a></li>
+                                        <li><a href="../customer/customer_view_2.php" style="text-decoration: none;">View Customers</a></li>
                                         <li><a href="../customer/customer_installment.php" style="text-decoration: none;">Add Lease Installment</a></li>
                                         <li><a href="../customer/customer_registration.php" style="text-decoration: none;">Add a Lease</a></li>
                                         <li class="divider"></li>
@@ -132,7 +132,7 @@ if (!isset($_SESSION['user_email'])) {
                                             <label class="sr-only" for="email">Name | ID</label>
                                             <input type="email" class="form-control" id="email" placeholder="Name | ID | Service No">
                                         </div>
-                                        <a href="../customer/customer_view.php" style="text-decoration: none;color: white;">
+                                        <a href="../customer/customer_view_2.php" style="text-decoration: none;color: white;">
                                             <button type="button" class="btn btn btn-block" style="background-color: #009688;color: white;">Search
                                             </button>
                                         </a>
@@ -158,7 +158,7 @@ if (!isset($_SESSION['user_email'])) {
                         <div class="list-group">
                             <a href="../customer/customer_registration.php" style="text-decoration: none;"><button type="button" class="list-group-item">New Registration</button></a>
                             <a href="../customer/customer_updateinfo.php" style="text-decoration: none;"><button type="button" class="list-group-item">Update Customers</button></a>
-                            <a href="../customer/customer_view.php" style="text-decoration: none;"><button type="button" class="list-group-item">Search Customers</button></a>
+                            <a href="../customer/customer_view_2.php" style="text-decoration: none;"><button type="button" class="list-group-item">Search Customers</button></a>
                             <a href="../customer/customer_registration.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Vehicle Lease</button></a>
                             <a href="../customer/customer_addpawn.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Land Pawn</button></a>
                             <a href="../customer/customer_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Lease Installment</button></a>

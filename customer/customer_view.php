@@ -28,6 +28,9 @@ $date_setter = date("Y-m-d");
 
         <link rel="stylesheet" type="text/css" href="../assets/css/customer_registration.css">
         <link rel="icon" href="favicon.ico">
+        
+        
+        
     </head>
     <body>
         <?php
@@ -79,6 +82,7 @@ $date_setter = date("Y-m-d");
                                         <?php
                                         if (isset($_POST['cbopayment'])) {
                                             $com_vehi = $_POST['cbopayment'];
+                                          echo '<script>alert("awa")</script>';
                                         }
                                         ?>
                                     </div>
@@ -102,10 +106,12 @@ $date_setter = date("Y-m-d");
 
                                     <select name="cbobranch" id="input-search-option" class="form-control" required onchange="setServiceOptionPanel();" style="width:400px;float: left;">
                                         <option value=""> --- Please Select --- </option>
+                                        <option value="HOR"> HOR </option>
+                                        <option value="BLS"> BLS </option>
                                        
                                         <?php
                                         $query = "SELECT * FROM branch WHERE `status`='Active'";
-                                        $result = mysqli_query($conn, $query);
+                                        $result = mysqli_query($d_bc, $query);
                                         while ($row = mysqli_fetch_assoc($result)):
                                             ?>
                                             <option value="<?php echo $row['branch'] ?>"><?php echo $row['branch'] ?></option>
@@ -165,14 +171,14 @@ $date_setter = date("Y-m-d");
                             else {
                                 $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                             }
-                            $result = mysqli_query($conn, $sql_query);
+                            $result = mysqli_query($d_bc, $sql_query);
                             $service_co = mysqli_num_rows($result);
                             if (!($result)) {
 
                                 //stop execution and display error message
                                 die(mysql_error());
                             }
-                            $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
+                            $rows = mysqli_fetch_assoc(mysqli_query($d_bc, 'SELECT FOUND_ROWS() AS rows'));
                             $pagination->records($rows['rows']);
                             $pagination->records_per_page($records_per_page);
                             ?>
@@ -205,7 +211,7 @@ $date_setter = date("Y-m-d");
                                                 <td><?php echo $row['cus_id'] ?></td>
                                                 <td><?php echo $row['cus_fullname'] ?></td>
                                                 <td><?php echo $row['cus_nic'] ?></td>
-                                                <td> <a href="#"><?php echo $row['ser_number'] ?></a></td>
+                                                <td><?php echo $row['ser_number'] ?></td>
                                                 <td><?php echo $row['vehicle_no'] ?></td>
                                                 <td><?php echo $row['cus_address'] ?></td>
                                                 <td><?php echo $row['cus_reg_date'] ?></td>
@@ -234,9 +240,10 @@ $date_setter = date("Y-m-d");
 
                                                     cel = x.cells[3].innerHTML;
                                                     var cus_id = cel.substring(cel.lastIndexOf("#") + 3, cel.lastIndexOf("<"));
-                                                    alert(cus_id);
-                                                    window.location.href = "customer_installment_set.php?ser_number=" + cus_id;
+                                                   // alert(cus_id);
+                                                    window.location.href = "customer_installment_set.php?ser_number=" + cel;
                                                 }
+                                                
                                             </script>                                           
 
                                         </div>

@@ -19,7 +19,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo ('customer_registration.php'); ?>" style="text-decoration: none;">New Registration</a></li>
                             <li><a href="<?php echo ('customer_updateinfo.php'); ?>" style="text-decoration: none;">Update Customer</a></li>
-                            <li><a href="<?php echo ('customer_view.php'); ?>" style="text-decoration: none;">View Customers</a></li>
+                            <li><a href="<?php echo ('customer_view_2.php'); ?>" style="text-decoration: none;">View Customers</a></li>
                             <li><a href="<?php echo ('customer_installment.php'); ?>" style="text-decoration: none;">Pay Installment</a></li>
                             <li><a href="<?php echo ('customer_tieup.php'); ?>" style="text-decoration: none;">Customer Tie-Up</a></li>
                         </ul>

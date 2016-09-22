@@ -585,6 +585,7 @@ echo 'alert($cus_seid)';
                                             <div class="form-group">
                                                 <input type="button" class="btn btn" id="custcontinue_print" value="Print" onclick="PrintPreview();">
                                                 <input type="button" class="btn btn" id="custcontinue_pdf" style="margin-right: 8px;" onclick="PrintDoc();" value="Save as PDF">
+                                                <input type="button" class="btn btn" id="custcontinue_pdf" style="margin-right: 8px;" onclick="viewLeger();" value="View Ledger Card">
                                             </div>
                                         </div>
                                     </div>
@@ -625,6 +626,10 @@ echo 'alert($cus_seid)';
                 return false;
             } else
                 return false;
+        }
+        
+        function viewLeger(){
+            alert(document.getElementById('cus_nic').value);
         }
 
     </script>
