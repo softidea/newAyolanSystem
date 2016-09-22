@@ -196,9 +196,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                    <button type="submit"  class="btn btn" id="cservicebtn">Save as PDF</button>
-
-                                                    <button type="submit"  class="btn btn" id="cservicebtn"><a href="customer_view_report.php" target="_parent" style="color: white; text-decoration: none">Print</a></button>
+                                                  
                                                     <script>
 
                                                         var cel;
@@ -360,9 +358,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                    <button type="submit"  class="btn btn" id="cservicebtn">Save as PDF</button>
-
-                                                    <button type="submit"  class="btn btn" id="cservicebtn"><a href="customer_view_report.php" target="_parent" style="color: white; text-decoration: none">Print</a></button>
+                                                   
                                                     <script>
 
                                                         var cel;
@@ -524,10 +520,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                    <button type="submit"  class="btn btn" id="cservicebtn">Save as PDF</button>
-
-                                                    <button type="submit"  class="btn btn" id="cservicebtn"><a href="customer_view_report.php" target="_parent" style="color: white; text-decoration: none">Print</a></button>
-                                                    <script>
+                                                   <script>
 
                                                         var cel;
                                                         function readValues(x) {
@@ -688,9 +681,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                    <button type="submit"  class="btn btn" id="cservicebtn">Save as PDF</button>
-
-                                                    <button type="submit"  class="btn btn" id="cservicebtn"><a href="customer_view_report.php" target="_parent" style="color: white; text-decoration: none">Print</a></button>
+                                                   
                                                     <script>
 
                                                         var cel;
