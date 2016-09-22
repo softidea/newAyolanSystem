@@ -78,7 +78,7 @@
                     <tr>
                         <td>
                             <div id="head_panel">
-                                <img src="../assets/images/admin/ayolan_logo.png" id="company_logo">
+                                <img src="http://ayolaninvestments.com/system/assets/images/admin/ayolan_logo.png" id="company_logo">
                             </div>
                         </td>
                         <td>
