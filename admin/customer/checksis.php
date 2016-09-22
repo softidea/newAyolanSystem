@@ -64,7 +64,7 @@
             {
                 background-color: #004D40;
             }
-            //.thcaption{text-align: center;}
+            
             #backregister
             {
                 background-color: #004D40;

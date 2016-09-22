@@ -24,7 +24,7 @@
         }
         div.container {
             width: 100%;
-            //border: 1px solid gray;
+            
         }
         header{
             /*            padding: 1em;*/

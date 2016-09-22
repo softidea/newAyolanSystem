@@ -120,8 +120,6 @@ body
               .dropdown-menu li > a:hover {
                   text-decoration: none;
                   color: #ffffff;
-                  //background-color: #229ac8;
-                  // background-image: linear-gradient(to bottom, #23a1d1, #1f90bb);
                   background-repeat: repeat-x;
               }
               /* top */
@@ -141,8 +139,7 @@ body
               #top #currency .currency-select:hover {
                   text-shadow: none;
                   color: #ffffff;
-                  // background-color: #229ac8;
-                  //background-image: linear-gradient(to bottom, #23a1d1, #1f90bb);
+                  
                   background-repeat: repeat-x;
               }
               #top .btn-link, #top-links li, #top-links a {

@@ -77,7 +77,7 @@ if (!isset($_SESSION['user_email'])) {
             {
                 background-color: #004D40;
             }
-            //.thcaption{text-align: center;}
+          
             #backregister
             {
                 background-color: #004D40;
