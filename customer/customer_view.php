@@ -32,8 +32,9 @@ $date_setter = date("Y-m-d");
     <body>
         <?php
         include '../assets/include/navigation_bar.php';
-
-        $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+        require_once '../db/mysqliConnect.php';
+        
+//        $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
         if (mysqli_connect_errno()) {
             echo "Falied to Connect the Database" . mysqli_connect_error();
         }
@@ -65,7 +66,7 @@ $date_setter = date("Y-m-d");
                                                 <input type="text" name="fname" id="fname" value="" placeholder="Search Here" id="input-email" class="form-control" maxlength="10" required/>
                                                 <br>
                                                 <button type="submit" name="search_buton"  id="cservicebtn" method="post" class="btn btn">Search</button>
- 
+
                                             </div>
                                         </form>
                                         <form method="post">
@@ -98,25 +99,33 @@ $date_setter = date("Y-m-d");
                                         <br>
                                         <button type="submit" on name="search_date" id="cservicebtn" class="btn btn">Search</button>
                                     </div>
-                                    
-                                                 <select name="cbopayment" id="input-search-option" class="form-control" required onchange="setServiceOptionPanel();">
-                                                <option value=""> --- Please Select --- </option>
-                                               <?php
-                                               $query="SELECT * FROM branch WHERE `status`='Active'";
-                                                $result = mysqli_query($conn, $query);
-                                                while ($row = mysqli_fetch_assoc($result)):
-                                               ?>
-                                                <option><?php echo $row['branch'] ?></option>
-                                                <?php endwhile?>
-                                            </select>
+
+                                    <select name="cbobranch" id="input-search-option" class="form-control" required onchange="setServiceOptionPanel();" style="width:400px;float: left;">
+                                        <option value=""> --- Please Select --- </option>
+                                       
+                                        <?php
+                                        $query = "SELECT * FROM branch WHERE `status`='Active'";
+                                        $result = mysqli_query($conn, $query);
+                                        while ($row = mysqli_fetch_assoc($result)):
+                                            ?>
+                                            <option value="<?php echo $row['branch'] ?>"><?php echo $row['branch'] ?></option>
+                                        <?php endwhile ?>
+                                    </select><p style="color: white;float: left;">as</p>
+                                    <button type="submit" on name="search_branch" id="cservicebtn" class="btn btn">Search</button>
                                     <br/>
+                                    <br/>
+                                    <?php
+                                        if (isset($_POST['cbobranch'])) {
+                                            $com_branch = $_POST['cbobranch'];
+                                        }
+                                        ?>
                                 </form>
                             </fieldset>
 
 
                             <!--pagination for Customer View-->
                             <?php
-                            global $conn;
+                           
                             $sql_query = "";
 
                             $records_per_page = 10;
@@ -130,8 +139,7 @@ $date_setter = date("Y-m-d");
                                     $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_tp`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                 } elseif ($com_vehi == "nic") {
                                     $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_nic`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                                }
-                                 elseif ($com_vehi == "vno") {
+                                } elseif ($com_vehi == "vno") {
                                     $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE c.vehicle_no='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                 }
                             } elseif (isset($_POST['search_date'])) {
@@ -140,7 +148,21 @@ $date_setter = date("Y-m-d");
                             } elseif (isset($_POST['search_buton_view_All'])) {
 
                                 $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                            } else {
+                            }elseif (isset($_POST['search_branch'])) {
+                                
+                                if ($com_branch=="HOR") {
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'HOR%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                }
+                                elseif ($com_branch=="BLS") {
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'BLS%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                }
+                                elseif ($com_branch=="PLD") {
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'PLD%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                }
+                                
+                                
+                            }
+                            else {
                                 $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                             }
                             $result = mysqli_query($conn, $sql_query);
@@ -201,17 +223,17 @@ $date_setter = date("Y-m-d");
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div class="form-inline">
-                                            
+
                                             <button type="submit"  class="btn btn" id="cservicebtn">Save as PDF</button>
-                                            
+
                                             <button type="submit"  class="btn btn" id="cservicebtn"><a href="customer_view_report.php" target="_parent" style="color: white; text-decoration: none">Print</a></button>
                                             <script>
 
                                                 var cel;
                                                 function readValues(x) {
-                                                    
+
                                                     cel = x.cells[3].innerHTML;
-                                                    var cus_id = cel.substring(cel.lastIndexOf("#") + 3, cel.lastIndexOf("<"));   
+                                                    var cus_id = cel.substring(cel.lastIndexOf("#") + 3, cel.lastIndexOf("<"));
                                                     alert(cus_id);
                                                     window.location.href = "customer_installment_set.php?ser_number=" + cus_id;
                                                 }
