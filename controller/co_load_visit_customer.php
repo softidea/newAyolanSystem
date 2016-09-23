@@ -31,6 +31,23 @@ if($service_no!=null && $service_no!=""){
 if($visit_service_no!=null && $visit_service_no!="" && $visit_cus_nic!=null && $visit_cus_nic!="" && $visit_cost!=null && $visit_cost!="" && $visit_date!=null && $visit_date!="" && $visit_des!=null && $visit_des!=""){
 
     global $conn;
+    $save_vehicle_visit="INSERT INTO `ayolanin_test`.`service_visit`
+            (
+             `visit_date`,
+             `ser_number`,
+             `cus_nic`,
+             `visit_cost`,
+             `visit_des`,visit_status)
+VALUES (
+        '$visit_date',
+        '$visit_service_no',
+        '$visit_cus_nic',
+        '$visit_cost',
+        '$visit_des','Active')";
+    $run_save_visit=  mysqli_query($conn, $save_vehicle_visit);
+    if($run_save_visit){
+        echo 'Customer Visit saved successfully';
+    }
     
     
 }
