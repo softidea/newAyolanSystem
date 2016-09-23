@@ -4,7 +4,7 @@ require '../db/newDB.php';
 
 $cust_nic = filter_input(INPUT_GET, 'customer_nic');
 
-$conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+$conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
 if (mysqli_connect_errno()) {
     echo "Falied to Connect the Database" . mysqli_connect_error();
 }
@@ -45,6 +45,7 @@ if ($cust_nic != "" && $cust_nic != null) {
     $prop_emp_name = "";
     $prop_emp_address = "";
 
+    $g1_id = "";
     $g1_name = "";
     $g1_address = "";
     $g1_tp = "";
@@ -57,6 +58,7 @@ if ($cust_nic != "" && $cust_nic != null) {
     $g1_emp_name = "";
     $g1_emp_address = "";
 
+    $g2_id = "";
     $g2_name = "";
     $g2_address = "";
     $g2_tp = "";
@@ -129,7 +131,7 @@ if ($cust_nic != "" && $cust_nic != null) {
   `proposer_employer`,
   `proposer_emp_address` 
 FROM
-  `ayolanin_datahost`.`customer` 
+  `customer` 
   where `cus_nic` ='" . $cust_nic . "'";
     $result_customer_all = mysqli_query($conn, $customer_table_data_quarry);
 
@@ -189,10 +191,10 @@ FROM
 from
   `guarantor` g left join `service` s on g.`ser_number`=s.`ser_number` where s.`cus_nic` ='" . $cust_nic . "'";
     $result_ger_all = mysqli_query($conn, $gerenter_table_data_quarry);
-$count=1;
+    $count = 1;
 
-   if ($ger_row = mysqli_fetch_assoc($result_ger_all)) {
-       $g1_id=$ger_row['ger_id'];
+    if ($ger_row = mysqli_fetch_assoc($result_ger_all)) {
+        $g1_id = $ger_row['ger_id'];
         $g1_name = $ger_row['ger_fullname'];
         $g1_address = $ger_row['ger_address'];
         $g1_tp = $ger_row['ger_tp'];
@@ -204,36 +206,32 @@ $count=1;
         $g1_salary = $ger_row['ger_salerry'];
         $g1_emp_name = $ger_row['ger_emp_name'];
         $g1_emp_address = $ger_row['ger_emp_address'];
-      
-        }
-
-    while ( $ger_row = mysqli_fetch_assoc($result_ger_all)) {
-       
-       
-        $count=2;
-        if ($count=2) {
-            $g2_id=$ger_row['ger_id'];
-        $g2_name = $ger_row['ger_fullname'];
-        $g2_address = $ger_row['ger_address'];
-        $g2_tp = $ger_row['ger_tp'];
-        $g2_dob = $ger_row['ger_dob'];
-        $g2_nic = $ger_row['ger_nic'];
-        $g2_ms = $ger_row['ger_ms'];
-        $g2_spouse = $ger_row['ger_wife_name'];
-        $g2_position = $ger_row['ger_position'];
-        $g2_salary = $ger_row['ger_salerry'];
-        $g2_emp_name = $ger_row['ger_emp_name'];
-        $g2_emp_address = $ger_row['ger_emp_address'];
-        
-        }
-
-       
     }
-    
-    
-  
-    
-    if(!($result_ger_all)) {
+
+    while ($ger_row = mysqli_fetch_assoc($result_ger_all)) {
+
+
+        $count = 2;
+        if ($count = 2) {
+            $g2_id = $ger_row['ger_id'];
+            $g2_name = $ger_row['ger_fullname'];
+            $g2_address = $ger_row['ger_address'];
+            $g2_tp = $ger_row['ger_tp'];
+            $g2_dob = $ger_row['ger_dob'];
+            $g2_nic = $ger_row['ger_nic'];
+            $g2_ms = $ger_row['ger_ms'];
+            $g2_spouse = $ger_row['ger_wife_name'];
+            $g2_position = $ger_row['ger_position'];
+            $g2_salary = $ger_row['ger_salerry'];
+            $g2_emp_name = $ger_row['ger_emp_name'];
+            $g2_emp_address = $ger_row['ger_emp_address'];
+        }
+    }
+
+
+
+
+    if (!($result_ger_all)) {
         die(mysql_error());
     }
 
@@ -292,7 +290,7 @@ FROM
   `idbank_acc_cat`,
   `cus_nic` 
 FROM
-  `ayolanin_datahost`.`cus_bnk_acc` 
+  `cus_bnk_acc` 
 WHERE `idbank_acc_cat`='1' AND `cus_nic`='" . $cust_nic . "'
 ";
     $cus_mobile_bank_quarry = "SELECT 
@@ -303,7 +301,7 @@ WHERE `idbank_acc_cat`='1' AND `cus_nic`='" . $cust_nic . "'
   `idbank_acc_cat`,
   `cus_nic` 
 FROM
-  `ayolanin_datahost`.`cus_bnk_acc` 
+  `cus_bnk_acc` 
 WHERE `idbank_acc_cat`='2' AND `cus_nic`='" . $cust_nic . "'
 ";
     $cus_daily_loan_bank_quarry = "SELECT 
@@ -314,7 +312,7 @@ WHERE `idbank_acc_cat`='2' AND `cus_nic`='" . $cust_nic . "'
   `idbank_acc_cat`,
   `cus_nic` 
 FROM
-  `ayolanin_datahost`.`cus_bnk_acc` 
+  `cus_bnk_acc` 
 WHERE `idbank_acc_cat`='3' AND `cus_nic`='" . $cust_nic . "'
 ";
 
@@ -340,6 +338,6 @@ WHERE `idbank_acc_cat`='3' AND `cus_nic`='" . $cust_nic . "'
         $cus_daily_loan_facilities = $cus_daily_loan_bank_row['cus_facilities'];
         $cus_daily_loan_account_no = $cus_daily_loan_bank_row['cus_bnk_account_no'];
     }
-    echo $cus_name . "#" . $cus_address . "#" . $cus_tp . "#" . $cus_nic . "#" . $cus_dob . "#" . $cus_position . "#" . $cus_salary . "#" . $cus_emp_name . "#" . $cus_emp_address . "#" . $cus_ms . "#" . $cus_dependdency . "#" . $cus_spouse_name . "#" . $cus_spouse_dob . "#" . $cus_spouse_position . "#" . $cus_spouse_salary . "#" . $cus_spouse_emp_name . "#" . $prop_name . "#" . $prop_address . "#" . $prop_tp . "#" . $prop_dob . "#" . $prop_nic . "#" . $prop_ms . "#" . $cus_regdate . "#" . $prop_spouse_name . "#" . $prop_postion . "#" . $prop_salary . "#" . $prop_emp_name . "#" . $prop_emp_address . "#" . $g1_name . "#" . $g1_address . "#" . $g1_tp . "#" . $g1_dob . "#" . $g1_nic . "#" . $g1_ms . "#" . $g1_spouse . "#" . $g1_position . "#" . $g1_salary . "#" . $g1_emp_name . "#" . $g1_emp_address . "#" . $g2_name  . "#" . $g2_address . "#" . $g2_tp . "#" . $g2_dob . "#" . $g2_nic . "#" . $g2_ms . "#" . $g2_spouse. "#" . $g2_position. "#" . $g2_emp_name . "#" . $g2_emp_address . "#" . $real_prp_house_position. "#" . $real_prp_house_size. "#" . $real_prp_house_value. "#" . $real_prp_house_pawned. "#" . $real_prp_house_pawn_getter. "#" . $real_prp_other_position. "#" . $real_prp_other_size . "#" . $real_prp_other_value . "#" . $real_prp_other_pawned. "#" . $real_prp_other_pawn_getter. "#" . $cus_savings_bank_branch . "#" . $cus_savings_facilities. "#" . $cus_savings_account_no. "#" . $cus_mobile_bank_branch. "#" . $cus_mobile_facilities. "#" . $cus_mobile_account_no. "#" . $cus_daily_loan_bank_branch. "#" . $cus_daily_loan_facilities. "#" . $cus_daily_loan_account_no."#".$g1_id."#".$g2_id;
+    echo $cus_name . "#" . $cus_address . "#" . $cus_tp . "#" . $cus_nic . "#" . $cus_dob . "#" . $cus_position . "#" . $cus_salary . "#" . $cus_emp_name . "#" . $cus_emp_address . "#" . $cus_ms . "#" . $cus_dependdency . "#" . $cus_spouse_name . "#" . $cus_spouse_dob . "#" . $cus_spouse_position . "#" . $cus_spouse_salary . "#" . $cus_spouse_emp_name . "#" . $prop_name . "#" . $prop_address . "#" . $prop_tp . "#" . $prop_dob . "#" . $prop_nic . "#" . $prop_ms . "#" . $cus_regdate . "#" . $prop_spouse_name . "#" . $prop_postion . "#" . $prop_salary . "#" . $prop_emp_name . "#" . $prop_emp_address . "#" . $g1_name . "#" . $g1_address . "#" . $g1_tp . "#" . $g1_dob . "#" . $g1_nic . "#" . $g1_ms . "#" . $g1_spouse . "#" . $g1_position . "#" . $g1_salary . "#" . $g1_emp_name . "#" . $g1_emp_address . "#" . $g2_name . "#" . $g2_address . "#" . $g2_tp . "#" . $g2_dob . "#" . $g2_nic . "#" . $g2_ms . "#" . $g2_spouse . "#" . $g2_position . "#" . $g2_emp_name . "#" . $g2_emp_address . "#" . $real_prp_house_position . "#" . $real_prp_house_size . "#" . $real_prp_house_value . "#" . $real_prp_house_pawned . "#" . $real_prp_house_pawn_getter . "#" . $real_prp_other_position . "#" . $real_prp_other_size . "#" . $real_prp_other_value . "#" . $real_prp_other_pawned . "#" . $real_prp_other_pawn_getter . "#" . $cus_savings_bank_branch . "#" . $cus_savings_facilities . "#" . $cus_savings_account_no . "#" . $cus_mobile_bank_branch . "#" . $cus_mobile_facilities . "#" . $cus_mobile_account_no . "#" . $cus_daily_loan_bank_branch . "#" . $cus_daily_loan_facilities . "#" . $cus_daily_loan_account_no . "#" . $g1_id . "#" . $g2_id;
 }
 ?>

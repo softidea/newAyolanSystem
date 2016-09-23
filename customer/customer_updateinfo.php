@@ -43,6 +43,11 @@ if (!isset($_SESSION['user_email'])) {
     $prop_emp_name = "";
     $prop_emp_address = "";
 
+    $gua_emp_address = "";
+    $gua_emp_name = "";
+    $gua_position = "";
+    $gua_bhalf_fullname = "";
+    $g1_id = "";
     $g1_name = "";
     $g1_address = "";
     $g1_tp = "";
@@ -106,12 +111,13 @@ if (!isset($_SESSION['user_email'])) {
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
         <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../assets/css/customer_registration.css" >
-        <?php require '../controller/co_load_vehicle_brands.php';
-         $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+        <?php
+        require '../controller/co_load_vehicle_brands.php';
+        $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
+//         require_once '../db/newDB.php';
         if (mysqli_connect_errno()) {
             echo "Falied to Connect the Database" . mysqli_connect_error();
         }
-        
         ?>
         <link rel="icon" href="favicon.ico">
         <script type="text/javascript">
@@ -845,7 +851,7 @@ if (!isset($_SESSION['user_email'])) {
 
             //update customer
             $quary_update_customer = "UPDATE 
-  `ayolanin_datahost`.`customer` 
+  `customer` 
 SET
 
   `cus_fullname` = '" . $_POST['cus_name'] . "',
@@ -881,7 +887,7 @@ WHERE `cus_nic` = '" . $_POST['search_cus_nic'] . "'
 //            update Gerenter 1
 
             $quary_update_gernter1 = "UPDATE 
-  `ayolanin_datahost`.`guarantor` 
+ `guarantor` 
 SET
 
   `ger_fullname` = '" . $_POST['g1_name'] . "',
@@ -897,14 +903,14 @@ SET
   `ger_emp_address` = '" . $_POST['g1_emp_address'] . "'
 
 
-WHERE `ger_id` = '".$_POST['g1_id']."' 
+WHERE `ger_id` = '" . $_POST['g1_id'] . "' 
 
 
 ";
 //            update Gerenter 2
 
             $quary_update_gernter2 = "UPDATE 
-  `ayolanin_datahost`.`guarantor` 
+  `guarantor` 
 SET
 
   `ger_fullname` = '" . $_POST['g2_name'] . "',
@@ -920,7 +926,7 @@ SET
   `ger_emp_address` = '" . $_POST['g2_emp_address'] . "'
 
 
-WHERE `ger_id` = '".$_POST['g2_id']."' 
+WHERE `ger_id` = '" . $_POST['g2_id'] . "' 
 
 
 ";
@@ -928,7 +934,7 @@ WHERE `ger_id` = '".$_POST['g2_id']."'
 //            Update property House
 
             $quary_update_house = "UPDATE 
-  `ayolanin_datahost`.`cus_real_property` 
+ `cus_real_property` 
 SET
 
   `place` = '" . $_POST['real_prp_house_position'] . "',
@@ -943,7 +949,7 @@ WHERE `category`='1' AND `cus_nic`='" . $_POST['search_cus_nic'] . "'
 //            Update property Other
 
             $quary_update_other = "UPDATE 
-  `ayolanin_datahost`.`cus_real_property` 
+  `cus_real_property` 
 SET
 
   `place` = '" . $_POST['real_prp_other_position'] . "',
@@ -958,7 +964,7 @@ WHERE `category`='2' AND `cus_nic`='" . $_POST['search_cus_nic'] . "'
 //            Update Savings Bank
 
             $quary_update_savings_bank = "UPDATE 
-  `ayolanin_datahost`.`cus_bnk_acc` 
+  `cus_bnk_acc` 
 SET
 
   `cus_bnk_name_and_branch` = '" . $_POST['cus_savings_bank_branch'] . "',
@@ -971,7 +977,7 @@ WHERE `idbank_acc_cat` = '1' AND `cus_nic` = '" . $_POST['search_cus_nic'] . "'
 //            Update Mobile Bank
 
             $quary_update_mobile_bank = "UPDATE 
-  `ayolanin_datahost`.`cus_bnk_acc` 
+  `cus_bnk_acc` 
 SET
 
   `cus_bnk_name_and_branch` = '" . $_POST['cus_mobile_bank_branch'] . "',
@@ -984,7 +990,7 @@ WHERE `idbank_acc_cat` = '2' AND `cus_nic` = '" . $_POST['search_cus_nic'] . "'
 //            Update Daily Loan Bank
 
             $quary_update_daily_loan_bank = "UPDATE 
-  `ayolanin_datahost`.`cus_bnk_acc` 
+  `cus_bnk_acc` 
 SET
 
   `cus_bnk_name_and_branch` = '" . $_POST['cus_daily_loan_bank_branch'] . "',
@@ -1010,8 +1016,8 @@ WHERE `idbank_acc_cat` = '3' AND `cus_nic` = '" . $_POST['search_cus_nic'] . "'
                 echo '<script>alert("Successfully Updated")</script>';
             } else {
                 echo '<script>alert("Updated Failed")</script>';
-               // echo '<script>alert("'.  mysqli_error().'")</script>';
-                
+                // echo '<script>alert("'.  mysqli_error().'")</script>';
+
                 die(mysql_error());
             }
             $na = $_POST['cus_fullname'];

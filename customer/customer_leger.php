@@ -193,7 +193,7 @@ $rental = "";
 
 
                                                 <td><?php echo $row['paid_date'] ?></td>
-                                                <td><?php echo $row['int_id'] ?></td>
+                                                <td>INV-<?php echo $row['int_id'] ?></td>
                                                 <td><?php echo $row['payment'] ?></td>
                                                 <td><?php echo $row['customer_due'] ?></td>
                                                 <td><?php echo $row['company_due'] ?></td>
