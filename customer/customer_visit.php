@@ -134,11 +134,33 @@
                     } else
                         return false;
                 }
+                
+                function check(){
+                    
+                     var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                        alert(xhttp.status + " awoooooooo " + xhttp.readyState);
+                        alert(xhttp.responseText);
+                        document.getElementById('ajax').innerHTML=xhttp.responseText;
+
+                    }
+
+                };
+
+                xhttp.open("POST", "1.jsp", true);
+                xhttp.send();
+                    
+                }
 
             </script>
         </head>
         <body>
-            <?php include '../assets/include/navigation_bar.php'; ?>
+            <?php include '../assets/include/navigation_bar.php'; 
+             require_once '../db/newDB.php';
+            ?>
             <div class="container" style="margin-top: 80px;display: block;">
                 <div class="row">
                     <div class="col-md-12">
@@ -192,25 +214,58 @@
                                 <!--bike rate registration-->
                                 <div class="new_vehicle" style="display: block;">
                                     <div class="col-sm-6">
+                                      
                                         <fieldset id="account">
                                             <legend>Visit Information</legend>
                                             <div class="form-group required">
+                                                 <form method="post" action="#">
                                                 <label class="control-label">Service No:</label>
                                                 <div class="form-inline required">
                                                     <input type="text"  name="service_no" id="service_no" class="form-control" style="width:85%;text-transform: uppercase;" maxlength="10" required/>
-                                                    <input type="button" class="btn btn" id="custcontinue" value="Search">
+                                                    <button type="submit" name="search_buton" method="post" class="btn btn" id="custcontinue" value="Search">Search</button>
                                                 </div>
+                                                 </form>
                                             </div>
                                             <div class="form-group required">
+                                                 <form method="post" action="#">
                                                 <label class="control-label">Visit Date:</label>
                                                 <div class="form-inline required">
                                                     <input type="date" name="visit_date" id="visit_date" class="form-control" style="width:85%;" value="<?php echo date("Y-m-d"); ?>"/>
-                                                    <input type="button" class="btn btn" id="custcontinue" value="Search">
+                                                    <button type="submit" name="search_buton_date" class="btn btn" id="custcontinue" method="post" value="Search">Search</button>
                                                 </div>
+                                                 </form>
                                             </div>
                                         </fieldset>
+                                      
                                     </div>
                                     <div class="col-sm-6">
+                                        <?php
+                        $records_per_page = 4;
+                        require 'Zebra_Pagination.php';
+                        $pagination = new Zebra_Pagination();
+                         $sql_query = "";
+                         if (isset($_POST['search_buton'])) {
+                             
+                              $sql_query = "SELECT SQL_CALC_FOUND_ROWS  `visit_id`,`visit_date`,`ser_number`,`cus_nic`, `visit_cost`,`visit_des`,`visit_status` from`service_visit` where ser_number='".$_POST['service_no']."'  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                         }
+                         elseif (isset($_POST['search_buton_date'])) {
+                              $sql_query = "SELECT SQL_CALC_FOUND_ROWS  `visit_id`,`visit_date`,`ser_number`,`cus_nic`, `visit_cost`,`visit_des`,`visit_status` from`service_visit` where visit_date='".$_POST['visit_date']."' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                         }else{
+                        $sql_query = "SELECT SQL_CALC_FOUND_ROWS  `visit_id`,`visit_date`,`ser_number`,`cus_nic`, `visit_cost`,`visit_des`,`visit_status` from`service_visit`  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                         }
+                        $result = mysqli_query($conn, $sql_query);
+                        
+                         if (!($result)) {
+                             echo '<script>alert("awaaa")</script>';
+                            // stop execution and display error message
+                          
+                        }
+                        
+                        $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
+                        $pagination->records($rows['rows']);
+                        $pagination->records_per_page($records_per_page);
+                        ?>
+
                                         <table class="table table-bordered table-striped table-hover">
                                             <tr>
                                                 <th>Visit Id</th>
@@ -221,34 +276,25 @@
                                                 <th>Description</th>
                                                 <th>Status</th>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>2016-09-25</td>
-                                                <td>HOR-555</td>
-                                                <td>Dilru Perera</td>
-                                                <td>Cost</td>
-                                                <td>Visit Description</td>
-                                                <td>Active</td>
+                                            <?php $index = 0; ?>
+                                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                            <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
+                                                
+                                                <td><?php echo $row['visit_id'] ?></td>
+                                                <td><?php echo $row['visit_date'] ?></td>
+                                                <td><?php echo $row['ser_number'] ?></td>
+                                                <td><?php echo $row['cus_nic'] ?></td>
+                                                <td><?php echo $row['visit_cost'] ?></td>
+                                                <td><?php echo $row['visit_des'] ?></td>
+                                                <td><?php echo $row['visit_status'] ?></td>
+                                               
+
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>2016-09-25</td>
-                                                <td>HOR-555</td>
-                                                <td>Dilru Perera</td>
-                                                <td>Cost</td>
-                                                <td>Visit Description</td>
-                                                <td>Active</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>2016-09-25</td>
-                                                <td>HOR-555</td>
-                                                <td>Dilru Perera</td>
-                                                <td>Cost</td>
-                                                <td>Visit Description</td>
-                                                <td>Active</td>
-                                            </tr>
+                                        <?php endwhile ?>
                                         </table>
+                                         <div class="text-center">
+                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
+                                </div>
                                     </div>
                                     <div class="col-sm-6" id="update_visit_panel">
                                         <fieldset id="account">
@@ -257,7 +303,7 @@
                                                 <label class="control-label">Visit Id:</label>
                                                 <div class="form-inline required">
                                                     <input type="text"  name="visit_id" id="visit_id" class="form-control" style="width:85%;text-transform: uppercase;" placeholder="Visit Id" maxlength="10" required onKeyPress="return numbersonly(this, event);"/>
-                                                    <input type="button" class="btn btn" id="custcontinue" value="Search">
+                                                    <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="check()">
                                                 </div>
                                             </div>
                                             <div class="form-group required">
