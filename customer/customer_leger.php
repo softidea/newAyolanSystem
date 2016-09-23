@@ -183,6 +183,9 @@ $rental = "";
                                             <th>Payment</th>
                                             <th>Customer Due</th>
                                             <th>Company Due</th>
+                                            <th>Next Payment Date</th>
+                                            <th>Payable Payment</th>
+                                            <th>Interest</th>
 
                                         </tr>
                                     </thead>
