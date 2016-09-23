@@ -20,16 +20,27 @@ if (!empty($username) || !empty($password)) {
     $qy = mysqli_query($d_bc, $qy_login);
     if (mysqli_num_rows($qy) == 1) {
         $row = mysqli_fetch_assoc($qy);
+        if ($row['user_status'] == '1') {
+            $_SESSION['user_type'] = $row['user_type'];
+            $url = "";
+            if ($row['user_type'] == 1) {
+                $url = '../user/user_home.php';
+            }
+            if ($row['user_type'] == 2) {
+                $url = '../user/user_home.php';
+            }
+            if ($row['user_type'] == 3) {
+                $url = '../admin/admin_home.php';
+            }
+        }
 
-        $url = '../user/user_home.php';
         echo '<script type="text/javascript">window.location.href="' . $url . '";</script>';
-
     } else {
         $url = '../index.php';
-        
-        
-       echo '<script type="text/javascript">window.location.href="' . $url . '"; alert("Your Email Or Password is incorrect!");</script>';
-       // echo '<script type="text/javascript">alert("Your Username Or Password is Incorrect");</script>';
+
+
+        echo '<script type="text/javascript">window.location.href="' . $url . '"; alert("Your Email Or Password is incorrect!");</script>';
+        // echo '<script type="text/javascript">alert("Your Username Or Password is Incorrect");</script>';
     }
 
     mysql_close($d_bc);

@@ -1,8 +1,5 @@
 <?php
 
-if (!isset($_SESSION['user_email'])) {
-  header("Location:../index.php");  
-}
 
 define('db_host', '77.104.142.97');
 define('db_port', '3306');

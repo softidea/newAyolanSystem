@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if (!isset($_SESSION['user_email'])) {
-    header("Location:../index.php");
-} else {
-    $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+
+    require_once '../../db/mysqliConnect.php';
     if (mysqli_connect_errno()) {
         echo "Falied to Connect the Database" . mysqli_connect_error();
     }
-}
+
 ?>
 <html>
     <head>
@@ -36,7 +34,8 @@ if (!isset($_SESSION['user_email'])) {
                                             <select name="select_user_type" id="select_user_type" class="form-control" required>
                                                 <!--<option value='0'>~~Select User Type~~</option>-->
                                                 <option value="1">User</option>
-                                                <option value="2">Administrator</option>
+                                                <option value="2">Manager</option>
+                                                <option value="3">Administrator</option>
                                             </select>
                                         </div>
                                         <div class="form-group required" id="service_combo_div">
@@ -83,9 +82,6 @@ if (!isset($_SESSION['user_email'])) {
     </body>
     <?php
     if (isset($_POST['user_account_save'])) {
-
-        global $conn;
-
         $user_type = filter_input(INPUT_POST, 'select_user_type');
         $branch = filter_input(INPUT_POST, 'select_branch');
         $name = filter_input(INPUT_POST, 'full_name');
@@ -104,7 +100,7 @@ if (!isset($_SESSION['user_email'])) {
                 '$branch',
                 '0')";
 
-                $run_query = mysqli_query($conn, $query);
+                $run_query = mysqli_query($d_bc, $query);
                 if ($run_query) {
                     echo "<script>alert('User account has been created');</script>";
                 } else {

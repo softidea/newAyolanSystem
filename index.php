@@ -49,7 +49,7 @@ session_start();
                     <aside id="column-right" class="col-sm-6">
                         <div class="panel">
                             <div class="panel-heading" style="background-color: #004D40;">
-                                <h3 class="panel-title"><h2 style="color: white;">AYOLAN INVESTMENTS</h2></h3>
+                                <h3 class="panel-title"><h2 style="color: white;">AYOLAN | INVESTMENTS</h2></h3>
                                 <p class="sub_topic">Finance Management System</p>
                             </div>
                             <div class="panel-body">
