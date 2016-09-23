@@ -3,6 +3,10 @@
 
 session_start();
 
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+
 require_once '../db/mysqliConnect.php';
 
 $username = filter_input(INPUT_POST, "user_email", FILTER_VALIDATE_EMAIL);
@@ -19,10 +23,11 @@ if (!empty($username) || !empty($password)) {
 
     $qy = mysqli_query($d_bc, $qy_login);
     if (mysqli_num_rows($qy) == 1) {
+        $url = "";
         $row = mysqli_fetch_assoc($qy);
         if ($row['user_status'] == '1') {
             $_SESSION['user_type'] = $row['user_type'];
-            $url = "";
+            
             if ($row['user_type'] == 1) {
                 $url = '../user/user_home.php';
             }
