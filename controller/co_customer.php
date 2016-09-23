@@ -1,13 +1,11 @@
 <?php
 
-$conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+$conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
 if (mysqli_connect_errno()) {
     echo "Falied to Connect the Database" . mysqli_connect_error();
 }
 session_start();
 $reference_person = $_SESSION['user_email'];
-
-
 
 
 $cus_name = "";
@@ -280,23 +278,11 @@ if (isset($_POST['lease_reg'])) {
     $vehicle_category = $_SESSION['vehicle_category'] = filter_input(INPUT_POST, 'vehicle_category');
     $vehicle_brand = $_SESSION['vehicle_brand'] = filter_input(INPUT_POST, 'vehicle_brand');
     $vehicle_type = $_SESSION['vehicle_type'] = filter_input(INPUT_POST, 'vehicle_type');
+    $vehicle_num = $_SESSION['vehicle_no'] = filter_input(INPUT_POST, 'vehicle_no');
+    
 
-
-    $pre_code = $_SESSION['v_code'] = filter_input(INPUT_POST, 'v_code');
-    $alter_code = $_SESSION['v_no_code'] = filter_input(INPUT_POST, 'v_no_code');
-    $v_no_num = $_SESSION['v_no_num'] = filter_input(INPUT_POST, 'v_no_num');
-    $vehicle_num = "";
-    $vehicle_code = "";
-    if (strlen($pre_code) == 1) {
-        $vehicle_num = $pre_code . "" . $alter_code . "-" . $v_no_num;
-        $vehicle_code = $pre_code . "" . $alter_code;
-    } else {
-        $vehicle_num = $alter_code . "-" . $v_no_num;
-        $vehicle_code = $alter_code;
-    }
-
-    $model_year = $_SESSION['model_year'] = filter_input(INPUT_POST, 'model_year');
-    $lease_rate = $_SESSION['lease_rate'] = filter_input(INPUT_POST, 'lease_rate');
+    $engine_number = $_SESSION['engine_number'] = filter_input(INPUT_POST, 'engine_number');
+    $chassis_number = $_SESSION['chassis_number'] = filter_input(INPUT_POST, 'chassis_number');
     $fixed_rate = $_SESSION['fixed_rate'] = filter_input(INPUT_POST, 'fixed_rate');
     $cbo_loan_duration = $_SESSION['cbo_loan_duration'] = filter_input(INPUT_POST, 'cbo_loan_duration');
     $ser_installment = $_SESSION['ser_installment'] = filter_input(INPUT_POST, 'ser_installment');
@@ -473,7 +459,7 @@ VALUES (
 
 //saving customer bank account details~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //saving leasing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+        
         $check_service = "SELECT * FROM service WHERE ser_number='$service_number'";
         $run_check = mysqli_query($conn, $check_service);
         if (mysqli_num_rows($run_check) > 0) {
@@ -481,36 +467,32 @@ VALUES (
             echo "<script>window.location.href='../customer/customer_addlease.php';</script>";
             
         } else {
-
-
-            $query_lease = "INSERT INTO service
+            $query_lease = "INSERT INTO `ayolanin_test`.`service`
             (
-             ser_number,
-             ser_category,
-             brand,
-             type,
-             v_code,
-             vehicle_no,
-             model_year,
-             lease_rate,
-             fix_rate,
-             period,
-             installment,
-             description,
-             province_code,
-             ser_date,
-             refrence_person,
-             ser_status,
-             cus_nic)
+             `ser_number`,
+             `vehicle_category`,
+             `vehicle_brand`,
+             `vehicle_type`,
+             `vehicle_no`,
+             `engine_number`,
+             `chassis_number`,
+             `fix_rate`,
+             `period`,
+             `installment`,
+             `description`,
+             `province_code`,
+             `ser_date`,
+             `refrence_person`,
+             `ser_status`,
+             `cus_nic`)
 VALUES (
         '$service_number',
         '$vehicle_category',
         '$vehicle_brand',
         '$vehicle_type',
-        '$vehicle_code',
         '$vehicle_num',
-        '$model_year',
-        '$lease_rate',
+        '$engine_number',
+        '$chassis_number',
         '$fixed_rate',
         '$cbo_loan_duration',
         '$ser_installment',
@@ -594,15 +576,15 @@ VALUES (
             if ($save_lease) {
                 if ($save_savings && $save_mobile && $save_daily_loan && $save_property1 && $save_property2 && $save_lease && $save_g1 && $save_g2) {
                     echo "<script>alert('Customer Lease has been sussfully added');</script>";
-//                echo "<script>window.location.href='../user/user_home.php';</script>";
-                    echo "<script>window.location.href='../customer/lease_image_uploader.php';</script>";
+                    echo "<script>window.location.href='../user/user_home.php';</script>";
+                    
                     $_SESSION['cus_nic'] = "";
                     $_SESSION['cus_name'] = "";
                 } else {
                     echo "Error while Saving";
                 }
             } else {
-                echo "Error while Saving";
+                echo "Error while Saving save lease";
             }
         }
 // saving gurantors~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

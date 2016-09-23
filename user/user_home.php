@@ -160,7 +160,7 @@ if (!isset($_SESSION['user_email'])) {
                             <a href="../customer/customer_updateinfo.php" style="text-decoration: none;"><button type="button" class="list-group-item">Update Customers</button></a>
                             <a href="../customer/customer_view_2.php" style="text-decoration: none;"><button type="button" class="list-group-item">Search Customers</button></a>
                             <a href="../customer/customer_registration.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Vehicle Lease</button></a>
-                            <a href="../customer/customer_addpawn.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add a Land Pawn</button></a>
+                            <a href="../customer/customer_visit.php" style="text-decoration: none;"><button type="button" class="list-group-item">Customer Visits</button></a>
                             <a href="../customer/customer_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Lease Installment</button></a>
                         </div>
                         <div class="panel-footer"><div style="height: 15px;"></div></div>
@@ -194,9 +194,9 @@ if (!isset($_SESSION['user_email'])) {
                                                 <img class="panelimage" style="width: 130px;margin-left: 60px;"src="../assets/images/home/reportt.png"/>
                                             </div>
                                             <div class="list-group">
-                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Lease Reports</button></a>
+                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Ledger Card</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Pawn Reports</button></a>
-                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Vehicle Reports</button></a>
+                                                <a href="../customer/view_vehicles.php" style="text-decoration: none;"><button type="button" class="list-group-item">Vehicle Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Land Reports</button></a>
                                                 <a href="../customer/customer_view_report.php" style="text-decoration: none;"><button type="button" class="list-group-item">Customer Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Account Reports</button></a>
@@ -218,7 +218,7 @@ if (!isset($_SESSION['user_email'])) {
                                                 <a href="../admin/customer/checksis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Release Re-Process</button></a>
                                                 <a href="../admin/customer/viewsis.php" style="text-decoration: none;"><button type="button" class="list-group-item">Re-Process Report</button></a>
                                                 <a href="../customer/check_installment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Check Installment</button></a>
-                                                <a href="../customer/customer_visit.php" style="text-decoration: none;"><button type="button" class="list-group-item">Visit Registration</button></a>
+                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item"><br></button></a>
                                             </div>
                                             <div class="panel-footer"><div style="height: 15px;"></div></div>
                                         </div>

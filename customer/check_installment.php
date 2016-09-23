@@ -52,7 +52,7 @@ if (isset($_SESSION['cus_nic'])) {
         <script src="../assets/js/angular.js"></script>
         <link rel="icon" href="favicon.ico">
 
-<?php require '../controller/co_load_vehicle_brands.php'; ?>
+        <?php require '../controller/co_load_vehicle_brands.php'; ?>
         <script type="text/javascript">
             function imagepreview(input) {
                 if (input.files && input.files[0]) {
@@ -67,27 +67,61 @@ if (isset($_SESSION['cus_nic'])) {
         <script type="text/javascript">
             function checkInstallment()
             {
+                var category = document.getElementById('cat_load').value;
                 var amount = document.getElementById('lease_amount').value;
                 var period = document.getElementById('v_lease_period').value;
-                
-//                alert(amount);
-//                alert(period);
-                
-                var installment = ((amount/period)+((3.96/100)*(amount)));
-//                alert(installment);
-                
-//                alert(Math.round(installment)+1);
-                
-                
-                document.getElementById('installment_val').value=Math.round(installment)+1+".00";
-                
+
+                if (category == "1") {
+                    var installment = ((amount / period) + ((3.96 / 100) * (amount)));
+                    document.getElementById('installment_val').value = Math.round(installment) + 1 + ".00";
+                } else if (category == "2") {
+                    var installment = ((amount / period) + ((2.96 / 100) * (amount)));
+                    document.getElementById('installment_val').value = Math.round(installment) + 1 + ".00";
+                } else {
+                    var installment = ((amount / period) + ((2.96 / 100) * (amount)));
+                    document.getElementById('installment_val').value = Math.round(installment) + 1 + ".00";
+                }
+
+
+
+
+            }
+        </script>
+        <script type="text/javascript">
+            function load_vehicle_categories() {
+                var cat_load = "loadcat";
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else
+                {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById('cat_load').innerHTML = xmlhttp.responseText;
+                        document.getElementById('cat_load_brand').innerHTML = xmlhttp.responseText;
+                        document.getElementById('cat_load_rate').innerHTML = xmlhttp.responseText;
+                        document.getElementById('search_category').innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load=" + cat_load, true);
+                xmlhttp.send();
+
+            }
+        </script>
+        <script type="text/javascript">
+            function resetFields() {
+                document.getElementById('lease_amount').value = "";
+//                document.getElementById('v_lease_period').innerHTML = selectedIndex = "0";
+                document.getElementById('installment_val').value = "";
             }
         </script>
         <link rel="stylesheet" href="../assets/css/images-uploader.css">
     </head>
-    <body>
+    <body onload="load_vehicle_categories()">
 
-<?php include '../assets/include/navigation_bar.php'; ?>
+        <?php include '../assets/include/navigation_bar.php'; ?>
         <!--Lease Registration Panel-->
         <div ng-app="" class="container" style="margin-top: 80px;display: block;" id="one">
             <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data">
@@ -102,14 +136,20 @@ if (isset($_SESSION['cus_nic'])) {
                                     <fieldset id="account">
                                         <legend>Check Installment</legend>
                                         <div class="form-group required">
+                                            <label class="control-label">Select Category:</label>
+                                            <select name="cat_load" id="cat_load" class="form-control" onchange="resetFields();">
+                                                <option value="0">~~Select Category~~</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group required">
                                             <label class="control-label">Lease Amount:</label>
                                             <div class="form-group required">
                                                 <input type="text" name="lease_amount" id="lease_amount" value="<?php echo $cus_nic; ?>" placeholder="Lease Amount" class="form-control" required maxlength="10" onKeyPress="return numbersonly(this, event)"/>
                                             </div>
                                         </div>
-                                         <div class="form-group">
+                                        <div class="form-group">
                                             <label class="control-label">Select Period:</label>
-                                           <select name="cbo_loan_duration" id="v_lease_period" class="form-control" required onchange="checkInstallment();">
+                                            <select name="cbo_loan_duration" id="v_lease_period" class="form-control" required onchange="checkInstallment();">
                                                 <option value="0">~~Select Period~~</option>
                                                 <option value="3">3 Months</option>
                                                 <option value="6">6 Months</option>
@@ -135,7 +175,7 @@ if (isset($_SESSION['cus_nic'])) {
                                         </div>
                                     </fieldset>
                                 </div>
-                      
+
                             </div>
                         </div>
                     </div>
@@ -143,7 +183,7 @@ if (isset($_SESSION['cus_nic'])) {
             </form>
         </div>
         <!--Lease Registration Panel-->
-<?php include '../assets/include/footer.php'; ?>
+        <?php include '../assets/include/footer.php'; ?>
     </body>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

@@ -50,9 +50,7 @@ if ($ser_number != "" && $ser_number != null) {
             if (mysqli_num_rows($run_cuss) > 0) {
                 if ($row_cus = mysqli_fetch_assoc($run_cuss)) {
 
-                    $ser_no = $row['vehicle_no'];
-                    $pre_code = $row['v_code'];
-                    $vehicle_no = $ser_no;
+                    $vehicle_no = $row['vehicle_no'];
 
                     $fixed_rent = $row['fix_rate'];
                     $install = $row['installment'];
@@ -260,7 +258,6 @@ function ServiceInstallment($sno_begin_ins){
     if (mysqli_num_rows($run_query) > 0) {
         
         if ($row = mysqli_fetch_assoc($run_query)) {
-            
             
             if(($row['ser_status'])==1){
             

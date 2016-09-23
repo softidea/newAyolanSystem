@@ -16,10 +16,24 @@ $cat_load_model = filter_input(INPUT_GET, 'cat_load_model');
 $rate_category = filter_input(INPUT_GET, 'rate_category');
 $rate_brand = filter_input(INPUT_GET, 'rate_brand');
 $rate_model = filter_input(INPUT_GET, 'rate_model');
+$rate_model_year = filter_input(INPUT_GET, 'model_year');
 $min_value = filter_input(INPUT_GET, 'min_value');
 $max_value = filter_input(INPUT_GET, 'max_value');
-$model_year = filter_input(INPUT_GET, 'model_year');
+$vehicle_pre_code = filter_input(INPUT_GET, 'vehicle_pre_code');
 
+$branch_load = filter_input(INPUT_GET, 'branch_load');
+
+if ($branch_load != null && $branch_load != "") {
+    global $conn;
+    $sql_query = "SELECT * FROM branch WHERE status='Active'";
+    $run_query = mysqli_query($conn, $sql_query);
+    echo "<option value='0'>~Select Branch~</option>";
+    while ($row_query = mysqli_fetch_array($run_query)) {
+        $branch_id = $row_query['branch_id'];
+        $branch = $row_query['branch'];
+        echo "<option value='$branch'>$branch</option>";
+    }
+}
 
 if ($cat_load != null && $cat_load != "") {
     global $conn;
@@ -87,16 +101,23 @@ if ($cat_load_model != null && $cat_load_model != "") {
         }
     }
 }
-if($rate_category!=null && $rate_category!="" && $rate_brand!=null && $rate_brand!="" && $rate_model!=null && $rate_model!="" && $model_year!=null && $model_year!="" && $max_value!=null && $max_value!="" && $min_value!=null && $min_value!=""){
+if ($rate_category != null && $rate_category != "" && $rate_brand != null && $rate_brand != "" && $rate_model != null && $rate_model != "" && $rate_model_year != null && $rate_model_year != "" && $min_value != null && $min_value != "" && $max_value != null && $max_value != "" && $vehicle_pre_code != null && $vehicle_pre_code != "") {
     global $conn;
-    $save_vehicle_rate="INSERT INTO vehicle_rates (category_id,brand_id,type_id,model_year,min_value,max_value) VALUES ('$rate_category','$rate_brand','$rate_model','$model_year','$min_value','$max_value')";
-    $run_save_rate=  mysqli_query($conn, $save_vehicle_rate);
-    if($run_save_rate){
+
+    $check_rate_available = "SELECT * FROM vehicle_rates WHERE category_id='$rate_category' AND brand_id='$rate_brand' AND type_id='$rate_model' AND pre_code='$vehicle_pre_code'";
+    $run_check_available = mysqli_query($conn, $check_rate_available);
+    if (mysqli_num_rows($run_check_available) == 0) {
+
+        $save_vehicle_rate = "INSERT INTO vehicle_rates (category_id,brand_id,type_id,model_year,min_value,max_value,pre_code) VALUES ('$rate_category','$rate_brand','$rate_model','$rate_model_year','$min_value','$max_value','$vehicle_pre_code')";
+        $run_save_rate = mysqli_query($conn, $save_vehicle_rate);
         echo "Vehicle Rate saved successfully";
-    }else{
-        echo "Error in Vehicle rate saving";
+    } else {
+
+        $update_current_rate = "UPDATE vehicle_rates SET model_year='$rate_model_year',min_value='$min_value',max_value='$max_value',pre_code='$vehicle_pre_code' WHERE category_id='$rate_category' AND brand_id='$rate_brand' AND type_id='$rate_model' AND pre_code='$vehicle_pre_code'";
+        $run_update_rate = mysqli_query($conn, $update_current_rate);
+        echo "Vehicle Rate updated successfully";
     }
-}else{
+} else {
     echo "Saving error,Please enter valid data";
 }
 

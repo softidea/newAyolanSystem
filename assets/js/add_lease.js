@@ -33,47 +33,6 @@
 
             }
 
-
-            function showVehicleMods(str) {
-                if (document.getElementById('v_cat').selectedIndex == 1) {
-                    if (str == "") {
-                        document.getElementById("v_code").innerHTML = "";
-                        return;
-                    }
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            document.getElementById("v_code").innerHTML = xmlhttp.responseText;
-                        }
-                    }
-                    xmlhttp.open("GET", "../controller/co_load_vehicle_mods.php?q=" + str, true);
-                    xmlhttp.send();
-                } else if (document.getElementById('v_cat').selectedIndex == 2) {
-                    if (str == "") {
-                        document.getElementById("v_code").innerHTML = "";
-                        return;
-                    }
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            document.getElementById("v_code").innerHTML = xmlhttp.responseText;
-                        }
-                    }
-                    xmlhttp.open("GET", "../controller/co_load_twheel_mods.php?q=" + str, true);
-                    xmlhttp.send();
-                }
-            }
-
             function showDetails()
             {
                 if (document.getElementById('v_cat').selectedIndex == 1) {

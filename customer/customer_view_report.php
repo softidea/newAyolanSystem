@@ -33,7 +33,7 @@ $date_setter = date("Y-m-d");
         <?php
         include '../assets/include/navigation_bar.php';
 
-        $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+        $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
         if (mysqli_connect_errno()) {
             echo "Falied to Connect the Database" . mysqli_connect_error();
         }
@@ -47,11 +47,18 @@ $date_setter = date("Y-m-d");
                             <h3 class="panel-title">Customer Information</h3>
                         </div>
                         <div class="panel-body" style="background-color: #FAFAFA;">
-                           
-
-                      
-
-
+                            <div class="col-sm-6">
+                                <fieldset id="account">
+                                    <legend>Search Option 01</legend>
+                                    <div class="form-group required">
+                                        <label class="control-label">Search By Date:</label>
+                                        <div class="form-inline required">
+                                            <input type="date"  name="report_date" id="report_date" class="form-control" style="width:85%;text-transform: uppercase;" maxlength="10" value="<?php echo date("Y-m-d");?>" required/>
+                                            <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="loadInstallmentCustomer();">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
                             <!--pagination for Customer View-->
                             <?php
                             global $conn;
@@ -102,7 +109,8 @@ $date_setter = date("Y-m-d");
                                             <th>Permanent Address</th>
                                             <th>Registration Date</th>
                                             <th>Phone Number</th>
-                                           
+                                            <th>Arrears</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,25 +129,26 @@ $date_setter = date("Y-m-d");
                                                 <td><?php echo $row['cus_address'] ?></td>
                                                 <td><?php echo $row['cus_reg_date'] ?></td>
                                                 <td><?php echo $row['cus_tp'] ?></td>
-                                              
+                                                <td></td>
+
                                             </tr>
                                             <?php $i++; ?>
                                         <?php endwhile ?>
                                     </tbody>
                                 </table>
-                               
+
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div class="form-inline">
-                                            
+
                                             <button type="submit"  class="btn btn" id="cservicebtn" onclick="window.print()">Print</button>
                                             <script>
 
                                                 var cel;
                                                 function readValues(x) {
                                                     cel = x.cells[3].innerHTML;
-                                                    var cus_id = cel.substring(cel.lastIndexOf("#") + 3, cel.lastIndexOf("<"));   
+                                                    var cus_id = cel.substring(cel.lastIndexOf("#") + 3, cel.lastIndexOf("<"));
                                                     alert(cus_id);
                                                     window.location.href = "customer_installment_set.php?ser_number=" + cus_id;
                                                 }

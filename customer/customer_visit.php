@@ -15,15 +15,66 @@
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
         <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../assets/css/customer_registration.css">
-
-        <?php if (isset($_GET['bootstrap']) && $_GET['bootstrap'] == 1): ?>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <?php else: ?>
-            <link rel="stylesheet" type="text/css" href="../assets/css/zebra_pagination.css">
-        <?php endif ?>
-
         <link rel="icon" href="favicon.ico">
-        <?php include '../controller/co_load_bike_rates.php'; ?>
+
+        <script type="text/javascript">
+            function loadCustomerServiceData() {
+                var service_no = document.getElementById('service_no').value;
+                if (service_no != null && service_no != "") {
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    { // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                            var value = xmlhttp.responseText;
+                            var result_arr = value.split("#");
+                            document.getElementById('vehicle_no').value = result_arr[0];
+                            document.getElementById('cus_nic').value = result_arr[1];
+                            document.getElementById('cus_name').value = result_arr[2];
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_visit_customer.php?service_no=" + service_no, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+        <script>
+            function save_customer_visit() {
+                var service_no = document.getElementById('service_no').value;
+                var cus_nic = document.getElementById('cus_nic').value;
+                var visit_cost = document.getElementById('visit_cost').value;
+                var visit_date = document.getElementById('visit_date').value;
+                var visit_des = document.getElementById('visit_des').value;
+
+                if (service_no != null && service_no != "" && cus_nic != null && cus_nic != "" && visit_cost != null && visit_cost != "" && visit_date != null && visit_date != "" && visit_des != null && visit_des != "") {
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    { // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                           alert(xmlhttp.responseText);
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_visit_customer.php?visit_service_no=" + service_no+"&visit_cus_nic="+cus_nic+"&visit_cost="+visit_cost+"&visit_date="+visit_date+"&visit_des="+visit_des, true);
+                    xmlhttp.send();
+
+                } else {
+                    alert("Invalid data found,Please enter valid data");
+                }
+            }
+        </script>
+
     </head>
     <body>
         <?php include '../assets/include/navigation_bar.php'; ?>
@@ -43,17 +94,21 @@
                                         <div class="form-group required">
                                             <label class="control-label">Service No:</label>
                                             <div class="form-inline required">
-                                                <input type="text"  name="service_no" id="service_no" class="form-control" style="width:85%;text-transform: uppercase;" maxlength="10" required/>
-                                                <input type="button" class="btn btn" id="custcontinue" value="Search">
+                                                <input type="text"  name="service_no" id="service_no" class="form-control" placeholder="Service No" style="width:85%;text-transform: uppercase;" maxlength="10" required/>
+                                                <input type="button" class="btn btn" id="custcontinue" value="Search" onclick="loadCustomerServiceData();">
                                             </div>
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Vehicle No:</label>
-                                            <input type="text" name="cus_name" id="cus_name" placeholder="Vehicle No" class="form-control" />
+                                            <input type="text" readonly name="vehicle_no" id="vehicle_no" placeholder="Vehicle No" class="form-control" />
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Customer NIC:</label>
-                                            <input type="text" name="cus_nic" id="cus_nic" placeholder="Customer NIC" class="form-control" />
+                                            <input type="text" readonly name="cus_nic" id="cus_nic" placeholder="Customer NIC" class="form-control" />
+                                        </div>
+                                        <div class="form-group required">
+                                            <label class="control-label">Customer Name:</label>
+                                            <input type="text" readonly name="cus_name" id="cus_name" placeholder="Customer NIC" class="form-control" />
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Visit Cost:</label>
@@ -68,7 +123,7 @@
                                             <input type="text" name="visit_des" id="visit_des" placeholder="Visit Description" class="form-control" />
                                         </div>
                                         <div class="form-group">
-                                            <button type="button" class="btn btn" id="cservicebtn">Save Visit</button>
+                                            <button type="button" class="btn btn" id="cservicebtn" onclick="save_customer_visit();">Save Visit</button>
                                         </div>
                                     </fieldset>
                                 </div>

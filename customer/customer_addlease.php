@@ -41,7 +41,7 @@ if (isset($_SESSION['cus_nic'])) {
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
         <!-- Optional theme -->
-        
+
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,700,600italic,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -52,116 +52,7 @@ if (isset($_SESSION['cus_nic'])) {
         <script src="../assets/js/angular.js"></script>
         <link rel="icon" href="favicon.ico">
 
-
-
-<?php require '../controller/co_load_vehicle_brands.php'; ?>
         <script type="text/javascript">
-            function imagepreview(input) {
-                if (input.files && input.files[0]) {
-                    var filerd = new FileReader();
-                    filerd.onload = function (e) {
-                        $('#imgpreview').attr('src', e.target.result);
-                    };
-                    filerd.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
-        <script type="text/javascript">
-            function showTypes(str) {
-
-                if (document.getElementById('v_cat').selectedIndex == 1) {
-                    if (str == "") {
-                        document.getElementById("v_type").innerHTML = "";
-                        return;
-                    }
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                            document.getElementById("v_type").innerHTML = xmlhttp.responseText;
-                        }
-                    }
-                    xmlhttp.open("GET", "../controller/co_load_vehicle_types.php?q=" + str, true);
-                    xmlhttp.send();
-                }
-            }
-        </script>
-
-        <script type="text/javascript">
-            function showVehicleMods(str) {
-                if (document.getElementById('v_cat').selectedIndex == 1) {
-                    if (str == "") {
-                        document.getElementById("v_code").innerHTML = "";
-                        return;
-                    }
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            document.getElementById("v_code").innerHTML = xmlhttp.responseText;
-                        }
-                    }
-                    xmlhttp.open("GET", "../controller/co_load_vehicle_mods.php?q=" + str, true);
-                    xmlhttp.send();
-                } else if (document.getElementById('v_cat').selectedIndex == 2) {
-                    if (str == "") {
-                        document.getElementById("v_code").innerHTML = "";
-                        return;
-                    }
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            document.getElementById("v_code").innerHTML = xmlhttp.responseText;
-                        }
-                    }
-                    xmlhttp.open("GET", "../controller/co_load_twheel_mods.php?q=" + str, true);
-                    xmlhttp.send();
-                }
-            }
-        </script>
-        <script type="text/javascript">
-            function set_vehicle_div(val) {
-                //alert(val);
-                if (val == 1) {
-                    //alert(val);
-                    reset_form_values();
-                    document.getElementById('v_brand').disabled = false;
-                }
-                else if (val == 2) {
-                    //alert(val);
-                    reset_form_values();
-                    document.getElementById('v_brand').disabled = true;
-                    document.getElementById("v_type").innerHTML = "";
-                    document.getElementById("v_type").innerHTML = "<option value='2'>2 Stroke</option><option value='4'>4 Stroke</option>";
-                    if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else { // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            document.getElementById('v_code').innerHTML = xmlhttp.responseText;
-                        }
-                    }
-                    xmlhttp.open("GET", "../controller/delete.php", true);
-                    xmlhttp.send();
-                }
-            }
             function reset_form_values() {
                 document.getElementById('v_brand').selectedIndex = "0";
                 document.getElementById('v_type').innerHTML = "";
@@ -179,7 +70,6 @@ if (isset($_SESSION['cus_nic'])) {
         </script>
         <script type="text/javascript">
             function searchCustomerforLease() {
-
                 if (document.getElementById('customer_nic').value != "") {
                     //alert('searchCustomerforLease');
                     var val = document.getElementById('customer_nic').value;
@@ -240,12 +130,12 @@ if (isset($_SESSION['cus_nic'])) {
                 }
             }
             function setServiceInstallment() {
-                var payment = document.getElementById('f_rate').value;
+                var fix_rate = document.getElementById('f_rate').value;
                 var period = document.getElementById('v_lease_period').value;
-                var vehicle_category=document.getElementById('vehicle_category').value;
+                var vehicle_category = document.getElementById('vehicle_category').value;
 
-                if (payment != "" && period != "" && payment != null && period != null) {
-
+                if (fix_rate != "" && period != "" && fix_rate != null && period != null) {
+                   
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
                         xmlhttp = new XMLHttpRequest();
@@ -255,11 +145,10 @@ if (isset($_SESSION['cus_nic'])) {
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             //alert(xmlhttp.responseText);
-
                             document.getElementById('ser_installment').value = xmlhttp.responseText;
                         }
                     }
-                    xmlhttp.open("GET", "../controller/co_load_lease_customer.php?payment=" + payment + "&period=" + period+"&vehicle_category="+, true);
+                    xmlhttp.open("GET", "../controller/co_load_lease_customer.php?fix_rate=" + fix_rate + "&period=" + period + "&vehicle_category=" + vehicle_category, true);
                     xmlhttp.send();
                 }
             }
@@ -272,11 +161,109 @@ if (isset($_SESSION['cus_nic'])) {
                 }
             };
         </script>
-        <link rel="stylesheet" href="../assets/css/images-uploader.css">
-    </head>
-    <body>
+        <script type="text/javascript">
+            function load_branches() {
+                var branch_load = "loadbranches";
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else
+                {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        if (xmlhttp.responseText != null && xmlhttp.responseText != "") {
+                            document.getElementById('scode').innerHTML = xmlhttp.responseText;
+                        }
+                    }
+                }
+                xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?branch_load=" + branch_load, true);
+                xmlhttp.send();
 
-<?php include '../assets/include/navigation_bar.php'; ?>
+            }
+        </script>
+        <script type="text/javascript">
+            function load_vehicle_categories() {
+                var cat_load = "loadcat";
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else
+                {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById('vehicle_category').innerHTML = xmlhttp.responseText;
+                        load_branches();
+                    }
+                }
+                xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load=" + cat_load, true);
+                xmlhttp.send();
+
+            }
+        </script>
+        <script type="text/javascript">
+            function load_vehicle_brands() {
+                var category = document.getElementById('vehicle_category').value;
+                if (category != null && category != "") {
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            if (xmlhttp.responseText != "" && xmlhttp.responseText != null) {
+                                document.getElementById('vehicle_brand').innerHTML = "";
+                                document.getElementById('vehicle_brand').innerHTML = xmlhttp.responseText;
+                                document.getElementById('vehicle_type').innerHTML = "<option value'0'>~Select Brand~</option>";
+                                document.getElementById('vehicle_no').value = "";
+                                document.getElementById('engine_number').value = "";
+                                document.getElementById('chassis_number').value = "";
+                                document.getElementById('f_rate').value = "";
+                                document.getElementById('v_lease_period').selectedIndex = "0";
+                                document.getElementById('ser_installment').value = "";
+                                document.getElementById('lease_des').value = "";
+                                document.getElementById('province_code').selectedIndex = "0";
+                            }
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load_brand=" + category, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function load_vehicle_rate_models() {
+                var brand = document.getElementById('vehicle_brand').value;
+                
+                if (brand != null && brand != "") {
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById('vehicle_type').innerHTML = xmlhttp.responseText;
+                        }
+                    }
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load_model=" + brand, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+        <link rel="stylesheet" href=" ../assets/css/images-uploader.css">
+    </head>
+    <body onload="load_vehicle_categories();">
+
+        <?php include '../assets/include/navigation_bar.php'; ?>
         <!--Lease Registration Panel-->
         <div ng-app="" class="container" style="margin-top: 80px;display: block;" id="one">
             <form action="../controller/co_customer.php" method="POST" enctype="multipart/form-data">
@@ -314,53 +301,41 @@ if (isset($_SESSION['cus_nic'])) {
                                         <div class="form-group">
                                             <label class="control-label">Service No:</label>
                                             <div class="form-inline">
-
-
-                                                <select name="service_code" id="scode" class="form-control" onchange="" style="width: 40%;" >
-                                                    <option value="HOR">HOR</option>
-                                                    <option value="BLS">BLS</option>
+                                                <select name="service_code" id="scode" class="form-control" style="width: 40%;" >
+                                                    <option value="0">~Select Brance~</option>
                                                 </select>
-                                                <input ng-app="" type="text" name="service_no" id="sno" ng-model="number" placeholder="Service No" class="form-control" onKeyPress="return numbersonly(this, event)" max="4" maxlength="4" style="width: 59%;" required/>
+                                                <input ng-app="" type="text" name="service_no" id="sno" placeholder="Service No" class="form-control" onKeyPress="return numbersonly(this, event)" max="4" maxlength="4" style="width: 59%;" required/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Select Category:</label>
-                                            <select name="vehicle_category" id="vehicle_category" class="form-control" onchange="set_vehicle_div(this.value);">
+                                            <select name="vehicle_category" id="vehicle_category" class="form-control" onchange="load_vehicle_brands();">
                                                 <option value="0">~~Select Category~~</option>
-                                                <option value="1">Bike</option>
-                                                <option value="2">Three-Wheel</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Select Vehicle Brand:</label>
-                                            <select name="vehicle_brand" id="v_brand" class="form-control" onchange="showTypes(this.value);"><?php load_vehicle_brands(); ?>
+                                            <select name="vehicle_brand" id="vehicle_brand" class="form-control" onchange="load_vehicle_rate_models();">
+                                                <option value="0">~Select Brand~</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Select Vehicle Type:</label>
-                                            <select name="vehicle_type" id="v_type" class="form-control" required onchange="showVehicleMods(this.value);">
+                                            <label class="control-label">Select Vehicle Model:</label>
+                                            <select name="vehicle_type" id="vehicle_type" class="form-control" required>
                                                 <option value="0">~~Select Vehicle Type~~</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Vehicle Pre Code:</label>
-                                            <select name="v_code" id="v_code" class="form-control" required onchange="showDetails();">
-                                                <option value="0">~~Select Vehicle Code~~</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-inline">
-                                            <input type="text" name="v_no_code" style="text-transform: uppercase;" id="v_no_code" placeholder="Ex:ME" class="form-control" required/>
-                                            <label class="control-label"> - </label>
-                                            <input type="text" name="v_no_num" onKeyPress="return numbersonly(this, event)" max="4" maxlength="4" id="v_no_num" placeholder="Ex:2558" class="form-control" required/>
-                                            <br>
+                                            <label class="control-label">Vehicle No:</label>
+                                            <input type="text" name="vehicle_no" id="vehicle_no" placeholder="Vehicle No" class="form-control" required/>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Model Year:</label>
-                                            <input type="text" readonly name="model_year" value="<?php echo $model_year; ?>" id="m_year" placeholder="Model Year" class="form-control" required/>
+                                            <label class="control-label">Engine No:</label>
+                                            <input type="text" name="engine_number" id="engine_number" placeholder="Engine No" class="form-control" required/>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Lease Rental:</label>
-                                            <input type="text" readonly name="lease_rate" id="l_rate" value="<?php echo $lease_rate; ?>" placeholder="Lease Rate" class="form-control" required/>
+                                            <label class="control-label">Chassis Number:</label>
+                                            <input type="text" name="chassis_number" id="chassis_number" placeholder="Chassis Number" class="form-control" required/>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Fixed Rental:</label>
@@ -386,12 +361,12 @@ if (isset($_SESSION['cus_nic'])) {
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Service Installment:</label>
-                                            <input type="text" name="ser_installment" id="ser_installment" value="<?php echo $fixed_rate; ?>" placeholder="Fix Rate" class="form-control" required readonly/>
+                                            <input type="text" name="ser_installment" id="ser_installment" placeholder="Fix Rate" class="form-control" required readonly/>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Vehicle Province Code:</label>
                                             <select name="province_code" id="province_code" class="form-control" required>
-                                                <option value="0">~~Select Period~~</option>
+                                                <option value="0">~~Select Province Code~~</option>
                                                 <option value="CP">CP-Central Province</option>
                                                 <option value="EP">EP-Eastern Province</option>
                                                 <option value="NC">NC-North Central Province</option>
@@ -419,7 +394,7 @@ if (isset($_SESSION['cus_nic'])) {
             </form>
         </div>
         <!--Lease Registration Panel-->
-<?php include '../assets/include/footer.php'; ?>
+        <?php include '../assets/include/footer.php'; ?>
     </body>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

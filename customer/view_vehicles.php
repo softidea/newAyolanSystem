@@ -15,25 +15,17 @@
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
         <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../assets/css/customer_registration.css">
-
-        <?php if (isset($_GET['bootstrap']) && $_GET['bootstrap'] == 1): ?>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <?php else: ?>
-            <link rel="stylesheet" type="text/css" href="../assets/css/zebra_pagination.css">
-        <?php endif ?>
-
         <link rel="icon" href="favicon.ico">
-        <?php include '../controller/co_load_bike_rates.php'; ?>
+
 
         <script type="text/javascript">
             function load_vehicle_categories() {
                 var cat_load = "loadcat";
                 if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
                 }
                 else
-                { // code for IE6, IE5
+                {
                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                 }
                 xmlhttp.onreadystatechange = function () {
@@ -41,6 +33,7 @@
                         document.getElementById('cat_load').innerHTML = xmlhttp.responseText;
                         document.getElementById('cat_load_brand').innerHTML = xmlhttp.responseText;
                         document.getElementById('cat_load_rate').innerHTML = xmlhttp.responseText;
+                        document.getElementById('search_category').innerHTML = xmlhttp.responseText;
                     }
                 }
                 xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load=" + cat_load, true);
@@ -51,7 +44,6 @@
         <script type="text/javascript">
             function load_vehicle_brands() {
                 var category = document.getElementById('cat_load_brand').value;
-                alert(category);
                 if (category != null && category != "") {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -88,6 +80,7 @@
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             alert(xmlhttp.responseText);
+                            document.getElementById('cat_load').selectedIndex = "0";
                             var brand = document.getElementById('new_brand').value = "";
                         }
                     }
@@ -115,6 +108,8 @@
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             alert(xmlhttp.responseText);
+                            document.getElementById('cat_load_brand').selectedIndex = "0";
+                            document.getElementById('brand_load').innerHTML = "<option>~Select Brand~</option>";
                             var model = document.getElementById('new_model').value = "";
                         }
                     }
@@ -128,7 +123,6 @@
         <script type="text/javascript">
             function load_vehicle_rate_brands() {
                 var category = document.getElementById('cat_load_rate').value;
-                alert(category);
                 if (category != null && category != "") {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -149,10 +143,9 @@
                 }
             }
         </script>
-        <script>
+        <script type="text/javascript">
             function load_vehicle_rate_models() {
                 var brand = document.getElementById('brand_load_rate').value;
-                alert(brand);
                 if (brand != null && brand != "") {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -172,15 +165,16 @@
                 }
             }
         </script>
-        <script>
-            function save_vehicle_rate() {
-                var category= document.getElementById('cat_load_rate').value;
+        <script type="text/javascript">
+            function save_rate() {
+                var category = document.getElementById('cat_load_rate').value;
                 var brand = document.getElementById('brand_load_rate').value;
                 var model = document.getElementById('model_load_rate').value;
                 var model_year = document.getElementById('model_year').value;
-                var min_value=document.getElementById('min_value').value;
-                var max_value=document.getElementById('min_value').value;
-                if (category != null && category != "" && brand!=null && brand!="" && model!=null && model!="" && model_year!=null && model_year!="" && min_value1=null && min_value!="" && max_value!=null && max_value!="") {
+                var min_value = document.getElementById('min_val').value;
+                var max_value = document.getElementById('max_val').value;
+                var vehicle_pre_code= document.getElementById('vehicle_pre_code').value;
+                if (category != null && category != "0" && brand != null && brand != "0" && model != null && model != "0" && model_year != null && model_year != "" && min_value != null && min_value != "" && max_value != null && max_value != "") {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
                         xmlhttp = new XMLHttpRequest();
@@ -192,23 +186,52 @@
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             alert(xmlhttp.responseText);
+                            document.getElementById('cat_load_rate').selectedIndex = "0";
+                            document.getElementById('brand_load_rate').innerHTML = "<option value='0'>~Select Brand~</option>"
+                            document.getElementById('model_load_rate').innerHTML = "<option value='0'>~Select Model~</option>"
+                            document.getElementById('model_year').value = "";
+                            document.getElementById('min_val').value = "";
+                            document.getElementById('max_val').value = "";
                         }
                     }
-                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?rate_category=" + category+"&rate_brand"+brand+"&rate_model"+model+"&min_value="+min_value+"&max_value="+max_value+"&model_year="+model_year, true);
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?rate_category=" + category + "&rate_brand=" + brand + "&rate_model=" + model + "&model_year=" + model_year + "&min_value=" + min_value + "&max_value=" + max_value+"&vehicle_pre_code="+vehicle_pre_code, true);
                     xmlhttp.send();
+                } else {
+                    alert("Invalid data,Please enter valid data");
                 }
             }
+        </script>
+        <script type="text/javascript">
+
+            function numbersonly(myfield, e, dec)
+            {
+                var key;
+                var keychar;
+                if (window.event)
+                    key = window.event.keyCode;
+                else if (e)
+                    key = e.which;
+                else
+                    return true;
+                keychar = String.fromCharCode(key);
+                if ((key == null) || (key == 0) || (key == 8) ||
+                        (key == 9) || (key == 13) || (key == 27))
+                    return true;
+                else if ((("0123456789").indexOf(keychar) > -1))
+                    return true;
+                else if (dec && (keychar == ".")) {
+                    myfield.form.elements[dec].focus();
+                    return false;
+                } else
+                    return false;
+            }
+
+
         </script>
 </html>
 </head>
 <body onload="load_vehicle_categories()">
-    <?php
-    include '../assets/include/navigation_bar.php';
-    $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
-    if (mysqli_connect_errno()) {
-        echo "Falied to Connect the Database" . mysqli_connect_error();
-    }
-    ?>
+    <?php include '../assets/include/navigation_bar.php'; ?>
     <!--Customer Panel Section-->
     <div class="container" style="margin-top: 80px;display: block;" id="one">
         <div class="row">
@@ -223,34 +246,9 @@
                                 <legend>Search Option 01</legend>
                                 <div class="form-group required">
                                     <label class="control-label">Search by Category:</label>
-                                    <select name="v_cat" id="v_cat" class="form-control" onchange="checker();">
-                                        <option value="bike">Bikes</option>
-                                        <option value="tw">Three-Wheels</option>
-                                        <option value="land">Lands</option>
+                                    <select name="search_category" id="search_category" class="form-control">
+                                        <option value="0">~~Select Category~~</option>
                                     </select>
-                                </div>
-                                <div id="advance_bike_panel" style="display: none;">
-                                    <div class="form-group required">
-                                        <label class="control-label">Brand:</label>
-                                        <select name="vbrand_advance" id="v_brand_advanced" class="form-control" onchange="loadCustomBikeBrands(this.value);">
-                                            <option value="0">~~Select Brand~~</option>
-                                            <option value="1">Bajaj</option>
-                                            <option value="2">Hero Honda</option>
-                                            <option value="3">TVS</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group required">
-                                        <label class="control-label">Select Type:</label>
-                                        <select name="vtype" id="v_type_advance" class="form-control" onchange="loadCustomBikeTypes(this.value);">
-                                            <option>~~Select Type~~</option> 
-                                        </select>
-                                    </div>
-                                    <div class="form-group required">
-                                        <label class="control-label">Select Model:</label>
-                                        <select name="vcode" id="v_code_advance" class="form-control" onchange=";">
-                                            <option>~~Select Model~~</option>
-                                        </select>
-                                    </div>
                                 </div>
                             </fieldset>
                         </div>
@@ -260,9 +258,6 @@
                                 <div class="form-group">
                                     <label class="control-label" id="hidecaption">Admin Options:</label>
                                     <div class="form-inline required">
-                                        <button type="submit"  class="btn btn" id="cservicebtn">Add Vehicle Rate</button>
-                                        <button type="submit"  class="btn btn" id="cservicebtn">Add Land Rate</button>
-                                        <button type="submit"  class="btn btn" id="cservicebtn">Update Rates</button>
                                         <a href="../print_report/Print_vehicleRate_bike.php"><button type="submit"  class="btn btn" id="cservicebtn" onclick="PrintDoc();">Print Report</button></a>
                                         <button type="submit"  class="btn btn" id="cservicebtn" onclick="PrintPreview();">Preview</button>
                                     </div>
@@ -270,23 +265,7 @@
                             </fieldset>
                         </div>
                         <!--pagination for bick values-->
-                        <?php
-                        global $conn;
-                        $records_per_page = 10;
-                        require 'Zebra_Pagination.php';
-                        $pagination = new Zebra_Pagination();
 
-                        $sql_query = "SELECT SQL_CALC_FOUND_ROWS `ser_vehicles_pre_id`,`vehicle_type_id`,`model_year`,`model`,`type`,`min_value`,`max_value` FROM`ser_vehicles_pre` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                        $result = mysqli_query($conn, $sql_query);
-                        if (!($result)) {
-
-                            // stop execution and display error message
-                            die(mysql_error());
-                        }
-                        $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
-                        $pagination->records($rows['rows']);
-                        $pagination->records_per_page($records_per_page);
-                        ?>
                         <div class="col-sm-12">
                             <div id="bike_div" style="display: block;background: white;">
                                 <table class="table table-bordered table-striped table-hover">
@@ -301,42 +280,15 @@
                                         </tr>
                                     </thead>
                                     <tbody id="bike_tbody">
-                                        <?php $index = 0; ?>
-                                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                                            <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
 
-                                                <td><?php echo $row['ser_vehicles_pre_id'] ?></td>
-                                                <td><?php echo $row['model_year'] ?></td>
-                                                <td><?php echo $row['model'] ?></td>
-                                                <td><?php echo $row['type'] ?></td>
-                                                <td><?php echo $row['min_value'] ?></td>
-                                                <td><?php echo $row['max_value'] ?></td>
-
-                                            </tr>
-                                        <?php endwhile ?>
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
+                                    <nav> <ul class="pagination"><li></li></ul></nav>
                                 </div>
                             </div>
                             <!--pagination for 3whele values-->
-                            <?php
-                            global $conn;
-                            $records_per_page = 10;
-                            $pagination = new Zebra_Pagination();
 
-                            $sql_query = "SELECT SQL_CALC_FOUND_ROWS `threewheel_pre_id`,`tw_type`,`tw_mode`,`min_val`,`max_val`,`status` FROM`ser_threewheel_pre`  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                            $result = mysqli_query($conn, $sql_query);
-                            if (!($result)) {
-
-                                // stop execution and display error message
-                                die(mysql_error());
-                            }
-                            $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
-                            $pagination->records($rows['rows']);
-                            $pagination->records_per_page($records_per_page);
-                            ?>
                             <div id="tw_div" style="display: none;">
                                 <table class="table table-bordered table-hover">
                                     <thead>
@@ -350,42 +302,15 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tw_tbody">
-                                        <?php $index = 0; ?>
-                                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                                            <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
 
-                                                <td><?php echo $row['threewheel_pre_id'] ?></td>
-                                                <td><?php echo 'None' ?></td>
-                                                <td><?php echo $row['tw_type'] ?></td>
-                                                <td><?php echo $row['tw_mode'] ?></td>
-                                                <td><?php echo $row['min_val'] ?></td>
-                                                <td><?php echo $row['max_val'] ?></td>
-
-                                            </tr>
-                                        <?php endwhile ?>
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
+                                    <nav> <ul class="pagination"><li></li></ul></nav>
                                 </div>
                             </div>
                             <!--pagination for Land values-->
-                            <?php
-                            global $conn;
-                            $records_per_page = 10;
-                            $pagination = new Zebra_Pagination();
 
-                            $sql_query = "SELECT SQL_CALC_FOUND_ROWS `id`,`year_id`,`amount_id`,`interest` FROM`ser_land_pre`   LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                            $result = mysqli_query($conn, $sql_query);
-                            if (!($result)) {
-
-                                // stop execution and display error message
-                                die(mysql_error());
-                            }
-                            $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
-                            $pagination->records($rows['rows']);
-                            $pagination->records_per_page($records_per_page);
-                            ?>
                             <div id="land_div" style="display: none;">
                                 <table class="table table-bordered table-hover">
                                     <thead>
@@ -397,36 +322,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $index = 0; ?>
-                                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-
-                                            <?php
-                                            $lid = $row['id'];
-                                            $l_yid = $row['year_id'];
-                                            $l_aid = $row['amount_id'];
-                                            $l_interest = $row['interest'];
-                                            ?>
-                                            <?php if ($l_yid == "1" && $l_yid != "0") { ?>
-                                                <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
-                                                    <td><?php echo $l_aid ?></td>
-                                                    <td><?php echo $l_yid . ' Year' ?></td>
-                                                    <td><?php echo $l_aid . '00,000.00' ?></td>
-                                                    <td><?php echo $l_interest ?></td>
-                                                </tr>
-                                            <?php } else if ($l_yid != "1" && $l_yid != "0") { ?>
-                                                <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
-                                                    <td><?php echo $l_aid ?></td>
-                                                    <td><?php echo $l_yid . ' Years' ?></td>
-                                                    <td><?php echo $l_aid . '00,000.00' ?></td>
-                                                    <td><?php echo $l_interest ?></td>
-                                                </tr>
-                                            <?php } ?>
-
-                                        <?php endwhile ?>
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
+                                    <nav> <ul class="pagination"><li></li></ul></nav>
                                 </div>
                             </div>
                             <!--bike rate registration-->
@@ -437,7 +336,7 @@
                                         <div class="form-group required">
                                             <label class="control-label">Select Category:</label>
                                             <select name="cat_load" id="cat_load" class="form-control">
-                                                <option value="0">~~Select Type~~</option>
+                                                <option value="0">~~Select Category~~</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
@@ -480,10 +379,11 @@
                                         <div class="form-group required">
                                             <label class="control-label">Select Category:</label>
                                             <select name="cat_load_rate" id="cat_load_rate" class="form-control" onchange="load_vehicle_rate_brands();">
-                                                <option value="0">~~Select Type~~</option>
+                                                <option value="0">~~Select Category~~</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
+
                                             <label class="control-label">Select Brand:</label>
                                             <select name="brand_load_rate" id="brand_load_rate" class="form-control" onchange="load_vehicle_rate_models();">
                                                 <option>~~Select Brand~~</option>
@@ -496,19 +396,23 @@
                                             </select>
                                         </div>
                                         <div class="form-group required">
+                                            <label class="control-label">Vehicle Pre Code:</label>
+                                            <input type="text" name="vehicle_pre_code" id="vehicle_pre_code" placeholder="Vehicle Pre Code" class="form-control" />
+                                        </div>
+                                        <div class="form-group required">
                                             <label class="control-label">Model Year:</label>
                                             <input type="text" name="model_year" id="model_year" placeholder="Model Year" class="form-control" />
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Min Value:</label>
-                                            <input type="text" name="min_val" id="min_val" placeholder="Min Value" class="form-control" />
+                                            <input type="text" name="min_val" id="min_val" placeholder="Min Value" class="form-control" onKeyPress="return numbersonly(this, event)"/>
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label">Max Value:</label>
-                                            <input type="text" name="max_val" id="max_val" placeholder="Max Value" class="form-control" />
+                                            <input type="text" name="max_val" id="max_val" placeholder="Max Value" class="form-control" onKeyPress="return numbersonly(this, event)" />
                                         </div>
                                         <div class="form-group">
-                                            <button type="button"  class="btn btn" id="cservicebtn" onclick="save_vehicle_rate();">Save Rate</button>
+                                            <button type="button" class="btn btn" id="cservicebtn" onclick="save_rate();">Save Rate</button>
                                         </div>
                                     </fieldset>
                                 </div>
