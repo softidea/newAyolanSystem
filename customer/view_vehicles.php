@@ -173,7 +173,7 @@
                 var model_year = document.getElementById('model_year').value;
                 var min_value = document.getElementById('min_val').value;
                 var max_value = document.getElementById('max_val').value;
-                var vehicle_pre_code= document.getElementById('vehicle_pre_code').value;
+                var vehicle_pre_code = document.getElementById('vehicle_pre_code').value;
                 if (category != null && category != "0" && brand != null && brand != "0" && model != null && model != "0" && model_year != null && model_year != "" && min_value != null && min_value != "" && max_value != null && max_value != "") {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -194,7 +194,7 @@
                             document.getElementById('max_val').value = "";
                         }
                     }
-                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?rate_category=" + category + "&rate_brand=" + brand + "&rate_model=" + model + "&model_year=" + model_year + "&min_value=" + min_value + "&max_value=" + max_value+"&vehicle_pre_code="+vehicle_pre_code, true);
+                    xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?rate_category=" + category + "&rate_brand=" + brand + "&rate_model=" + model + "&model_year=" + model_year + "&min_value=" + min_value + "&max_value=" + max_value + "&vehicle_pre_code=" + vehicle_pre_code, true);
                     xmlhttp.send();
                 } else {
                     alert("Invalid data,Please enter valid data");
@@ -226,12 +226,42 @@
                     return false;
             }
 
+            function checker(type) {
+
+
+                if (type == 1) {
+
+                    document.getElementById('bike_div').style.display = 'block';
+                    document.getElementById('tw_div').style.display = 'none';
+                    document.getElementById('van_div').style.display = 'none';
+
+                }
+                if (type == 2) {
+
+                    document.getElementById('bike_div').style.display = 'none';
+                    document.getElementById('tw_div').style.display = 'block';
+                    document.getElementById('van_div').style.display = 'none';
+
+                }
+                if (type == 3) {
+
+                    document.getElementById('bike_div').style.display = 'none';
+                    document.getElementById('tw_div').style.display = 'none';
+                    document.getElementById('van_div').style.display = 'block';
+
+                }
+
+            }
+
 
         </script>
 </html>
 </head>
 <body onload="load_vehicle_categories()">
-    <?php include '../assets/include/navigation_bar.php'; ?>
+    <?php
+    include '../assets/include/navigation_bar.php';
+    require_once '../db/newDB.php';
+    ?>
     <!--Customer Panel Section-->
     <div class="container" style="margin-top: 80px;display: block;" id="one">
         <div class="row">
@@ -246,7 +276,7 @@
                                 <legend>Search Option 01</legend>
                                 <div class="form-group required">
                                     <label class="control-label">Search by Category:</label>
-                                    <select name="search_category" id="search_category" class="form-control">
+                                    <select name="search_category" id="search_category" class="form-control" onchange="checker(this.value);">
                                         <option value="0">~~Select Category~~</option>
                                     </select>
                                 </div>
@@ -265,13 +295,30 @@
                             </fieldset>
                         </div>
                         <!--pagination for bick values-->
+                        <?php
+                        $records_per_page = 10;
+                        require 'Zebra_Pagination.php';
+                        $pagination = new Zebra_Pagination();
+                        $sql_query = "SELECT SQL_CALC_FOUND_ROWS  a.`model_year`,a.`min_value`,a.`max_value`,a.`pre_code`,b.`brand`,c.`vehicle_type` from`vehicle_rates` a  inner Join `vehicle_brand` b on a.`brand_id`=b.`brand_id` inner join `vehicle_type` c on a.`type_id`=c.`type_id` where a.`category_id`='1' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                        $result = mysqli_query($conn, $sql_query);
+                        
+                         if (!($result)) {
+                             echo '<script>alert("awaaa")</script>';
+                            // stop execution and display error message
+                          
+                        }
+                        
+                        $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
+                        $pagination->records($rows['rows']);
+                        $pagination->records_per_page($records_per_page);
+                        ?>
 
                         <div class="col-sm-12">
                             <div id="bike_div" style="display: block;background: white;">
                                 <table class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
+
                                             <th>Model Year</th>
                                             <th>Model</th>
                                             <th>Type</th>
@@ -281,19 +328,48 @@
                                     </thead>
                                     <tbody id="bike_tbody">
 
+                                        <?php $index = 0; ?>
+                                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                            <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
+                                                
+                                                <td><?php echo $row['model_year'] ?></td>
+                                                <td><?php echo $row['brand'] ?></td>
+                                                <td><?php echo $row['vehicle_type'] ?></td>
+                                                <td><?php echo $row['min_value'] ?></td>
+                                                <td><?php echo $row['max_value'] ?></td>
+
+                                            </tr>
+                                        <?php endwhile ?>
+
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    <nav> <ul class="pagination"><li></li></ul></nav>
+                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                 </div>
                             </div>
                             <!--pagination for 3whele values-->
+                             <?php
+                            global $conn;
+                            $records_per_page = 10;
+                            $pagination = new Zebra_Pagination();
 
+                            $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.`model_year`,a.`min_value`,a.`max_value`,a.`pre_code`,b.`brand`,c.`vehicle_type` from`vehicle_rates` a  inner Join `vehicle_brand` b on a.`brand_id`=b.`brand_id` inner join `vehicle_type` c on a.`type_id`=c.`type_id` where a.`category_id`='2'  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                            $result = mysqli_query($conn, $sql_query);
+                            if (!($result)) {
+
+                                // stop execution and display error message
+                                die(mysql_error());
+                            }
+                            $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
+                            $pagination->records($rows['rows']);
+                            $pagination->records_per_page($records_per_page);
+                            ?>
+                            
                             <div id="tw_div" style="display: none;">
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>TW_Id</th>
+
                                             <th>Model Year</th>
                                             <th>Model</th>
                                             <th>Type</th>
@@ -303,29 +379,75 @@
                                     </thead>
                                     <tbody id="tw_tbody">
 
+                                        <?php $index = 0; ?>
+                                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                            <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
+                                                
+                                                <td><?php echo $row['model_year'] ?></td>
+                                                <td><?php echo $row['brand'] ?></td>
+                                                <td><?php echo $row['vehicle_type'] ?></td>
+                                                <td><?php echo $row['min_value'] ?></td>
+                                                <td><?php echo $row['max_value'] ?></td>
+
+                                            </tr>
+                                        <?php endwhile ?>
+                                        
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    <nav> <ul class="pagination"><li></li></ul></nav>
+                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                 </div>
                             </div>
                             <!--pagination for Land values-->
 
-                            <div id="land_div" style="display: none;">
+                             <?php
+                            global $conn;
+                            $records_per_page = 10;
+                            $pagination = new Zebra_Pagination();
+
+                            $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.`model_year`,a.`min_value`,a.`max_value`,a.`pre_code`,b.`brand`,c.`vehicle_type` from`vehicle_rates` a  inner Join `vehicle_brand` b on a.`brand_id`=b.`brand_id` inner join `vehicle_type` c on a.`type_id`=c.`type_id` where a.`category_id`='3'   LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                            $result = mysqli_query($conn, $sql_query);
+                            if (!($result)) {
+
+                                // stop execution and display error message
+                                die(mysql_error());
+                            }
+                            $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
+                            $pagination->records($rows['rows']);
+                            $pagination->records_per_page($records_per_page);
+                            ?>
+                            
+                            <div id="van_div" style="display: none;">
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Term Year</th>
-                                            <th>Amount</th>
-                                            <th>Interest</th>
+
+                                            <th>Model Year</th>
+                                            <th>Model</th>
+                                            <th>Type</th>
+                                            <th>Min Value</th>
+                                            <th>Max Value</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
+                                        <?php $index = 0; ?>
+                                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                            <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?>>
+                                                
+                                                <td><?php echo $row['model_year'] ?></td>
+                                                <td><?php echo $row['brand'] ?></td>
+                                                <td><?php echo $row['vehicle_type'] ?></td>
+                                                <td><?php echo $row['min_value'] ?></td>
+                                                <td><?php echo $row['max_value'] ?></td>
+
+                                            </tr>
+                                        <?php endwhile ?>
+                                        
                                     </tbody>
                                 </table>
-                                <div class="text-center">
-                                    <nav> <ul class="pagination"><li></li></ul></nav>
+                                 <div class="text-center">
+                                    <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                 </div>
                             </div>
                             <!--bike rate registration-->
@@ -425,7 +547,7 @@
     </div>
     <!--Customer Panel Section-->
 
-    <?php include '../assets/include/footer.php'; ?>
+<?php include '../assets/include/footer.php'; ?>
 </body>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
