@@ -629,7 +629,9 @@ echo 'alert($cus_seid)';
         }
         
         function viewLeger(){
-            alert(document.getElementById('cus_nic').value);
+            var sno=document.getElementById('ser_number_id').value;
+            alert(document.getElementById('ser_number_id').value);
+             window.location.href = "customer_leger.php?ser_number=" +sno;
         }
 
     </script>

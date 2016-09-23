@@ -79,10 +79,9 @@ $date_setter = date("Y-m-d");
                                                     </select>
                                                     <?php
                                                     if (isset($_POST['cbopayment'])) {
-                                                       
+
                                                         $com_vehi = $_POST['cbopayment'];
-                                                   
-                                                        }
+                                                    }
                                                     ?>
 
 
@@ -126,8 +125,8 @@ $date_setter = date("Y-m-d");
                                             $sql_query1 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_nic`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         } elseif ($com_vehi == "vno") {
                                             $sql_query1 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE c.vehicle_no='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                                        }elseif ($com_vehi == "all") {
-                                           $sql_query1 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                        } elseif ($com_vehi == "all") {
+                                            $sql_query1 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         }
                                     } else {
                                         $sql_query1 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic  ORDER BY a.cus_id LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
@@ -196,7 +195,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                  
+
                                                     <script>
 
                                                         var cel;
@@ -244,10 +243,9 @@ $date_setter = date("Y-m-d");
                                                     </select>
                                                     <?php
                                                     if (isset($_POST['cbopayment'])) {
-                                                       
+
                                                         $com_vehi = $_POST['cbopayment'];
-                                                   
-                                                        }
+                                                    }
                                                     ?>
 
 
@@ -277,7 +275,7 @@ $date_setter = date("Y-m-d");
                                     </form>
 
                                     <?php
-                                   $pagination = new Zebra_Pagination();
+                                    $pagination = new Zebra_Pagination();
                                     $sql_query = "";
 
                                     if (isset($_POST['search_buton'])) {
@@ -290,14 +288,14 @@ $date_setter = date("Y-m-d");
                                             $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_nic`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         } elseif ($com_vehi == "vno") {
                                             $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE c.vehicle_no='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                                        }elseif ($com_vehi == "all") {
-                                           $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'HOR%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                        } elseif ($com_vehi == "all") {
+                                            $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'HOR%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         }
                                     } else {
                                         $sql_query = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'HOR%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                     }
 
-                                    
+
 
                                     $result = mysqli_query($d_bc, $sql_query);
                                     $service_co = mysqli_num_rows($result);
@@ -316,10 +314,9 @@ $date_setter = date("Y-m-d");
                                             <thead>
                                                 <tr>
 
-                                                    <th>No</th>
+                                                    <th>Service Number</th>
                                                     <th>Full Name</th>
                                                     <th>NIC</th>
-                                                    <th>Service Number</th>
                                                     <th>Vehicle Number</th>
                                                     <th>Permanent Address</th>
                                                     <th>Registration Date</th>
@@ -336,10 +333,9 @@ $date_setter = date("Y-m-d");
                                                     <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> onclick="readValues(this)">
 
 
-                                                        <td><?php echo $row['cus_id'] ?></td>
+                                                        <td><?php echo $row['ser_number'] ?></td>
                                                         <td><?php echo $row['cus_fullname'] ?></td>
                                                         <td><?php echo $row['cus_nic'] ?></td>
-                                                        <td><?php echo $row['ser_number'] ?></td>
                                                         <td><?php echo $row['vehicle_no'] ?></td>
                                                         <td><?php echo $row['cus_address'] ?></td>
                                                         <td><?php echo $row['cus_reg_date'] ?></td>
@@ -358,7 +354,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                   
+
                                                     <script>
 
                                                         var cel;
@@ -406,10 +402,9 @@ $date_setter = date("Y-m-d");
                                                     </select>
                                                     <?php
                                                     if (isset($_POST['cbopayment'])) {
-                                                       
+
                                                         $com_vehi = $_POST['cbopayment'];
-                                                   
-                                                        }
+                                                    }
                                                     ?>
 
 
@@ -439,7 +434,7 @@ $date_setter = date("Y-m-d");
                                     </form>
 
                                     <?php
-                                   $pagination = new Zebra_Pagination();
+                                    $pagination = new Zebra_Pagination();
                                     $sql_query2 = "";
 
                                     if (isset($_POST['search_buton'])) {
@@ -452,14 +447,14 @@ $date_setter = date("Y-m-d");
                                             $sql_query2 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_nic`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         } elseif ($com_vehi == "vno") {
                                             $sql_query2 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE c.vehicle_no='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                                        }elseif ($com_vehi == "all") {
-                                           $sql_query2 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'BLS%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                        } elseif ($com_vehi == "all") {
+                                            $sql_query2 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'BLS%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         }
                                     } else {
                                         $sql_query2 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'BLS%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                     }
 
-                                    
+
 
                                     $result2 = mysqli_query($d_bc, $sql_query2);
                                     $service_co2 = mysqli_num_rows($result2);
@@ -475,13 +470,12 @@ $date_setter = date("Y-m-d");
                                     <br/>
                                     <div class="col-sm-12">
                                         <table class="table table-bordered table-hover">
-                                            <thead>
+                                             <thead>
                                                 <tr>
 
-                                                    <th>No</th>
+                                                    <th>Service Number</th>
                                                     <th>Full Name</th>
                                                     <th>NIC</th>
-                                                    <th>Service Number</th>
                                                     <th>Vehicle Number</th>
                                                     <th>Permanent Address</th>
                                                     <th>Registration Date</th>
@@ -498,10 +492,9 @@ $date_setter = date("Y-m-d");
                                                     <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> onclick="readValues(this)">
 
 
-                                                        <td><?php echo $row2['cus_id'] ?></td>
+                                                        <td><?php echo $row2['ser_number'] ?></td>
                                                         <td><?php echo $row2['cus_fullname'] ?></td>
                                                         <td><?php echo $row2['cus_nic'] ?></td>
-                                                        <td><?php echo $row2['ser_number'] ?></td>
                                                         <td><?php echo $row2['vehicle_no'] ?></td>
                                                         <td><?php echo $row2['cus_address'] ?></td>
                                                         <td><?php echo $row2['cus_reg_date'] ?></td>
@@ -520,7 +513,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                   <script>
+                                                    <script>
 
                                                         var cel;
                                                         function readValues(x) {
@@ -567,10 +560,9 @@ $date_setter = date("Y-m-d");
                                                     </select>
                                                     <?php
                                                     if (isset($_POST['cbopayment'])) {
-                                                       
+
                                                         $com_vehi = $_POST['cbopayment'];
-                                                   
-                                                        }
+                                                    }
                                                     ?>
 
 
@@ -613,14 +605,14 @@ $date_setter = date("Y-m-d");
                                             $sql_query3 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE a.`cus_nic`='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         } elseif ($com_vehi == "vno") {
                                             $sql_query3 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,c.vehicle_no,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE c.vehicle_no='" . $_POST['fname'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
-                                        }elseif ($com_vehi == "all") {
-                                           $sql_query3 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'PLD%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                        } elseif ($com_vehi == "all") {
+                                            $sql_query3 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'PLD%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                         }
                                     } else {
                                         $sql_query3 = "SELECT SQL_CALC_FOUND_ROWS a.cus_id,a.cus_fullname,a.cus_nic,a.cus_address,a.cus_reg_date,a.cus_tp,c.`ser_number`,c.vehicle_no FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE ser_number LIKE 'PLD%'  ORDER BY c.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
                                     }
 
-                                   
+
 
                                     $result3 = mysqli_query($d_bc, $sql_query3);
                                     $service_co3 = mysqli_num_rows($result3);
@@ -639,10 +631,9 @@ $date_setter = date("Y-m-d");
                                             <thead>
                                                 <tr>
 
-                                                    <th>No</th>
+                                                    <th>Service Number</th>
                                                     <th>Full Name</th>
                                                     <th>NIC</th>
-                                                    <th>Service Number</th>
                                                     <th>Vehicle Number</th>
                                                     <th>Permanent Address</th>
                                                     <th>Registration Date</th>
@@ -659,10 +650,9 @@ $date_setter = date("Y-m-d");
                                                     <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> onclick="readValues(this)">
 
 
-                                                        <td><?php echo $row3['cus_id'] ?></td>
+                                                        <td><?php echo $row3['ser_number'] ?></td>
                                                         <td><?php echo $row3['cus_fullname'] ?></td>
                                                         <td><?php echo $row3['cus_nic'] ?></td>
-                                                        <td><?php echo $row3['ser_number'] ?></td>
                                                         <td><?php echo $row3['vehicle_no'] ?></td>
                                                         <td><?php echo $row3['cus_address'] ?></td>
                                                         <td><?php echo $row3['cus_reg_date'] ?></td>
@@ -681,7 +671,7 @@ $date_setter = date("Y-m-d");
                                             <div class="form-group">
                                                 <div class="form-inline">
 
-                                                   
+
                                                     <script>
 
                                                         var cel;

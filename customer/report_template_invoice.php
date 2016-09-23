@@ -39,7 +39,6 @@ and open the template in the editor.
             }
             article {
                 margin-left: 170px;
-                border-left: 1px solid gray;
                 padding: 1em;
                 overflow: hidden;
             }
@@ -102,6 +101,13 @@ and open the template in the editor.
                 font-weight: 400;
                 line-height: 18.5714px;
             }
+            tr{
+                 font-family: sans-serif,Tahoma, Verdana, Segoe;
+                font-size: 14px;
+                padding-bottom: 5px;
+                margin: 10px;
+
+            }
         </style>
 
     </head>
@@ -110,7 +116,7 @@ and open the template in the editor.
         <div class="container">
 
             <header>
-               <!-- <img src="http://ayolaninvestments.com/system/assets/images/admin/ayolan_logo.png" alt="img" style="width: 180px;height: 190px;"/> -->
+                <img src="http://ayolaninvestments.com/system/assets/images/admin/ayolan_logo.png" alt="img" style="width: 180px;height: 190px;"/>
 
 
                 <h1 style="font-family: sans-serif,Tahoma, Verdana, Segoe">CUSTOMER INVOICE | AYOLAN INVESTMENTS </h1>
@@ -158,10 +164,87 @@ and open the template in the editor.
             </header>
             <hr style="padding-top: 0px;margin: 0px;"/>
             <article>
-
+                <div style="float: right;">
+                    
+                     <table>
+                    <tr>
+                        <td style="width:200px;">Date</td>
+                        <td>08-08-2016</td>
+                    </tr>
+                </table>
+                    
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <table>
+                    <tr>
+                        <td style="width:200px;">Vehicle No</td>
+                        <td>ABC-1156</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+                <table>
+                    <tr>
+                        <td style="width:200px;">Agrement No</td>
+                        <td>HOR-2022</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+                <table>
+                    <tr>
+                        <td style="width:200px;">Customer Name</td>
+                        <td>Supun Jayasekera</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+                <table>
+                    <tr>
+                        <td style="width:200px;">SumOf Rupees</td>
+                        <td>Ten Thousand Only</td>
+                    </tr>
+                </table>
                 
+              
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+              
+               
+                <div style="float: right">
+                
+                  <table>
+                    <tr>
+                        <td style="width:200px;"><strong>Amount</strong></td>
+                        <td><strong>10000.00</strong></td>
+                    </tr>
+                </table>
+                
+            </div>
+                <br/>
+                <br/>
+                 <hr/>
+                <Center><p style="border: 1px;">If Contact Is Terminated Payment Is Accepted Without Prejudice To Our Legal Rights</p></center>
 
             </article>
+            
             <hr/>
             <footer style="font-family: sans-serif,Tahoma, Verdana, Segoe">                
                 <h4 style="font-family: sans-serif,Tahoma, Verdana, Segoe">Copyright © <?php echo date("Y"); ?> Ayolan Investments </h4></footer>
