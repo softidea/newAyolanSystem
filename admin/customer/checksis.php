@@ -64,7 +64,7 @@
             {
                 background-color: #004D40;
             }
-            
+
             #backregister
             {
                 background-color: #004D40;
@@ -77,9 +77,36 @@
                 background-color: #009688;
             }
         </style>
+        <script>
+
+            function load_vehicle_categories() {
+               
+                var cat_load = "loadcat";
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else
+                {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//                        document.getElementById('cat_load').innerHTML = xmlhttp.responseText;
+//                        document.getElementById('cat_load_brand').innerHTML = xmlhttp.responseText;
+//                        document.getElementById('cat_load_rate').innerHTML = xmlhttp.responseText;
+                        alert(xmlhttp.responseText);
+                        document.getElementById('search_category').innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "../../controller/co_load_vehicle_category.php?cat_load=" + cat_load, true);
+                xmlhttp.send();
+
+            }
+
+        </script>
     </head>
-    <body>
-      <?php include '../../assets/include/navigation_bar_forAdmin_step2.php'; ?>
+    <body onload="load_vehicle_categories();">
+        <?php include '../../assets/include/navigation_bar_forAdmin_step2.php'; ?>
 
         <!--Service View Main Panel-->
         <div class="container" style="margin-top: 80px;display: block;" id="one">
@@ -95,11 +122,8 @@
                                     <legend>Search Option-01</legend>
                                     <div class="form-group required">
                                         <label class="control-label" for="input-email">Select Service:</label>
-                                        <select name="cbopayment" id="cboservice" class="form-control" required>
-                                            <option value=""> --- All Services --- </option>
-                                            <option value="bike">Search by Name</option>
-                                            <option value="twheel">Search by NIC</option>
-                                            <option value="land">Search by Phone Number</option>
+                                        <select name="search_category" id="search_category" class="form-control" >
+                                            <option value="0">~~Select Category~~</option>
                                         </select>
                                     </div>
                                     <div class="form-group required">
@@ -120,9 +144,10 @@
                                             <label class="control-label" for="input-email">Select Customer:</label>
                                             <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
                                                 <option value=""> --- Please Select --- </option>
-                                                <option value="bike">Customer Name</option>
-                                                <option value="twheel">NIC</option>
-                                                <option value="land">Phone Number</option>
+                                               
+                                                <option value="nic">NIC</option>
+                                                <option value="phone">Phone Number</option>
+                                                 <option value="vno">Vehicle Number</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
@@ -142,21 +167,11 @@
                                         <legend>Search Option-03</legend>
                                         <div class="form-group required">
                                             <label class="control-label" for="input-email">From Date:</label>
-                                            <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="bike">Motor Bike Leasing</option>
-                                                <option value="twheel">Three-Wheel Leasing</option>
-                                                <option value="land">Land Pawning</option>
-                                            </select>
+                                           <input type="date" name="visit_date" id="visit_date" class="form-control" value="<?php echo date("Y-m-d"); ?>"/>
                                         </div>
                                         <div class="form-group required">
                                             <label class="control-label" for="input-email">To Date:</label>
-                                            <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="bike">Motor Bike Leasing</option>
-                                                <option value="twheel">Three-Wheel Leasing</option>
-                                                <option value="land">Land Pawning</option>
-                                            </select>
+                                            <input type="date" name="visit_date" id="visit_date" class="form-control" value="<?php echo date("Y-m-d"); ?>"/>
                                         </div>
                                     </fieldset>
                                 </div>
