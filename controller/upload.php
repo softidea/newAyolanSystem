@@ -1,4 +1,11 @@
+
 <?php
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+
 
 if (isset($_POST['submit'])) {
     $j = 0; // Variable for indexing uploaded image.

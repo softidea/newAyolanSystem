@@ -1,7 +1,15 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+require_once '../db/mysqliConnect.php';
+
+
 function load_vehicle_brands() {
-    require_once '../db/mysqliConnect.php';
+    
 
     $sql_query = "CALL sp_lod_vehicle_brand();";
     $run_query = mysqli_query($d_bc, $sql_query);
@@ -13,7 +21,7 @@ function load_vehicle_brands() {
     }
     }
 function load_land_pawn_amounts(){
-    require_once '../db/mysqliConnect.php';
+    
     $sql_query = "SELECT * FROM pawn_amount";
     $run_query = mysqli_query($d_bc, $sql_query);
     echo "<option value='0'>~~Select Amount~~</option>";

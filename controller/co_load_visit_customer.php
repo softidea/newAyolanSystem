@@ -1,6 +1,14 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+
+
 require '../db/newDB.php';
+
 $service_no= filter_input(INPUT_GET, 'service_no');
 
 $visit_service_no= filter_input(INPUT_GET, 'visit_service_no');

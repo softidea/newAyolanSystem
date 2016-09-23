@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
 require '../db/mysqliConnect.php';
 
 $cus_sno = filter_input(INPUT_GET, 'sno');

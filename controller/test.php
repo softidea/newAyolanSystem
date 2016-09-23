@@ -1,7 +1,14 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+require_once '../db/mysqliConnect.php';
+
 
 function load() {
-    require_once '../db/mysqliConnect.php';
+   
     $sql_query = "SELECT * FROM vehicle_brand";
     $run_query = mysqli_query($d_bc, $sql_query);
 

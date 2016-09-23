@@ -7,6 +7,12 @@ define('db_password', 'WelComeDB1129');
 define('db_database', 'ayolanin_datahost');
 
 $d_bc = mysqli_connect(db_host, db_user, db_password, db_database) or die('Could not connect to MySql: ' . mysqli_connect_error());
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+require_once '../db/mysqliConnect.php';
 
 //getting varibles from ajax method
 $v_code = $_GET['v_type'];

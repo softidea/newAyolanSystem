@@ -1,6 +1,11 @@
 <?php
 
-//session_start();
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+require_once '../db/newDB.php';
 
 $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_test");
 //$conn = mysqli_connect("localhost", "root", "1234", "ayolanin_datahost");

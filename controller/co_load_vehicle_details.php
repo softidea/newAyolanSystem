@@ -1,12 +1,12 @@
 <?php
 
-define('db_host', '77.104.142.97');
-define('db_port', '3306');
-define('db_user', 'ayolanin_dev');
-define('db_password', 'WelComeDB1129');
-define('db_database', 'ayolanin_test');
+session_start();
 
-$d_bc = mysqli_connect(db_host, db_user, db_password, db_database) or die('Could not connect to MySql: ' . mysqli_connect_error());
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+require_once '../db/mysqliConnect.php';
+
 
 //getting varibles from ajax method
 $v_type = $_GET['v_type'];

@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../index.php");
+}
+
+
 require '../db/newDB.php';
 
 $cat_load = filter_input(INPUT_GET, 'cat_load');

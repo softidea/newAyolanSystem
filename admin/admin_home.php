@@ -1,9 +1,19 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_email'])) {
+    header("Location:../../index.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Administrator | Home</title>
         <?php include '../assets/include/head.php'; ?>
+        
+        
         <link rel="stylesheet" href="../assets/css/admin.css">
 
     </head>
