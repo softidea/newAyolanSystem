@@ -9,7 +9,24 @@ and open the template in the editor.
         <title>Report | Invoice</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
 
+session_start();
+
+$p_vehicle_number="None";
+$p_service_number="None";
+$p_cus_name="None";
+$p_amount_word="None";
+$p_amount="0.00";
+$p_due_amount="0.00";
+
+$p_username=$_SESSION['user_username'];
+
+?>
+
+
+    </head>
+    <body>
         <style>
             div.container {
                 width: 100%;
@@ -168,79 +185,62 @@ and open the template in the editor.
                     
                      <table>
                     <tr>
-                        <td style="width:200px;">Date</td>
-                        <td>08-08-2016</td>
+                        <td>Date :<?php echo date("d-m-Y"); ?></td>
                     </tr>
                 </table>
                     
                 </div>
                 <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <table>
-                    <tr>
-                        <td style="width:200px;">Vehicle No</td>
-                        <td>ABC-1156</td>
-                    </tr>
-                </table>
-                <br/>
-                <br/>
-                <br/>
-                <table>
-                    <tr>
-                        <td style="width:200px;">Agrement No</td>
-                        <td>HOR-2022</td>
-                    </tr>
-                </table>
-                <br/>
-                <br/>
-                <br/>
-                <table>
-                    <tr>
-                        <td style="width:200px;">Customer Name</td>
-                        <td>Supun Jayasekera</td>
-                    </tr>
-                </table>
-                <br/>
-                <br/>
-                <br/>
-                <table>
-                    <tr>
-                        <td style="width:200px;">SumOf Rupees</td>
-                        <td>Ten Thousand Only</td>
-                    </tr>
-                </table>
-                
-              
+                <tr>
+                    <td style="width:200px;">Vehicle No</td>
+                    <td>:<?php echo "$p_vehicle_number"; ?></td>
+                </tr>
 
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-              
-               
-                <div style="float: right">
-                
-                  <table>
+                <tr>
+                    <td style="width:200px;">Aargument No</td>
+                    <td>:<?php echo "$p_service_number"; ?></td>
+                </tr>
+
+                <tr>
+                    <td style="width:200px;">Customer Name</td>
+                    <td>:<?php echo "$p_cus_name"; ?></td>
+                </tr>
+
+                <tr>
+                    <td style="width:200px;">Sum Of Rupees</td>
+                    <td>:<?php echo "$p_amount_word"; ?></td>
+                </tr>
+            </table>
+
+
+
+
+            <div style="float: right;height: 50px;">
+
+                <table style="background: #4CAF50">
                     <tr>
                         <td style="width:200px;"><strong>Amount</strong></td>
-                        <td><strong>10000.00</strong></td>
+                        <td>:<strong><?php echo "$p_amount"; ?></strong></td>
+                    </tr>
+                    <hr/>
+                    <tr>
+                        <td style="width:200px;"><strong>Due Amount</strong></td>
+                        <td>:<strong><?php echo "$p_due_amount"; ?></strong></td>
                     </tr>
                 </table>
                 
             </div>
-                <br/>
-                <br/>
-                 <hr/>
+            <br/>
+            <br/>
+            <br/>
+
+            <hr/>
+            <div style="width: 100%;">
+                <p>Customer Signature:..................................<span><br/></span> Officer Signature:..................................(<?php echo "$p_username";  ?>)</p>
+            </div>
+            <hr/>
+
+            <footer style="font-family: sans-serif,Tahoma, Verdana, Segoe">   
                 <Center><p style="border: 1px;">If Contact Is Terminated Payment Is Accepted Without Prejudice To Our Legal Rights</p></center>
 
             </article>
