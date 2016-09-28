@@ -24,11 +24,11 @@ if (!isset($_SESSION['user_email'])) {
                     <ul class="list-inline">
                         <li>
                             <a href="#">
-                                <i class="glyphicon glyphicon-earphone"></i>
+                                <i class="glyphicon glyphicon-eye-open"></i>
                             </a>
-                            <span class="hidden-xs hidden-sm hidden-md">+94714 339 339</span>
+                            <span class="hidden-xs hidden-sm hidden-md"><?php echo $_SESSION['user_username'];  ?></span>
                         </li>
-                        <li><a href="../admin/user_management/update_user_account.php"  title="User Management"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md">Users</span></a></li>
+                        <li><a href="../admin/user_management/update_user_account.php"  title="User Management"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $_SESSION['user_typel']; ?> Account</span></a></li>
                         <li><a href=""  title="User Management"><i class="glyphicon glyphicon-object-align-vertical"></i> <span class="hidden-xs hidden-sm hidden-md">Re-Processes</span></a></li>
                         <li><a href=""  title="User Management"><i class="glyphicon glyphicon-sort-by-attributes"></i> <span class="hidden-xs hidden-sm hidden-md">Privileges</span></a></li>
                         <li><a href=""  title="User Management"><i class="glyphicon glyphicon-print"></i> <span class="hidden-xs hidden-sm hidden-md">Reports</span></a></li>
