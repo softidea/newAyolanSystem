@@ -160,7 +160,9 @@ if ($s_no != "" && $s_no != null) {
         if ($row = mysqli_fetch_assoc($run_query)) {
 
             $ser_number = $row['ser_number'];
-            $vehicle_no = $row['vehicle_no'];
+            $ser_no = $row['vehicle_no'];
+            $pre_code = $row['v_code'];
+            $vehicle_no = $ser_no;
 
             $fixed_rent = $row['fix_rate'];
             $install = $row['installment'];
@@ -306,6 +308,7 @@ function ServiceInstallment($sno_begin_ins){
             // $no_of_months = floor(($d2-$d1)/(60*60*24*30));
             
             
+            
             $paid_installments =0;
            
             
@@ -440,7 +443,12 @@ function ServiceInstallment($sno_begin_ins){
                         
                         
                         if($currentmonthpay>0){
+                            
+                            
+                            
+                           
                             for($tt=0;$tt<$i;$tt++){
+                                
                                 if($is_arriers[$tt]){
                                     
                                     if(($currentmonthpay!=0)&&($payment_arr_calc[$tt]-$currentmonthpay)>0){
@@ -524,7 +532,9 @@ function ServiceInstallment($sno_begin_ins){
                             
                             // echo $monfreepay."-".$weekfreepay."-".$fiveppay."-".$tenppay."|";
                             
-                            $thismonthdue=$payment_arr[$i];                        
+                            $thismonthdue=$payment_arr[$i];
+                            
+                            
                             
                             
                             if($thismonthdue<=$monfreepay){

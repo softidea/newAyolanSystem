@@ -2,9 +2,8 @@
 session_start();
 
 if (!isset($_SESSION['user_email'])) {
-    header("Location:../../index.php");
+    header("Location:../index.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +11,8 @@ if (!isset($_SESSION['user_email'])) {
         <meta charset="utf-8">
         <title>Administrator | Home</title>
         <?php include '../assets/include/head.php'; ?>
-        
-        
+
+
         <link rel="stylesheet" href="../assets/css/admin.css">
 
     </head>
@@ -25,11 +24,11 @@ if (!isset($_SESSION['user_email'])) {
                     <ul class="list-inline">
                         <li>
                             <a href="#">
-                                <i class="glyphicon glyphicon-earphone"></i>
+                                <i class="glyphicon glyphicon-eye-open"></i>
                             </a>
-                            <span class="hidden-xs hidden-sm hidden-md">+94714 339 339</span>
+                            <span class="hidden-xs hidden-sm hidden-md"><?php echo $_SESSION['user_username'];  ?></span>
                         </li>
-                        <li><a href=""  title="User Management"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md">Users</span></a></li>
+                        <li><a href="../admin/user_management/update_user_account.php"  title="User Management"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $_SESSION['user_typel']; ?> Account</span></a></li>
                         <li><a href=""  title="User Management"><i class="glyphicon glyphicon-object-align-vertical"></i> <span class="hidden-xs hidden-sm hidden-md">Re-Processes</span></a></li>
                         <li><a href=""  title="User Management"><i class="glyphicon glyphicon-sort-by-attributes"></i> <span class="hidden-xs hidden-sm hidden-md">Privileges</span></a></li>
                         <li><a href=""  title="User Management"><i class="glyphicon glyphicon-print"></i> <span class="hidden-xs hidden-sm hidden-md">Reports</span></a></li>
@@ -55,11 +54,12 @@ if (!isset($_SESSION['user_email'])) {
                                 <img class="panelimage" src="../assets/images/admin/user management.png"/>
                             </div>
                             <div class="list-group">
-                                <a href="../admin/user_management/user_management.php" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Create New User Account</button></a>
-                                <a href="" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Create New Administrator Account</button></a>
-                                <a href="" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">View User Accounts</button></a>
-                                <a href="" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Update User Account</button></a>
-                                <a href="" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">View Administrator Accounts</button></a>
+
+                                <a href="../admin/user_management/administrator_account.php" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Create New Administrator Account</button></a>
+                                <a href="../admin/user_management/manager_account.php" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Create New Manager Account</button></a>
+                                <a href="../admin/user_management/user_account.php" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Create New User Account</button></a>
+                                <a href="../admin/user_management/view_user_account.php" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">View All Accounts</button></a>
+                                <a href="../admin/user_management/update_any_account.php" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Update User Account</button></a>
                                 <a href="" style="text-decoration: none;"><button type="button" class="list-group-item" id="listButton">Update Administrator Account</button></a>
                             </div>
                             <div class="panel-footer">

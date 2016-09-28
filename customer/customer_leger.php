@@ -82,12 +82,50 @@ $rental = "";
                 xmlhttp.send();
             }
 
+            function check() {
+//                alert("awa");
+                var serviceno = document.getElementById('sevis_id').value;
+                //alert(serviceno);
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                // alert('ela 2');
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                    {
+//                        alert(xmlhttp.responseText);
+                        var res_value = xmlhttp.responseText;
+                        var res_arr = res_value.split("#");
+
+                        if (res_arr.length > 1) {
+//                            alert("awawrqer");
+//                            //document.getElementById('payable_date').value = res_arr[0];
+//                            document.getElementById('payble_installment').value = res_arr[1] + ".00";
+                            //document.getElementById('next_installment').value = res_arr[2] + ".00";
+                            document.getElementById('nedate').innerHTML = res_arr[0];
+//                            document.getElementById('total_payable_payment').value = res_arr[4];
+
+//                            document.getElementById('remain_amount').value = res_arr[5] + ".00";
+//                            document.getElementById('total_payable_in_settlement').value = res_arr[7];
+//                            document.getElementById('requiredpayment').value = res_arr[8];
+//                            document.getElementById('maximumpayment').value = res_arr[5];
+//                            document.getElementById('total_payable_installements').value = res_arr[6];
+                        }
+                    }
+                }
+                xmlhttp.open("GET", "../controller/co_load_installment_customer.php?sno_begin_ins=" + serviceno, true);
+                xmlhttp.send();
+
+            }
         </script>
 
 
 
     </head>
-    <body>
+    <body onload="check()">
         <?php
         include '../assets/include/navigation_bar.php';
         require_once '../db/mysqliConnect.php';
@@ -110,7 +148,12 @@ $rental = "";
             while ($row_query = mysqli_fetch_array($run_query)) {
                 $name = $row_query['cus_fullname'];
                 $address = $row_query['cus_address'];
-                $status = $row_query['ser_status'];
+                if ($row_query['ser_status']==1) {
+                    $status ="Active" ;
+                }else{
+                     $status ="Deactive" ;
+                }
+                
                 $facility = $row_query['description'];
                 $vno = $row_query['vehicle_no'];
                 $capital = $row_query['fix_rate'];
@@ -140,7 +183,7 @@ $rental = "";
                                     <label>Address</label> 
                                     <p id="address"><?php echo $address; ?></p>
 
-                                    <label>Contact Status   </label>
+                                    <label>Customer Status   </label>
                                     <p id="status"><?php echo $status; ?></p>
 
                                     <label>Vehicle No </label>
@@ -153,9 +196,9 @@ $rental = "";
 
                                 <fieldset id="account">
                                     <legend>Financial Details</legend>
-                                     <label>Type Of Facility </label> 
-                                    <p id="facility"><?php echo $facility;?></p>
-                                    
+                                    <label>Type Of Service </label> 
+                                    <p id="facility"><?php echo $facility; ?></p>
+
                                     <label>Capital</label>
                                     <p id="capital"><?php echo $capital; ?></p>
 
@@ -164,6 +207,10 @@ $rental = "";
 
                                     <label>Rental</label>
                                     <p id="rental"><?php echo $rental; ?></p>
+
+
+
+
                                 </fieldset>
 
                             </div>
@@ -185,7 +232,7 @@ $rental = "";
                                             <th>Company Due</th>
                                             <th>Next Payment Date</th>
                                             <th>Payable Payment</th>
-                                            <th>Interest</th>
+                                            
 
                                         </tr>
                                     </thead>
@@ -200,6 +247,8 @@ $rental = "";
                                                 <td><?php echo $row['payment'] ?></td>
                                                 <td><?php echo $row['customer_due'] ?></td>
                                                 <td><?php echo $row['company_due'] ?></td>
+                                                <td id="nedate"></td>
+                                                <td><?php echo $row['payment'] - $row['company_due'] + $row['customer_due'] ?></td>
 
                                             </tr>
 
@@ -229,22 +278,22 @@ $rental = "";
     <script src="http://bootsnipp.com/dist/scripts.min.js"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
-            function setServiceOptionPanel()
+        function setServiceOptionPanel()
+        {
+            var sp_value = document.getElementById('input-search-option').value;
+            if (sp_value == 'serviceno')
             {
-                var sp_value = document.getElementById('input-search-option').value;
-                if (sp_value == 'serviceno')
-                {
-                    document.getElementById('cboservice').disabled = false;
+                document.getElementById('cboservice').disabled = false;
 
-                    alert(sp_value);
-                }
-                else if (sp_value == 'cname' || sp_value == 'tp')
-                {
-                    document.getElementById('cboservice').selectedIndex = "0";
-                    document.getElementById('cboservice').disabled = true;
-                    alert(sp_value);
-                }
+                alert(sp_value);
             }
+            else if (sp_value == 'cname' || sp_value == 'tp')
+            {
+                document.getElementById('cboservice').selectedIndex = "0";
+                document.getElementById('cboservice').disabled = true;
+                alert(sp_value);
+            }
+        }
 
     </script>
 

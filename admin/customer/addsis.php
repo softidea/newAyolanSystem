@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_email'])) {
     date_default_timezone_set('Asia/Colombo');
     $sis_date = date("Y-m-d");
 }
+
 ?>
 <html>
     <head>
@@ -189,8 +190,10 @@ if (!isset($_SESSION['user_email'])) {
         <?php include '../../assets/include/navigation_bar_forAdmin_step2.php'; ?>
 
         <!--Service View Main Panel-->
+         <form method="post" action="#">
         <div class="container" style="margin-top: 80px;display: block;" id="one">
             <div class="row">
+               
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading" id="panelheading">
@@ -203,7 +206,7 @@ if (!isset($_SESSION['user_email'])) {
                                     <div class="form-group required">
                                         <div class="form-group required">
                                             <label class="control-label">NIC:</label>
-                                            <input type="text" disabled name="cus_nic" id="cus_nic" placeholder="NIC" class="form-control" required/>
+                                            <input type="text" disabled name="cus_nic" id="cus_nic" placeholder="NIC" class="form-control" value="<?php echo '';?>" required/>
                                         </div>
                                     </div>
                                     <div class="form-group required">
@@ -229,6 +232,7 @@ if (!isset($_SESSION['user_email'])) {
                             <div class="col-sm-6">
                                 <div id="searchOptionPanel">
                                     <fieldset id="account">
+                                        <form method="post" action="#">
                                         <legend>Service Information</legend>
                                         <div class="form-group required">
                                             <label class="control-label">Service No:</label>
@@ -258,6 +262,7 @@ if (!isset($_SESSION['user_email'])) {
                                                 <input type="date" name="sis_date" id="sis_date"  min="1900-12-31" max="<?php echo $sis_date; ?>" value="<?php echo $sis_date; ?>" placeholder="Ex:2016-07-25" class="form-control" required/>
                                             </div>
                                         </div>
+                                        </form>
                                     </fieldset>
                                 </div>
                             </div>
@@ -326,18 +331,21 @@ if (!isset($_SESSION['user_email'])) {
                                 <fieldset>
                                     <legend>Re-Process Description:</legend>
                                     <textarea  style="height: 100px;width: 100%;" maxlength="250" name="re_process_des" id="re_process_des" placeholder="Enter Re-Process Description" required maxlength="500"></textarea>
-                                    <button type="submit"  class="btn btn" id="cservicebtn">Back</button>
+                                   
                                     <button type="submit"  class="btn btn" id="cservicebtn" onclick="saveSis();">Save Re-Process</button>
-                                    <button type="submit"  class="btn btn" id="cservicebtn">View All</button>
+                                    
                                 </fieldset>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
+         </form>
         <!--Customer Service Loader-->
-
+       
+        
         <?php include '../../assets/include/footer.php'; ?>
     </body>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

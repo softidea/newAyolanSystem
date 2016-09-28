@@ -38,6 +38,7 @@
                 }
                 xmlhttp.open("GET", "../controller/co_load_vehicle_category.php?cat_load=" + cat_load, true);
                 xmlhttp.send();
+
             }
         </script>
         <script type="text/javascript">

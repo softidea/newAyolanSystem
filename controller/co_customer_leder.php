@@ -5,12 +5,12 @@ session_start();
 if (!isset($_SESSION['user_email'])) {
     header("Location:../index.php");
 }
-require '../db/mysqliConnect.php';
+require_once '../db/mysqliConnect.php';
 
 $cus_sno = filter_input(INPUT_GET, 'sno');
 
 if ($cus_sno != null && $cus_sno != "") {
-    global $d_bc;
+    
     $sql_query = "SELECT a.cus_fullname,c.vehicle_no,a.cus_address,c.`description`,c.`ser_status`,c.`fix_rate`,c.`installment`,c.`period` FROM customer a INNER JOIN service c ON a.cus_nic=c.cus_nic WHERE c.`ser_number`='".$cus_sno."'";
     $run_query = mysqli_query($d_bc, $sql_query);
     while ($row_query = mysqli_fetch_array($run_query)) {

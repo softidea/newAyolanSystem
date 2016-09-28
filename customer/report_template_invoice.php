@@ -35,7 +35,7 @@ $p_username=$_SESSION['user_username'];
 
             header{
                 padding: 2em;
-                height:200px;
+                height:120px;
                 color: black;
                 padding-top: 0px;
                 margin: 0px;
@@ -61,11 +61,11 @@ $p_username=$_SESSION['user_username'];
             }
             h1 {
                 font-family: sans-serif,Tahoma, Verdana, Segoe;
-                font-size: 24px;
+                font-size: 14px;
                 font-style: normal;
                 font-variant: normal;
-                font-weight: 500;
-                line-height: 26.4px;
+                font-weight: 300;
+                line-height: 20px;
             }
             h3 {
                 font-family: sans-serif,Tahoma, Verdana, Segoe;
@@ -104,53 +104,40 @@ $p_username=$_SESSION['user_username'];
             }
             p {
                 font-family: sans-serif,Tahoma, Verdana, Segoe;
-                font-size: 21px;
-                font-style: normal;
-                font-variant: normal;
-                font-weight: 400;
-                line-height: 30px;
-            }
-            footer {
-                font-family: sans-serif,Tahoma, Verdana, Segoe;
                 font-size: 13px;
                 font-style: normal;
                 font-variant: normal;
-                font-weight: 400;
-                line-height: 18.5714px;
+                font-weight: 50;
+                line-height: 15px;
+            }
+            footer {
+                margin: 0px;
+                padding: 0px;
+                font-family: sans-serif,Tahoma, Verdana, Segoe;
+                font-size: 12px;
+                font-style: normal;
+                font-variant: normal;
+                font-weight: 200;
+                line-height: 10px;
             }
             tr{
-                 font-family: sans-serif,Tahoma, Verdana, Segoe;
+                font-family: sans-serif,Tahoma, Verdana, Segoe;
                 font-size: 14px;
                 padding-bottom: 5px;
                 margin: 10px;
 
             }
         </style>
-
-    </head>
-    <body>
-
         <div class="container">
 
             <header>
-                <img src="http://ayolaninvestments.com/system/assets/images/admin/ayolan_logo.png" alt="img" style="width: 180px;height: 190px;"/>
+                <img src="http://ayolaninvestments.com/system/assets/images/admin/ayolan_logo.png" alt="img" style="width: 100px;height: 100px;"/>
 
 
                 <h1 style="font-family: sans-serif,Tahoma, Verdana, Segoe">CUSTOMER INVOICE | AYOLAN INVESTMENTS </h1>
                 <hr/>
-                <table style="float: left;margin-top: 10px">
-                    <tr style="text-align: left">
-                        <td>Hot Line:<br/> +94 77 27 77 770</td>
-                    </tr>
-                    <tr style="text-align: left">
-                        <td>Main Branch:<br/> +94 034 22 65 107</td>
-                    </tr>
-                    <tr  style="text-align: left">
-                        <td>Bulathsinhala Branch:<br/> +94 34 22 82 182</td>
-                    </tr>
-
-                </table>
-                <table style="width: 300px;float:right;margin-top: 10px;font-family: sans-serif,Tahoma, Verdana, Segoe;">
+                
+                <table style="width: 300px;float:right;font-family: sans-serif,Tahoma, Verdana, Segoe;">
                     <tr>
                         <td style="width:50px;text-align: right;">
                             <address id="address1">
@@ -160,22 +147,15 @@ $p_username=$_SESSION['user_username'];
                                 Horana.
                             </address>
                         </td>
-                        <td style="width:50px;text-align: right;">
+                        <td style="width:100px;text-align: right;">
                             <address id="address2">
-                                Branch:<br/>
-                                No: 18,<br/>
-                                Horana Rd,<br/>
-                                Bulathsinhale.
+                                Hot Line:<br/>
+                                +94 77 27 77 770<br/>
+                                Main Branch:<br/>
+                                +94 034 22 65 107
                             </address>
                         </td>
-                        <td style="width:50px;text-align: right;">
-                            <address id="address3">
-                                Branch:<br/>
-                                No: 53,<br/>
-                                Horana Rd,<br/>
-                                Piliyandala.
-                            </address>
-                        </td>
+                       
                     </tr>
                 </table>
             </header>
@@ -227,8 +207,13 @@ $p_username=$_SESSION['user_username'];
                         <td style="width:200px;"><strong>Due Amount</strong></td>
                         <td>:<strong><?php echo "$p_due_amount"; ?></strong></td>
                     </tr>
+                    <hr/>
+                    <tr>
+                        <td style="width:200px;"><strong>Due Amount</strong></td>
+                        <td><strong>105000.00</strong></td>
+                    </tr>
                 </table>
-                
+
             </div>
             <br/>
             <br/>
@@ -243,11 +228,8 @@ $p_username=$_SESSION['user_username'];
             <footer style="font-family: sans-serif,Tahoma, Verdana, Segoe">   
                 <Center><p style="border: 1px;">If Contact Is Terminated Payment Is Accepted Without Prejudice To Our Legal Rights</p></center>
 
-            </article>
-            
-            <hr/>
-            <footer style="font-family: sans-serif,Tahoma, Verdana, Segoe">                
-                <h4 style="font-family: sans-serif,Tahoma, Verdana, Segoe">Copyright © <?php echo date("Y"); ?> Ayolan Investments </h4></footer>
+                <h4 style="font-family: sans-serif,Tahoma, Verdana, Segoe">Copyright © <?php echo date("Y"); ?> Ayolan Investments </h4>
+            </footer>
         </div>
 
     </body>
