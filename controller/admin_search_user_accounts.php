@@ -5,11 +5,8 @@ session_start();
 if (!isset($_SESSION['user_email'])) {
     header("Location:../index.php");
 }
+require_once '../db/newDB.php';
 
-$conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
-if (mysqli_connect_errno()) {
-    echo "Falied to Connect the Database" . mysqli_connect_error();
-}
 
 $user_account_search_value = filter_input(INPUT_GET, 'user_account_search_value');
 $user_account_id = filter_input(INPUT_GET, 'user_account_id');

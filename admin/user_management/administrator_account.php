@@ -33,8 +33,8 @@ session_start();
                                             <label class="control-label">Select User Type:</label>
                                             <select name="select_user_type" id="select_user_type" class="form-control" required>
                                                 <!--<option value='0'>~~Select User Type~~</option>-->
-                                                <option value="1">User</option>
                                                 
+                                                <option value="3">Administrator</option>
                                             </select>
                                         </div>
                                         <div class="form-group required" id="service_combo_div">
