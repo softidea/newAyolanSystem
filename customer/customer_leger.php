@@ -148,7 +148,12 @@ $rental = "";
             while ($row_query = mysqli_fetch_array($run_query)) {
                 $name = $row_query['cus_fullname'];
                 $address = $row_query['cus_address'];
-                $status = $row_query['ser_status'];
+                if ($row_query['ser_status']==1) {
+                    $status ="Active" ;
+                }else{
+                     $status ="Deactive" ;
+                }
+                
                 $facility = $row_query['description'];
                 $vno = $row_query['vehicle_no'];
                 $capital = $row_query['fix_rate'];
@@ -178,7 +183,7 @@ $rental = "";
                                     <label>Address</label> 
                                     <p id="address"><?php echo $address; ?></p>
 
-                                    <label>Contact Status   </label>
+                                    <label>Customer Status   </label>
                                     <p id="status"><?php echo $status; ?></p>
 
                                     <label>Vehicle No </label>
@@ -191,7 +196,7 @@ $rental = "";
 
                                 <fieldset id="account">
                                     <legend>Financial Details</legend>
-                                    <label>Type Of Facility </label> 
+                                    <label>Type Of Service </label> 
                                     <p id="facility"><?php echo $facility; ?></p>
 
                                     <label>Capital</label>
@@ -227,7 +232,7 @@ $rental = "";
                                             <th>Company Due</th>
                                             <th>Next Payment Date</th>
                                             <th>Payable Payment</th>
-                                            <th>Interest</th>
+                                            
 
                                         </tr>
                                     </thead>

@@ -65,7 +65,7 @@
             {
                 background-color: #004D40;
             }
-           
+
             #backregister
             {
                 background-color: #004D40;
@@ -81,7 +81,10 @@
     </head>
     <body>
 
-        <?php include '../../assets/include/navigation_bar_forAdmin_step2.php'; ?>
+        <?php
+        include '../../assets/include/navigation_bar_forAdmin_step2.php';
+        require_once '../../db/newDB.php';
+        ?>
 
         <!--Service View Main Panel-->
         <div class="container" style="margin-top: 80px;display: block;" id="one">
@@ -93,65 +96,127 @@
                         </div>
                         <div class="panel-body" style="background-color: #FAFAFA;">
                             <div class="col-sm-4">
-                                <fieldset id="account">
-                                    <legend>Search Option-01</legend>
-                                    <div class="form-group required">
-                                        <label class="control-label" for="input-email">Select Service:</label>
-                                        <select name="cbopayment" id="cboservice" class="form-control" required>
-                                            <option value=""> --- All Services --- </option>
-                                            <option value="bike">Land</option>
-                                            <option value="twheel">Vehicle</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group required">
-                                        <div class="form-group required">
-                                            <label class="control-label" for="input-email">Service No:</label>
-                                            <input type="text"  name="customersearch" id="fname" value="" placeholder="Enter Service No Here" id="input-email" class="form-control" required/>
-                                            <button type="submit"  class="btn btn" id="cservicebtn">Search</button>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-sm-4">
-                                <div id="searchOptionPanel">
+                                 <form method="post" action="#">
                                     <fieldset id="account">
-                                        <legend>Search Option-02</legend>
+                                       
+                                        <legend>Search Option-01</legend>
+                                        
                                         <div class="form-group required">
-                                            <label class="control-label">Select Customer:</label>
-                                            <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="bike">Customer Name</option>
-                                                <option value="twheel">NIC</option>
-                                                <option value="land">Phone Number</option>
+                                            <label class="control-label" for="input-email">Select Service:</label>
+                                            <select name="cbopayment" id="cboservice" class="form-control" required>
+                                                <option value=""> --- All Services --- </option>
+                                                <option value="land">Land</option>
+                                                <option value="vehicls">Vehicle</option>
                                             </select>
                                         </div>
                                         <div class="form-group required">
                                             <div class="form-group required">
-                                                <label class="control-label">Search Customer:</label>
-                                                <input type="text" name="fname" id="fname" value="" placeholder="Enter Customer Search" id="input-email" class="form-control" required/>
-                                                <button type="submit"  class="btn btn" id="cservicebtn">Search</button>
+                                                <label class="control-label" for="input-email">Service No:</label>
+                                                <input type="text"  name="Ser_search" id="fname" value="" placeholder="Enter Service No Here" id="input-email" class="form-control" required/>
+                                                <button type="submit"  class="btn btn" name="customer_Ser_search" id="cservicebtn">Search</button>
                                             </div>
                                         </div>
+                                            
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="col-sm-4">
+                                <div id="searchOptionPanel">
+                                    <fieldset id="account">
+                                        <form method="post" action="#">
+                                            <legend>Search Option-02</legend>
+                                            <div class="form-group required">
+                                                <label class="control-label">Select Customer:</label>
+
+                                                <select name="cbopayment" id="cboservice" class="form-control" required onchange="check();">
+                                                    <option value=""> --- Please Select --- </option>
+                                                    <option value="vno">Vehicle Number</option>
+                                                    <option value="nic">NIC</option>
+                                                    <option value="pno">Phone Number</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group required">
+                                                <div class="form-group required">
+                                                    <label class="control-label">Search Customer:</label>
+                                                    <input type="text" name="fname" id="fname" value="" placeholder="Enter Customer Search" id="input-email" class="form-control" required/>
+                                                    <button type="submit" name="customer_id_search" class="btn btn" id="cservicebtn">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <?php
+                                        if (isset($_POST['cbopayment'])) {
+
+                                            $com_cus = $_POST['cbopayment'];
+                                        }
+                                        ?>
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div id="searchOptionPanel">
                                     <fieldset id="account">
-                                        <legend>Search Option-03</legend>
-                                        <div class="form-group required">
-                                            <label class="control-label">From Date:</label>
-                                            <input type="date" name="start_date" id="start_date" class="form-control"/>
-                                        </div>
-                                        <div class="form-group required">
-                                            <label class="control-label">To Date:</label>
-                                            <input type="date" name="end_date" id="end_date" class="form-control"/>
-                                            <button type="submit"  class="btn btn" id="cservicebtn">Search</button>
-                                        </div>
+
+                                        <form method="post" action="#">
+                                            <legend>Search Option-03</legend>
+                                            <div class="form-group required">
+                                                <label class="control-label">From Date:</label>
+                                                <input type="date" name="start_date" id="start_date" class="form-control"/>
+                                            </div>
+                                            <div class="form-group required">
+                                                <label class="control-label">To Date:</label>
+                                                <input type="date" name="end_date" id="end_date" class="form-control"/>
+                                                <button type="submit"  class="btn btn" name="customer_date_search" id="cservicebtn">Search</button>
+                                            </div>
+                                        </form>
                                     </fieldset>
                                 </div>
                             </div>
                             <!--Service View Main Panel-->
+
+                            <?php
+                            $records_per_page = 10;
+                            require '../../customer/Zebra_Pagination.php';
+                            $pagination = new Zebra_Pagination();
+
+                            if (isset($_POST['customer_id_search'])) {
+
+                                if ($com_cus == "vno") {
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS SELECT c.`sis_reg_id`,c.`sis_date`,a.`cus_fullname`,c.`ser_number`,c.`sis_des`,i.`customer_due`,c.`sis_cost` 
+FROM `sis_registration` c INNER JOIN `service` s ON c.`ser_number`=s.`ser_number` INNER JOIN `customer` a ON s.`cus_nic`=a.`cus_nic` INNER JOIN `ser_installment` i ON s.`ser_number`=i.`ser_number` WHERE s.`vehicle_no`='" . $_POST['fname'] . "'  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                }
+
+                                if ($com_cus == "nic") {
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS SELECT c.`sis_reg_id`,c.`sis_date`,a.`cus_fullname`,c.`ser_number`,c.`sis_des`,i.`customer_due`,c.`sis_cost` 
+FROM `sis_registration` c INNER JOIN `service` s ON c.`ser_number`=s.`ser_number` INNER JOIN `customer` a ON s.`cus_nic`=a.`cus_nic` INNER JOIN `ser_installment` i ON s.`ser_number`=i.`ser_number` WHERE a.`cus_nic`='" . $_POST['fname'] . "'  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                }
+
+                                if ($com_cus == "pno") {
+                                    $sql_query = "SELECT SQL_CALC_FOUND_ROWS SELECT c.`sis_reg_id`,c.`sis_date`,a.`cus_fullname`,c.`ser_number`,c.`sis_des`,i.`customer_due`,c.`sis_cost` 
+FROM `sis_registration` c INNER JOIN `service` s ON c.`ser_number`=s.`ser_number` INNER JOIN `customer` a ON s.`cus_nic`=a.`cus_nic` INNER JOIN `ser_installment` i ON s.`ser_number`=i.`ser_number` WHERE a.`cus_tp`='" . $_POST['fname'] . "'  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                                }
+                            } else if (isset($_POST['customer_Ser_search'])) {
+                                echo '<script>alert"awa"</script>';
+                                $sql_query = "SELECT SQL_CALC_FOUND_ROWS SELECT c.`sis_reg_id`,c.`sis_date`,a.`cus_fullname`,c.`ser_number`,c.`sis_des`,i.`customer_due`,c.`sis_cost` 
+FROM `sis_registration` c INNER JOIN `service` s ON c.`ser_number`=s.`ser_number` INNER JOIN `customer` a ON s.`cus_nic`=a.`cus_nic` INNER JOIN `ser_installment` i ON s.`ser_number`=i.`ser_number` WHERE s.`ser_number`='" . $_POST['Ser_search'] . "'  LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                            } elseif (isset($_POST['customer_date_search'])) {
+
+                                $sql_query = "SELECT SQL_CALC_FOUND_ROWS SELECT c.`sis_reg_id`,c.`sis_date`,a.`cus_fullname`,c.`ser_number`,c.`sis_des`,i.`customer_due`,c.`sis_cost` 
+FROM `sis_registration` c INNER JOIN `service` s ON c.`ser_number`=s.`ser_number` INNER JOIN `customer` a ON s.`cus_nic`=a.`cus_nic` INNER JOIN `ser_installment` i ON s.`ser_number`=i.`ser_number` WHERE c.`sis_date` BETWEEN '" . $_POST['start_date'] . "' AND '" . $_POST['end_date'] . "' LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                            } else {
+                                $sql_query = "SELECT SQL_CALC_FOUND_ROWS c.`sis_reg_id`,c.`sis_date`,a.`cus_fullname`,c.`ser_number`,c.`sis_des`,i.`customer_due`,c.`sis_cost` 
+                                               FROM `sis_registration` c INNER JOIN `service` s ON c.`ser_number`=s.`ser_number` INNER JOIN `customer` a ON s.`cus_nic`=a.`cus_nic` INNER JOIN `ser_installment` i ON s.`ser_number`=i.`ser_number` LIMIT " . (($pagination->get_page() - 1) * $records_per_page) . "," . $records_per_page;
+                            }
+
+                            $result = mysqli_query($conn, $sql_query);
+                            if (!($result)) {
+
+                                // stop execution and display error message
+                                die(mysql_error());
+                            }
+                            $rows = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT FOUND_ROWS() AS rows'));
+                            $pagination->records($rows['rows']);
+                            $pagination->records_per_page($records_per_page);
+                            ?>
 
                             <!--Customer Service Loader-->
                             <div class="col-sm-12">
@@ -174,77 +239,36 @@
 
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row"><input type="radio"></th>
-                                                        <td>1258</td>
-                                                        <td>2016-10-12</td>
-                                                        <td>Malinda Senanayake</td>
-                                                        <td>HOR1258</td>
-                                                        <td>Description</td>
-                                                        <td>30000.00</td>
-                                                        <td>10000.00</td>
-                                                        <td>40000.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row"><input type="radio"></th>
-                                                        <td>1258</td>
-                                                        <td>2016-10-12</td>
-                                                        <td>Malinda Senanayake</td>
-                                                        <td>HOR1258</td>
-                                                        <td>Description</td>
-                                                        <td>30000.00</td>
-                                                        <td>10000.00</td>
-                                                        <td>40000.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row"><input type="radio"></th>
-                                                        <td>1258</td>
-                                                        <td>2016-10-12</td>
-                                                        <td>Malinda Senanayake</td>
-                                                        <td>HOR1258</td>
-                                                        <td>Description</td>
-                                                        <td>30000.00</td>
-                                                        <td>10000.00</td>
-                                                        <td>40000.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row"><input type="radio"></th>
-                                                        <td>1258</td>
-                                                        <td>2016-10-12</td>
-                                                        <td>Malinda Senanayake</td>
-                                                        <td>HOR1258</td>
-                                                        <td>Description</td>
-                                                        <td>30000.00</td>
-                                                        <td>10000.00</td>
-                                                        <td>40000.00</td>
-                                                    </tr>
-                                                </tbody>
+                                                <tbody id="bike_tbody">
+<?php
+$index = 0;
+$status = "";
+?>
+                                                    <?php while ($row = mysqli_fetch_assoc($result)): ?>
 
+
+
+                                                        <tr<?php echo $index++ % 2 ? ' class="even"' : '' ?> onclick="readValues(this);">
+
+                                                            <td><input type="radio" name="check"/></td>
+                                                            <td><?php echo $row['sis_reg_id'] ?></td>
+                                                            <td><?php echo $row['sis_date'] ?></td>
+                                                            <td><?php echo $row['cus_fullname'] ?></td>
+                                                            <td><?php echo $row['ser_number'] ?></td>
+                                                            <td><?php echo $row['sis_des'] ?></td>
+                                                            <td><?php echo $row['customer_due'] ?></td>
+                                                            <td><?php echo $row['sis_cost'] ?></td>
+                                                            <td><?php echo $row['customer_due'] + $row['sis_cost'] ?></td>
+
+
+                                                        </tr>
+<?php endwhile ?>
+                                                </tbody>
                                             </table>
-                                            <div style="text-align: center;">
-                                                <nav>
-                                                    <ul class="pagination">
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Previous">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Next">
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
+                                            <div class="text-center">
+                                                <nav> <ul class="pagination"><li> <?php $pagination->render(); ?></li></ul></nav>
                                             </div>
+
                                         </fieldset>
                                     </div>
                                 </div>
@@ -316,7 +340,7 @@
         </div>
         <!--Customer Service Loader-->
 
-        <?php include '../../assets/include/footer.php'; ?>
+<?php include '../../assets/include/footer.php'; ?>
     </body>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
