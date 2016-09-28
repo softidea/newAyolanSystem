@@ -2,10 +2,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_email'])) {
-    header("Location:../index.php");
-}
-
     require_once '../../db/mysqliConnect.php';
     if (mysqli_connect_errno()) {
         echo "Falied to Connect the Database" . mysqli_connect_error();
@@ -38,7 +34,8 @@ if (!isset($_SESSION['user_email'])) {
                                             <select name="select_user_type" id="select_user_type" class="form-control" required>
                                                 <!--<option value='0'>~~Select User Type~~</option>-->
                                                 <option value="1">User</option>
-                                                
+                                                <option value="2">Manager</option>
+                                                <option value="3">Administrator</option>
                                             </select>
                                         </div>
                                         <div class="form-group required" id="service_combo_div">

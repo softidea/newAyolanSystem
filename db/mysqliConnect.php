@@ -13,12 +13,9 @@ define('db_database', 'ayolanin_test');
 //define('db_password', '1234');
 //define('db_database', 'ayolanin_datahost');
 
-
 $d_bc = mysqli_connect(db_host, db_user, db_password, db_database)
 
-or die(
-        header("Location:../errors/error_page.php")
-        );
+or die('Could not connect to MySql: ' . mysqli_connect_error());
 
 mysqli_set_charset($d_bc, "UTF8");
 

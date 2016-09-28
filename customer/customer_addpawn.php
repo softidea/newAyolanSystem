@@ -20,7 +20,6 @@ session_start();
     $reg_date = "";
     $cbo_period = "";
     $pawn_rate = "";
-    $fixed_rate = "";
     date_default_timezone_set('Asia/Colombo');
     $reg_date = date("Y-m-d");
     ?>
@@ -48,7 +47,6 @@ session_start();
             function check() {
                 var aid = document.getElementById('cbo_pawn_amount').value;
                 var yid = document.getElementById('cbo_pawn_period').value;
-                alert(aid + "###" + yid);
                 if (aid != 0 && yid != 0) {
                     if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -60,11 +58,11 @@ session_start();
                     }
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                            if (xmlhttp.responseText == "No Interest Found") {
+                            if (xmlhttp.responseText == "No Interest Found,Try Again") {
                                 alert(xmlhttp.responseText);
                             }
                             else {
-                                document.getElementById('pawn_rate').value = xmlhttp.responseText;
+                                document.getElementById('pawn_rate').value = xmlhttp.responseText+".00";
                             }
                         }
                     }

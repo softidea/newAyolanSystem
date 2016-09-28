@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <?php
 session_start();
-
 if (!isset($_SESSION['user_email'])) {
     header("Location:../index.php");
+} else {
+    $conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
+    if (mysqli_connect_errno()) {
+        echo "Falied to Connect the Database" . mysqli_connect_error();
+    }
 }
-require_once '../../db/mysqliConnect.php';
-
 ?>
 <html>
     <head>
@@ -57,8 +59,7 @@ require_once '../../db/mysqliConnect.php';
                                         <select name="select_account_type" id="select_account_type" class="form-control" required onchange="searchAccounts();">
                                             <!--<option value=""> --- Please Select --- </option>-->
                                             <option value="1">User</option>
-                                            <option value="2">Manager</option>
-                                            <option value="3">Administrator</option>
+                                            <option value="2">Administrator</option>
                                         </select>
                                 </fieldset>
                             </div>

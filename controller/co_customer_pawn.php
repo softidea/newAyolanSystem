@@ -1,17 +1,7 @@
 <?php
 
 session_start();
-
-if (!isset($_SESSION['user_email'])) {
-    header("Location:../index.php");
-}
-
-$conn = mysqli_connect("77.104.142.97", "ayolanin_dev", "WelComeDB1129", "ayolanin_datahost");
-if (mysqli_connect_errno()) {
-    echo "Falied to Connect the Database" . mysqli_connect_error();
-}
-session_start();
-$reference_person = $_SESSION['user_email'];
+require '../db/newDB.php';
 
 $cus_name = "";
 $cus_address = "";
@@ -36,7 +26,7 @@ date_default_timezone_set('Asia/Colombo');
 $cus_regdate = date("Y-m-d");
 
 if (isset($_POST['pawn_reg'])) {
-    
+
     $cus_name = $_SESSION['cus_name'] = filter_input(INPUT_POST, 'cus_name');
     $cus_address = $_SESSION['cus_address'] = filter_input(INPUT_POST, 'cus_address');
     $cus_tp = $_SESSION['cus_tp'] = filter_input(INPUT_POST, 'cus_tp');
@@ -61,17 +51,25 @@ if (isset($_POST['pawn_reg'])) {
     $prop_salary = $_SESSION['prop_salary'] = filter_input(INPUT_POST, 'prop_salary');
     $prop_emp_name = $_SESSION['prop_emp_name'] = filter_input(INPUT_POST, 'prop_emp_name');
     $prop_emp_address = $_SESSION['prop_emp_address'] = filter_input(INPUT_POST, 'prop_emp_address');
-    
-    
-    $deed_no=$_SESSION['deed_no']=  filter_input(INPUT_POST, 'deed_no');
-    $deed_reg_date=$_SESSION['deed_reg_date'] = filter_input(INPUT_POST, 'deed_reg_date');
-    $deed_amount=$_SESSION['cbo_pawn_amount'] = filter_input(INPUT_POST, 'cbo_pawn_amount');
-    $cbo_pawn_period=$_SESSION['cbo_pawn_period']=  filter_input(INPUT_POST, 'cbo_pawn_period');
-    $pawn_rate=$_SESSION['pawn_rate']=  filter_input(INPUT_POST, 'pawn_rate');
-    $fixed_rate=$_SESSION['fixed_rate']=  filter_input(INPUT_POST, 'fixed_rate');
-    $area=$_SESSION['area']=  filter_input(INPUT_POST, 'area');
-    $loan_description=$_SESSION['loan_description']=  filter_input(INPUT_POST, 'loan_description');
-    
+
+
+    $deed_no = $_SESSION['deed_no'] = filter_input(INPUT_POST, 'deed_no');
+    $deed_reg_date = $_SESSION['deed_reg_date'] = filter_input(INPUT_POST, 'deed_reg_date');
+    $deed_amount = $_SESSION['cbo_pawn_amount'] = filter_input(INPUT_POST, 'cbo_pawn_amount');
+    $cbo_pawn_period = $_SESSION['cbo_pawn_period'] = filter_input(INPUT_POST, 'cbo_pawn_period');
+    $pawn_rate = $_SESSION['pawn_rate'] = filter_input(INPUT_POST, 'pawn_rate');
+    $area = $_SESSION['area'] = filter_input(INPUT_POST, 'area');
+    $loan_description = $_SESSION['loan_description'] = filter_input(INPUT_POST, 'loan_description');
+
+    echo $deed_no;
+    echo $deed_reg_date;
+    echo $deed_amount;
+    echo $cbo_pawn_period;
+    echo $pawn_rate;
+    echo $area;
+    echo $loan_description;
+
+
     //saving customer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     global $conn;
     $query_customer = "INSERT INTO customer
@@ -139,37 +137,44 @@ VALUES (
         '$prop_emp_address')";
 
     $save_customer = mysqli_query($conn, $query_customer);
-    if($save_customer){
+
+    if ($save_customer) {
+        global $conn;
         //saving land pawn~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        $query_pawn = "INSERT INTO land_pawns
+        $save_land_pawn = "INSERT INTO `ayolanin_test`.`land_pawns`
             (
-             deed_no,
-             deed_reg_date,
-             amount,
-             period,
-             pawn_rental,
-             description,
-             cus_nic,
-             area)
+             `deed_no`,
+             `deed_reg_date`,
+             `amount`,
+             `period`,
+             `pawn_rental`,
+             `fix_rental`,
+             `description`,
+             `cus_nic`,
+             `area`,
+             `pawn_status`)
 VALUES (
         '$deed_no',
         '$deed_reg_date',
         '$deed_amount',
         '$cbo_pawn_period',
         '$pawn_rate',
+        '$pawn_rate',
         '$loan_description',
         '$cus_nic',
-        '$area')";
-        
-        $save_pawn=  mysqli_query($conn, $query_pawn);
-        if($save_pawn){
+        '$area',
+        '1')";
+
+        $save_pawn = mysqli_query($conn, $save_land_pawn);
+
+        if ($save_pawn && $save_customer) {
             echo "Land Pawn successfully saved";
             echo "<script>window.location.href='../user/user_home.php';</script>";
-        }else{
-            echo "Error while saving lan pawn";
+        } else {
+            echo "Error while saving land pawn-uu";
         }
-    }else{
-            echo "Error while saving lan pawn";
-        }
+    } else {
+        echo "Error while saving land pawn-hhh";
+    }
 }
 ?>

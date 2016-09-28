@@ -24,23 +24,23 @@ if (!isset($_SESSION['user_email'])) {
                     <ul class="list-inline">
                         <li>
                             <a href="#">
-                                <i class="glyphicon glyphicon-eye-open"></i>
+                                <i class="glyphicon glyphicon-earphone"></i>
                             </a>
-                            <span class="hidden-xs hidden-sm hidden-md"><?php echo $_SESSION['user_username'];  ?></span>
+                            <span class="hidden-xs hidden-sm hidden-md">0342265107</span>
                         </li>
 
                         <?php
                         global $conn;
                         $logged_user = $_SESSION['user_email'];
-                        $query = "SELECT * FROM userlogin WHERE user_type='3' AND user_email='$logged_user'";
+                        $query = "SELECT * FROM userlogin WHERE user_type='11' AND user_email='$logged_user'";
                         $run_query = mysqli_query($conn, $query);
                         if (mysqli_num_rows($run_query) > 0) {
                             ?>
 
                             <li><a href="../admin/index.php"  title="User Management"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md">Switch Admin</span></a></li>
                         <?php } ?>
-                        <li><a href="../customer/user_change_password.php"  title="My Account"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $_SESSION['user_typel']; ?> Account</span></a></li>
-                        <li><a href="../controller/co_logout.php" style="text-decoration: none;"><i class="glyphicon glyphicon-off"></i> <span class="hidden-xs hidden-sm hidden-md">Logout</span></a></li>	
+                        <li><a href="../customer/user_change_password.php"  title="My Account"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md">My Account</span></a></li>
+                        <li><a href="../controller/co_logout.php" style="text-decoration: none;"><i class="glyphicon glyphicon-user"></i> <span class="hidden-xs hidden-sm hidden-md">Logout</span></a></li>	
                     </ul>
                 </div>
             </div>
@@ -180,7 +180,7 @@ if (!isset($_SESSION['user_email'])) {
                             <a href="../customer/customer_serviceview.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Vehicle Leases</button></a>
                             <a href="../customer/customer_serviceview.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Land Pawns</button></a>
                             <a href="../customer/view_vehicles.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Vehicle Rates</button><a>
-                                    <a href="../customer/view_vehicles.php" style="text-decoration: none;"><button type="button" class="list-group-item">View Land Rates</button></a>
+                                    <a href="../customer/land_pawn_payment.php" style="text-decoration: none;"><button type="button" class="list-group-item">Add Land Installment</button></a>
                                     </div>
                                     <div class="panel-footer"><div style="height: 15px;"></div></div>
                                     </div>
@@ -194,7 +194,7 @@ if (!isset($_SESSION['user_email'])) {
                                                 <img class="panelimage" style="width: 130px;margin-left: 60px;"src="../assets/images/home/reportt.png"/>
                                             </div>
                                             <div class="list-group">
-                                                <a href="../customer/" style="text-decoration: none;"><button type="button" class="list-group-item">Ledger Card</button></a>
+                                                <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Ledger Card</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Pawn Reports</button></a>
                                                 <a href="../customer/view_vehicles.php" style="text-decoration: none;"><button type="button" class="list-group-item">Vehicle Reports</button></a>
                                                 <a href="#" style="text-decoration: none;"><button type="button" class="list-group-item">Land Reports</button></a>
